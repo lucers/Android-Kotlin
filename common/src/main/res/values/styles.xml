@@ -1,0 +1,46 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
+    </style>
+
+    <!-- ActivityAnimation -->
+    <style name="ActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter_anim</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_open_exit_anim</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter_anim</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_close_exit_anim</item>
+    </style>
+
+    <!-- NoSpaceActionBarTheme -->
+    <style name="NoSpaceActionBarTheme" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
+
+    <!-- TransparentActivityTheme -->
+    <style name="TransparentActivityTheme" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!-- DialogTheme -->
+    <style name="DialogTheme" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <!-- BottomDialogAnimation -->
+    <style name="BottomDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/bottom_dialog_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/bottom_dialog_exit_anim</item>
+    </style>
+</resources>

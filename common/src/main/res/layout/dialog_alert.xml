@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/layout_background_white">
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="45dp"
+        android:background="#E6E6E6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_cancel"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textColor="#999999"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_confirm"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="@string/confirm"
+        android:textColor="#FA9D18"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E6E6E6"
+        app:layout_constraintBottom_toTopOf="@id/btn_cancel" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_alert_message"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:gravity="center"
+        android:maxHeight="200dp"
+        android:textColor="#333333"
+        app:layout_constraintBottom_toTopOf="@id/btn_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="提示内容" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,52 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api rootProject.ext.dependencies["androidx"]
+    api rootProject.ext.dependencies["multidex"]
+    api rootProject.ext.dependencies["junit"]
+    api rootProject.ext.dependencies["testRunner"]
+    api rootProject.ext.dependencies["testEspresso"]
+    api rootProject.ext.dependencies["kotlin_core"]
+    api rootProject.ext.dependencies["kotlin_jdk"]
+    api rootProject.ext.dependencies["rxKotlin"]
+    api rootProject.ext.dependencies["materialDesign"]
+    api rootProject.ext.dependencies["constraintLayout"]
+    api rootProject.ext.dependencies["recyclerView"]
+    api rootProject.ext.dependencies["autoSize"]
+    api rootProject.ext.dependencies["arouterApi"]
+    api rootProject.ext.dependencies["immersionBar"]
+    api rootProject.ext.dependencies["immersionBar_kotlin"]
+    api rootProject.ext.dependencies["mvrx"]
+    api rootProject.ext.dependencies["mmkv"]
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["gsonConverter"]
+    api rootProject.ext.dependencies["rxJavaAdapter"]
+}

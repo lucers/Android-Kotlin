@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="drawableSize" format="dimension" />
+    <attr name="drawableLeftWidth" format="dimension" />
+    <attr name="drawableLeftHeight" format="dimension" />
+    <attr name="drawableTopWidth" format="dimension" />
+    <attr name="drawableTopHeight" format="dimension" />
+    <attr name="drawableRightWidth" format="dimension" />
+    <attr name="drawableRightHeight" format="dimension" />
+    <attr name="drawableBottomWidth" format="dimension" />
+    <attr name="drawableBottomHeight" format="dimension" />
+    <attr name="drawableLeft" format="reference" />
+    <attr name="drawableTop" format="reference" />
+    <attr name="drawableRight" format="reference" />
+    <attr name="drawableBottom" format="reference" />
+    <attr name="drawableCenter" format="boolean" />
+
+    <attr name="radius" format="dimension" />
+    <attr name="leftRadius" format="dimension" />
+    <attr name="topRadius" format="dimension" />
+    <attr name="rightRadius" format="dimension" />
+    <attr name="bottomRadius" format="dimension" />
+
+    <!--DrawableRadioButton-->
+    <declare-styleable name="DrawableRadioButton">
+        <attr name="drawableSize" />
+        <attr name="drawableLeftWidth" />
+        <attr name="drawableLeftHeight" />
+        <attr name="drawableTopWidth" />
+        <attr name="drawableTopHeight" />
+        <attr name="drawableRightWidth" />
+        <attr name="drawableRightHeight" />
+        <attr name="drawableBottomWidth" />
+        <attr name="drawableBottomHeight" />
+        <attr name="drawableLeft" />
+        <attr name="drawableTop" />
+        <attr name="drawableRight" />
+        <attr name="drawableBottom" />
+    </declare-styleable>
+
+    <!--DrawableTextView-->
+    <declare-styleable name="DrawableTextView">
+        <attr name="drawableSize" />
+        <attr name="drawableLeftWidth" />
+        <attr name="drawableLeftHeight" />
+        <attr name="drawableTopWidth" />
+        <attr name="drawableTopHeight" />
+        <attr name="drawableRightWidth" />
+        <attr name="drawableRightHeight" />
+        <attr name="drawableBottomWidth" />
+        <attr name="drawableBottomHeight" />
+        <attr name="drawableLeft" />
+        <attr name="drawableTop" />
+        <attr name="drawableRight" />
+        <attr name="drawableBottom" />
+        <attr name="drawableCenter" />
+    </declare-styleable>
+
+    <!--DrawableEditText-->
+    <declare-styleable name="DrawableEditText">
+        <attr name="drawableSize" />
+        <attr name="drawableLeftWidth" />
+        <attr name="drawableLeftHeight" />
+        <attr name="drawableTopWidth" />
+        <attr name="drawableTopHeight" />
+        <attr name="drawableRightWidth" />
+        <attr name="drawableRightHeight" />
+        <attr name="drawableBottomWidth" />
+        <attr name="drawableBottomHeight" />
+        <attr name="drawableLeft" />
+        <attr name="drawableTop" />
+        <attr name="drawableRight" />
+        <attr name="drawableBottom" />
+    </declare-styleable>
+
+    <!--RadiusImageView-->
+    <declare-styleable name="RadiusImageView">
+        <attr name="radius" />
+        <attr name="leftRadius" />
+        <attr name="topRadius" />
+        <attr name="rightRadius" />
+        <attr name="bottomRadius" />
+    </declare-styleable>
+
+    <!--LetterListView-->
+    <declare-styleable name="LetterListView">
+        <attr name="letterSize" format="dimension" />
+        <attr name="letterColor" format="color" />
+    </declare-styleable>
+
+    <attr name="halfVisibleItemCount" format="integer" />
+    <attr name="itemTextSize" format="dimension" />
+    <attr name="itemMaximumWidthText" format="string" />
+    <attr name="itemTextColor" format="color" />
+    <attr name="textGradual" format="boolean" />
+    <attr name="selectedTextColor" format="color" />
+    <attr name="selectedTextSize" format="dimension" />
+    <attr name="currentItemPosition" format="integer" />
+    <attr name="itemWidthSpace" format="dimension" />
+    <attr name="itemHeightSpace" format="dimension" />
+    <attr name="zoomInSelectedItem" format="boolean" />
+    <attr name="wheelCyclic" format="boolean" />
+    <attr name="wheelCurtain" format="boolean" />
+    <attr name="wheelCurtainColor" format="color" />
+    <attr name="wheelCurtainBorder" format="boolean" />
+    <attr name="wheelCurtainBorderColor" format="color" />
+
+    <!--WheelView-->
+    <declare-styleable name="WheelView">
+        <attr name="halfVisibleItemCount" />
+        <attr name="itemTextSize" />
+        <attr name="itemMaximumWidthText" />
+        <attr name="itemTextColor" />
+        <attr name="textGradual" />
+        <attr name="selectedTextColor" />
+        <attr name="selectedTextSize" />
+        <attr name="currentItemPosition" />
+        <attr name="itemWidthSpace" />
+        <attr name="itemHeightSpace" />
+        <attr name="zoomInSelectedItem" />
+        <attr name="wheelCyclic" />
+        <attr name="wheelCurtain" />
+        <attr name="wheelCurtainColor" />
+        <attr name="wheelCurtainBorder" />
+        <attr name="wheelCurtainBorderColor" />
+    </declare-styleable>
+</resources>
