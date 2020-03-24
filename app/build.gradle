@@ -1,54 +1,10 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply from: '../common_build.gradle'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.lucers.android"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        applicationId APPLICATION_ID
         versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
+        versionName "1.0.0"
     }
-
-//    signingConfigs {
-//        debug {
-//            keyAlias KEY_ALIAS
-//            storePassword RELEASE_STORE_PASSWORD
-//            keyPassword RELEASE_KEY_PASSWORD
-//            storeFile file(RELEASE_STORE_FILE)
-//        }
-//        release {
-//            keyAlias KEY_ALIAS
-//            storePassword RELEASE_STORE_PASSWORD
-//            keyPassword RELEASE_KEY_PASSWORD
-//            storeFile file(RELEASE_STORE_FILE)
-//        }
-//    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-}
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':common')
-
-    kapt rootProject.ext.dependencies["arouterCompiler"]
 }

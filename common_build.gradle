@@ -4,14 +4,18 @@ if (isRunAlone.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: '../dependencies.gradle'
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
@@ -19,25 +23,46 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+                arg("AROUTER_GENERATE_DOC", "enable")
+            }
+        }
     }
 
     sourceSets {
         main {
             if (isRunAlone.toBoolean()) {
-                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
-            } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
             }
+        }
+    }
+
+    signingConfigs {
+        release {
+            keyAlias KEY_ALIAS
+            storePassword RELEASE_STORE_PASSWORD
+            keyPassword RELEASE_KEY_PASSWORD
+            storeFile file(RELEASE_STORE_FILE)
         }
     }
 
     buildTypes {
         debug {
             minifyEnabled false
+            signingConfig signingConfigs.release
+            buildConfigField "String", "BASE_URL", TEST_URL
+            buildConfigField "String", "ROUTE_ROOT", ROUTE_ROOT
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
+            buildConfigField "String", "BASE_URL", BASE_URL
+            buildConfigField "String", "ROUTE_ROOT", ROUTE_ROOT
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -47,6 +72,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':common')
 
-    annotationProcessor rootProject.ext.dependencies["arouterCompiler"]
-    annotationProcessor rootProject.ext.dependencies["butterKnifeCompiler"]
+    kapt rootProject.ext.dependencies["arouterCompiler"]
 }

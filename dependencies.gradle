@@ -1,0 +1,20 @@
+configurations.all {
+    resolutionStrategy {
+        def ext = rootProject.ext
+        eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'androidx.annotation' && requested.name == 'annotation') {
+                details.useVersion ext.annotationVersion
+            }
+            if (requested.group == 'androidx.lifecycle' && requested.name == 'lifecycle-common') {
+                details.useVersion ext.lifecycleVersion
+            }
+            if (requested.group == 'io.reactivex.rxjava2' && requested.name == 'rxjava') {
+                details.useVersion ext.rxjavaVersion
+            }
+            if (requested.group == 'com.google.code.gson' && requested.name == 'gson') {
+                details.useVersion ext.gsonVersion
+            }
+        }
+    }
+}
