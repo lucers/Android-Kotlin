@@ -2,9 +2,6 @@ package com.lucers.common.model
 
 import com.airbnb.mvrx.*
 import com.lucers.common.constants.TypeConstants
-import com.lucers.common.http.HttpManager
-import com.lucers.common.http.HttpResponse
-import com.lucers.common.http.service.UserService
 import com.lucers.common.state.ForgetPasswordState
 import com.lucers.common.utils.CheckUtil
 import io.reactivex.Observer
@@ -25,59 +22,15 @@ class ForgetPasswordModel(initialState: ForgetPasswordState) :
         logStateChanges()
     }
 
-    fun submit(loginType: String) {
+    fun submit() {
         if (checkPhoneNumber()) return else setState { copy(phoneNumberError = "") }
         if (checkVerifyCode()) return else setState { copy(verifyCodeError = "") }
         if (checkPassword()) return else setState { copy(passwordError = "") }
         if (checkConfirmPassword()) return else setState { copy(confirmPasswordError = "") }
-        val observable = HttpManager.instance
-            .createService(UserService::class.java)
-            .forgetPassword(phoneNumber!!, verifyCode!!, password!!, confirmPassword!!, loginType)
-        HttpManager.instance
-            .subscribe(observable, object : Observer<HttpResponse<Any>> {
-                override fun onComplete() {
-                    setState { copy(submitRequest = Uninitialized) }
-                }
-
-                override fun onSubscribe(d: Disposable) {
-                    setState { copy(submitRequest = Loading()) }
-                }
-
-                override fun onNext(t: HttpResponse<Any>) {
-                    setState { copy(submitRequest = Success(t)) }
-                }
-
-                override fun onError(e: Throwable) {
-                    setState { copy(submitRequest = Fail(e)) }
-                    setState { copy(submitRequest = Uninitialized) }
-                }
-            })
     }
 
-    fun sendVerifyCode(loginType: String) {
+    fun sendVerifyCode() {
         if (checkPhoneNumber()) return else setState { copy(phoneNumberError = "") }
-        val observable = HttpManager.instance
-            .createService(UserService::class.java)
-            .sendVerifyCode(phoneNumber!!, TypeConstants.verifyCodeTypeForgetPassword, loginType)
-        HttpManager.instance
-            .subscribe(observable, object : Observer<HttpResponse<Any>> {
-                override fun onComplete() {
-                    setState { copy(verifyCodeRequest = Uninitialized) }
-                }
-
-                override fun onSubscribe(d: Disposable) {
-                    setState { copy(verifyCodeRequest = Loading()) }
-                }
-
-                override fun onNext(t: HttpResponse<Any>) {
-                    setState { copy(verifyCodeRequest = Success(t)) }
-                }
-
-                override fun onError(e: Throwable) {
-                    setState { copy(verifyCodeRequest = Fail(e)) }
-                    setState { copy(verifyCodeRequest = Uninitialized) }
-                }
-            })
     }
 
     private fun checkPhoneNumber(): Boolean {

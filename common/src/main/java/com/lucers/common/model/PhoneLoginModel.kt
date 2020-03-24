@@ -2,9 +2,6 @@ package com.lucers.common.model
 
 import com.airbnb.mvrx.*
 import com.lucers.common.bean.result.LoginResult
-import com.lucers.common.http.HttpManager
-import com.lucers.common.http.HttpResponse
-import com.lucers.common.http.service.UserService
 import com.lucers.common.state.PhoneLoginState
 import com.lucers.common.utils.CheckUtil
 import io.reactivex.Observer
@@ -25,32 +22,9 @@ class PhoneLoginModel(initialState: PhoneLoginState) :
         logStateChanges()
     }
 
-    fun phoneLogin(loginType: String) {
+    fun phoneLogin() {
         if (checkPhoneNumber()) return else setState { copy(phoneNumberError = "") }
         if (checkPassword()) return else setState { copy(passwordError = "") }
-        val observable = HttpManager.instance
-            .createService(UserService::class.java)
-            .phoneLogin(phoneNumber!!, password!!, loginType, "", qqId, wxId)
-        HttpManager.instance.subscribe(observable, object : Observer<HttpResponse<LoginResult>> {
-            override fun onComplete() {
-                setState { copy(request = Uninitialized) }
-            }
-
-            override fun onSubscribe(d: Disposable) {
-                setState { copy(request = Loading()) }
-            }
-
-            override fun onNext(t: HttpResponse<LoginResult>) {
-                t.results?.let {
-                    setState { copy(request = Success(it)) }
-                }
-            }
-
-            override fun onError(e: Throwable) {
-                setState { copy(request = Fail(e)) }
-                setState { copy(request = Uninitialized) }
-            }
-        })
     }
 
     private fun checkPhoneNumber(): Boolean {
