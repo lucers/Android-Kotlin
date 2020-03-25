@@ -26,6 +26,8 @@ ext {
             immersionBar_kotlin: "com.gyf.immersionbar:immersionbar-ktx:3.0.0",
             // https://github.com/JessYanCoding/AndroidAutoSize
             autoSize           : "me.jessyan:autosize:1.1.2",
+            // https://github.com/chrisbanes/PhotoView
+            photoView          : "com.github.chrisbanes:PhotoView:2.0.0",
 
             /*
              * Kotlin

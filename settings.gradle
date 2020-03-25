@@ -1,2 +1,4 @@
-include ':app', ':common'
-rootProject.name='Android-Kotlin'
+rootProject.name = 'Andorid-Kotlin'
+include ':app'
+include ':common'
+include ':lib-http'

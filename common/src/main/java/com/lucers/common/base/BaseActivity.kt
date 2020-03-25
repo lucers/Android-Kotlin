@@ -52,26 +52,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
     }
 
-    override fun invalidate() {
-        LogUtil.e(this.javaClass.name, "invalidate")
-    }
-
-    open fun dealWithRequest(request: Async<Any>) {
-        when (request) {
-            is Loading -> {
-                showLoadingWindow(request.hashCode())
-            }
-            is Fail -> {
-                hideLoadingWindow()
-                request.error.message?.let {
-                    LogUtil.e(this.javaClass.name, it)
-                    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                }
-            }
-            else -> hideLoadingWindow()
-        }
-    }
-
     fun showLoadingWindow(tag: String) {
         if (loadingWindow == null) {
             loadingWindow = LoadingWindow(this, tag)

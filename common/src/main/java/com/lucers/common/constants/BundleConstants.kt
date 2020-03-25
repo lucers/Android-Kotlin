@@ -3,16 +3,11 @@ package com.lucers.common.constants
 /**
  * BundleConstants
  */
-class BundleConstants {
+object BundleConstants {
 
-    companion object {
-        const val userId: String = "userId"
+    const val userId: String = "userId"
 
-        const val weChatAuthorCode: String = "weChatAuthorCode"
+    const val alertMessage: String = "alertMessage"
 
-        const val thirdLoginType: String = "thirdLoginType"
-        const val thirdLoginId: String = "thirdLoginId"
-
-        const val alertMessage: String = "alertMessage"
-    }
+    const val fragmentIndex: String = "fragmentIndex"
 }

@@ -1,13 +1,18 @@
 package com.lucers.common.utils
 
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.text.TextUtils
 import com.google.gson.Gson
+import com.lucers.common.R
 import java.io.BufferedReader
 import java.io.InputStreamReader
+
 
 /**
  * AppUtil
@@ -18,6 +23,7 @@ import java.io.InputStreamReader
 object AppUtil {
 
     private const val tag = "AppUtil"
+
     const val weChatPackageName = "com.tencent.mm"
     const val qqPackageName = "com.tencent.mobileqq"
 
@@ -40,11 +46,6 @@ object AppUtil {
         }
     }
 
-    /**
-     * getVersionName
-     *
-     * @return VersionName
-     */
     fun getVersionName(context: Context): String {
         var versionName = ""
         try {
@@ -53,15 +54,10 @@ object AppUtil {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        LogUtil.d(tag, "versionName:$versionName")
+        LogUtil.d("versionName:$versionName")
         return versionName
     }
 
-    /**
-     * getVersionCode
-     *
-     * @return VersionCode
-     */
     fun getVersionCode(context: Context): Long {
         var versionCode = 0L
         try {
@@ -74,7 +70,7 @@ object AppUtil {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        LogUtil.d(tag, "versionCode:$versionCode")
+        LogUtil.d("versionCode:$versionCode")
         return versionCode
     }
 
@@ -96,5 +92,32 @@ object AppUtil {
             e.printStackTrace()
         }
         return result
+    }
+
+    fun getAppName(context: Context): String {
+        return context.getString(R.string.app_name)
+    }
+
+    fun exitToHome(context: Context) {
+        val intent = Intent()
+        intent.action = Intent.ACTION_MAIN
+        intent.addCategory(Intent.CATEGORY_HOME)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+    }
+
+    fun toAppDetail(context: Context) {
+        try {
+            val pkg = "com.android.settings"
+            val cls = "com.android.settings.applications.InstalledAppDetails"
+            val intent = Intent()
+            intent.component = ComponentName(pkg, cls)
+            intent.data = Uri.parse("package:" + context.packageName)
+            intent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            LogUtil.e(Gson().toJson(e))
+        }
     }
 }

@@ -15,11 +15,8 @@
     <attr name="drawableBottom" format="reference" />
     <attr name="drawableCenter" format="boolean" />
 
-    <attr name="radius" format="dimension" />
-    <attr name="leftRadius" format="dimension" />
-    <attr name="topRadius" format="dimension" />
-    <attr name="rightRadius" format="dimension" />
-    <attr name="bottomRadius" format="dimension" />
+    <attr name="textSize" format="dimension" />
+    <attr name="textColor" format="color" />
 
     <!--DrawableRadioButton-->
     <declare-styleable name="DrawableRadioButton">
@@ -73,15 +70,6 @@
         <attr name="drawableBottom" />
     </declare-styleable>
 
-    <!--RadiusImageView-->
-    <declare-styleable name="RadiusImageView">
-        <attr name="radius" />
-        <attr name="leftRadius" />
-        <attr name="topRadius" />
-        <attr name="rightRadius" />
-        <attr name="bottomRadius" />
-    </declare-styleable>
-
     <!--LetterListView-->
     <declare-styleable name="LetterListView">
         <attr name="letterSize" format="dimension" />
@@ -123,5 +111,20 @@
         <attr name="wheelCurtainColor" />
         <attr name="wheelCurtainBorder" />
         <attr name="wheelCurtainBorderColor" />
+    </declare-styleable>
+
+    <!--TextBanner-->
+    <declare-styleable name="TextBanner">
+        <attr name="textSize" />
+        <attr name="textColor" />
+        <attr name="textGravity" format="enum">
+            <enum name="center" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="bottom" value="2"/>
+            <enum name="start" value="3"/>
+            <enum name="end" value="4"/>
+            <enum name="center_horizontal" value="5"/>
+            <enum name="center_vertical" value="6"/>
+        </attr>
     </declare-styleable>
 </resources>

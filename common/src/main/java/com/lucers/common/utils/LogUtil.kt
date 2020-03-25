@@ -2,6 +2,7 @@ package com.lucers.common.utils
 
 import android.util.Log
 import com.lucers.common.BuildConfig
+import com.lucers.common.base.BaseApplication
 
 /**
  * LogUtil
@@ -17,52 +18,54 @@ object LogUtil {
     const val WARN = 4
     const val ERROR = 5
 
-    /**
-     * set level control log print
-     */
-    var level:Int = VERBOSE
+    var level: Int = VERBOSE
 
     private val debugModel: Boolean = BuildConfig.DEBUG
 
-    /**
-     * verbose level log
-     */
+    fun v(message: String) {
+        v(AppUtil.getAppName(BaseApplication.INSTANCE), message)
+    }
+
     fun v(tag: String, message: String) {
         if (level <= VERBOSE && debugModel) {
             Log.v(tag, message)
         }
     }
 
-    /**
-     * debug level log
-     */
+    fun d(message: String) {
+        d(AppUtil.getAppName(BaseApplication.INSTANCE), message)
+    }
+
     fun d(tag: String, message: String) {
         if (level <= DEBUG && debugModel) {
             Log.d(tag, message)
         }
     }
 
-    /**
-     * info level log
-     */
+    fun i(message: String) {
+        i(AppUtil.getAppName(BaseApplication.INSTANCE), message)
+    }
+
     fun i(tag: String, message: String) {
         if (level <= INFO && debugModel) {
             Log.i(tag, message)
         }
     }
 
-    /**
-     * warn level log
-     */
+    fun w(message: String) {
+        w(AppUtil.getAppName(BaseApplication.INSTANCE), message)
+    }
+
     fun w(tag: String, message: String) {
         if (level <= WARN) {
             Log.w(tag, message)
         }
     }
 
-    /**
-     * error level log
-     */
+    fun e(message: String) {
+        e(AppUtil.getAppName(BaseApplication.INSTANCE), message)
+    }
+
     fun e(tag: String, message: String) {
         if (level <= ERROR) {
             Log.e(tag, message)

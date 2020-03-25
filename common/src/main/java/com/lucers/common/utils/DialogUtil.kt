@@ -36,22 +36,4 @@ object DialogUtil {
         dialogFragment.arguments = bundle
         dialogFragment.show(fragmentTransaction, dialogFragment.javaClass.simpleName)
     }
-
-    fun showBindPhoneDialog(
-        activity: FragmentActivity,
-        onBindPhoneClickListener: BindPhoneDialog.OnBindPhoneClickListener,
-        onRegisterClickListener: BindPhoneDialog.OnRegisterClickListener
-    ) {
-        val fragmentManager = activity.supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        val fragment = fragmentManager.findFragmentByTag(BindPhoneDialog::class.java.simpleName)
-        if (fragment != null) {
-            fragmentTransaction.show(fragment)
-            return
-        }
-        val dialogFragment = BindPhoneDialog()
-        dialogFragment.onBindPhoneClickListener = onBindPhoneClickListener
-        dialogFragment.onRegisterClickListener = onRegisterClickListener
-        dialogFragment.show(fragmentTransaction, dialogFragment.javaClass.simpleName)
-    }
 }

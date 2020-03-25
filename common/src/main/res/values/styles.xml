@@ -1,20 +1,45 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="CommonAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="editTextColor">@color/default_text_color</item>
         <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/default_text_size</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
+        <item name="android:windowBackground">@drawable/window_background</item>
+        <item name="android:windowAnimationStyle">@style/ActivityAnimationEndStart</item>
     </style>
 
-    <!-- ActivityAnimation -->
-    <style name="ActivityAnimation" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter_anim</item>
-        <item name="android:activityOpenExitAnimation">@anim/activity_open_exit_anim</item>
-        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter_anim</item>
-        <item name="android:activityCloseExitAnimation">@anim/activity_close_exit_anim</item>
+    <!--LoginTheme-->
+    <style name="LoginTheme" parent="CommonAppTheme">
+        <item name="android:windowAnimationStyle">@style/ActivityAnimationDownUp</item>
+    </style>
+
+    <!-- ActivityAnimationAlpha -->
+    <style name="ActivityAnimationAlpha" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/anim_alpha_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_alpha_open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/anim_alpha_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/anim_alpha_close_exit</item>
+    </style>
+
+    <!-- ActivityAnimationDownUp -->
+    <style name="ActivityAnimationDownUp" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/anim_down_up_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_down_up_open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/anim_down_up_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/anim_down_up_close_exit</item>
+    </style>
+
+    <!-- ActivityAnimationEndStart -->
+    <style name="ActivityAnimationEndStart" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/anim_end_start_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_end_start_open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/anim_end_start_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/anim_end_start_close_exit</item>
     </style>
 
     <!-- NoSpaceActionBarTheme -->
@@ -24,7 +49,7 @@
     </style>
 
     <!-- TransparentActivityTheme -->
-    <style name="TransparentActivityTheme" parent="AppTheme">
+    <style name="TransparentActivityTheme" parent="CommonAppTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
