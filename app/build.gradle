@@ -1,10 +1,63 @@
-apply from: '../common_build.gradle'
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
         applicationId APPLICATION_ID
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
+
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+                arg("AROUTER_GENERATE_DOC", "enable")
+            }
+        }
     }
+
+    signingConfigs {
+        release {
+            keyAlias KEY_ALIAS
+            storePassword RELEASE_STORE_PASSWORD
+            keyPassword RELEASE_KEY_PASSWORD
+            storeFile file(RELEASE_STORE_FILE)
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            buildConfigField "String", "ROUTE_ROOT", ROUTE_ROOT
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            buildConfigField "String", "ROUTE_ROOT", ROUTE_ROOT
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':common')
+
+    kapt rootProject.ext.dependencies["arouterCompiler"]
 }
