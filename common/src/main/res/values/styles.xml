@@ -40,7 +40,7 @@
 
     <!-- BottomDialogAnimation -->
     <style name="BottomDialogAnimation">
-        <item name="android:windowEnterAnimation">@anim/bottom_dialog_enter_anim</item>
-        <item name="android:windowExitAnimation">@anim/bottom_dialog_exit_anim</item>
+        <item name="android:windowEnterAnimation">@anim/anim_down_up_open_enter</item>
+        <item name="android:windowExitAnimation">@anim/anim_down_up_close_exit</item>
     </style>
 </resources>

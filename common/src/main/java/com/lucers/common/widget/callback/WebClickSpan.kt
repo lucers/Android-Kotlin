@@ -24,5 +24,4 @@ class WebClickSpan(private val spanClickListener: SpanClickListener) : Clickable
          */
         fun onSpanClick()
     }
-
 }

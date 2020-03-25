@@ -1,4 +1,4 @@
-package com.lucers.common.dialog
+package com.lucers.common.ui.dialog
 
 import android.app.Dialog
 import android.os.Bundle

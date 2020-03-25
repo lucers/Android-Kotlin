@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.lucers.common.base.BaseDialogFragment
 import com.lucers.common.constants.BundleConstants
-import com.lucers.common.dialog.AlertDialog
-import com.lucers.common.dialog.BindPhoneDialog
+import com.lucers.common.ui.dialog.AlertDialog
 
 object DialogUtil {
 

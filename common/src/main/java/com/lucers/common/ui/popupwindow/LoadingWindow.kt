@@ -1,4 +1,4 @@
-package com.lucers.common.popupwindow
+package com.lucers.common.ui.popupwindow
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,9 +11,9 @@ import android.widget.PopupWindow
 import com.lucers.common.R
 
 @SuppressLint("InflateParams")
-class LoadingWindow(context: Context, private val tag: Int) : PopupWindow() {
+class LoadingWindow(context: Context, private val tag: String) : PopupWindow() {
 
-    fun getTag(): Int = tag
+    fun getTag(): String = tag
 
     init {
         val contentView: View = LayoutInflater.from(context).inflate(R.layout.window_loading, null)
