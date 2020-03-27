@@ -13,13 +13,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation rootProject.ext.dependencies["junit"]
-    implementation rootProject.ext.dependencies["testRunner"]
-    implementation rootProject.ext.dependencies["testEspresso"]
-
-    implementation rootProject.ext.dependencies["retrofit"]
-    implementation rootProject.ext.dependencies["gsonConverter"]
-    implementation rootProject.ext.dependencies["rxJavaAdapter"]
-    implementation rootProject.ext.dependencies["scalarConverte"]
-    implementation rootProject.ext.dependencies["httpLog"]
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["gsonConverter"]
+    api rootProject.ext.dependencies["rxJavaAdapter"]
+    api rootProject.ext.dependencies["scalarConverte"]
+    api rootProject.ext.dependencies["httpLog"]
 }

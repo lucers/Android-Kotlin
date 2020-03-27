@@ -1,23 +1,23 @@
-package com.lucers.common.widget
+package com.lucers.widget.drawable
 
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.AppCompatEditText
-import com.lucers.common.R
+import androidx.appcompat.widget.AppCompatRadioButton
+import com.lucers.widget.R
 
 /**
- * DrawableEditText
+ * DrawableRadioButton
  *
  * @author Lucers
  */
-class DrawableEditText @JvmOverloads constructor(
+class DrawableRadioButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyle: Int = R.attr.editTextStyle
-) : AppCompatEditText(context, attrs, defStyle) {
+    defStyle: Int = 0
+) : AppCompatRadioButton(context, attrs, defStyle) {
 
     private var drawableSize = 0
     private var drawableLeftWidth = 0
@@ -37,55 +37,47 @@ class DrawableEditText @JvmOverloads constructor(
         initAttrs(context, attrs)
     }
 
-    private fun initAttrs(context: Context, attrs: AttributeSet?) {
+    private fun initAttrs(
+        context: Context,
+        attrs: AttributeSet?
+    ) {
         if (attrs == null) {
             return
         }
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.DrawableEditText)
+        val typedArray =
+            context.obtainStyledAttributes(attrs, R.styleable.DrawableRadioButton)
         val indexCount = typedArray.indexCount
         for (i in 0 until indexCount) {
-            when (val index = typedArray.getIndex(i)) {
-                R.styleable.DrawableEditText_drawableSize -> {
-                    drawableSize = typedArray.getDimensionPixelSize(index, 0)
-                }
-                R.styleable.DrawableEditText_drawableLeftWidth -> {
-                    drawableLeftWidth = typedArray.getDimensionPixelSize(index, 0)
-                }
-                R.styleable.DrawableEditText_drawableLeftHeight -> {
-                    drawableLeftHeight = typedArray.getDimensionPixelSize(index, 0)
-                }
-                R.styleable.DrawableEditText_drawableTopWidth -> {
-                    drawableTopWidth = typedArray.getDimensionPixelSize(index, 0)
-                }
-                R.styleable.DrawableEditText_drawableTopHeight -> {
-                    drawableTopHeight = typedArray.getDimensionPixelSize(index, 0)
-                }
-                R.styleable.DrawableEditText_drawableRightWidth -> {
-                    drawableRightWidth = typedArray.getDimensionPixelSize(index, 0)
-                }
-                R.styleable.DrawableEditText_drawableRightHeight -> {
-                    drawableRightHeight = typedArray.getDimensionPixelSize(index, 0)
-                }
-                R.styleable.DrawableEditText_drawableBottomWidth -> {
-                    drawableBottomWidth = typedArray.getDimensionPixelSize(index, 0)
-                }
-                R.styleable.DrawableEditText_drawableBottomHeight -> {
-                    drawableBottomHeight = typedArray.getDimensionPixelSize(index, 0)
-                }
-                R.styleable.DrawableEditText_drawableLeft -> {
-                    drawableLeft = typedArray.getDrawable(index)
-                }
-                R.styleable.DrawableEditText_drawableTop -> {
-                    drawableTop = typedArray.getDrawable(index)
-                }
-                R.styleable.DrawableEditText_drawableRight -> {
-                    drawableRight = typedArray.getDrawable(index)
-                }
-                R.styleable.DrawableEditText_drawableBottom -> {
-                    drawableBottom = typedArray.getDrawable(index)
-                }
+            val index = typedArray.getIndex(i)
+            if (index == R.styleable.DrawableRadioButton_drawableSize) {
+                drawableSize = typedArray.getDimensionPixelSize(index, 0)
+            } else if (index == R.styleable.DrawableRadioButton_drawableLeftWidth) {
+                drawableLeftWidth = typedArray.getDimensionPixelSize(index, 0)
+            } else if (index == R.styleable.DrawableRadioButton_drawableLeftHeight) {
+                drawableLeftHeight = typedArray.getDimensionPixelSize(index, 0)
+            } else if (index == R.styleable.DrawableRadioButton_drawableTopWidth) {
+                drawableTopWidth = typedArray.getDimensionPixelSize(index, 0)
+            } else if (index == R.styleable.DrawableRadioButton_drawableTopHeight) {
+                drawableTopHeight = typedArray.getDimensionPixelSize(index, 0)
+            } else if (index == R.styleable.DrawableRadioButton_drawableRightWidth) {
+                drawableRightWidth = typedArray.getDimensionPixelSize(index, 0)
+            } else if (index == R.styleable.DrawableRadioButton_drawableRightHeight) {
+                drawableRightHeight = typedArray.getDimensionPixelSize(index, 0)
+            } else if (index == R.styleable.DrawableRadioButton_drawableBottomWidth) {
+                drawableBottomWidth = typedArray.getDimensionPixelSize(index, 0)
+            } else if (index == R.styleable.DrawableRadioButton_drawableBottomHeight) {
+                drawableBottomHeight = typedArray.getDimensionPixelSize(index, 0)
+            } else if (index == R.styleable.DrawableRadioButton_drawableLeft) {
+                drawableLeft = typedArray.getDrawable(index)
+            } else if (index == R.styleable.DrawableRadioButton_drawableTop) {
+                drawableTop = typedArray.getDrawable(index)
+            } else if (index == R.styleable.DrawableRadioButton_drawableRight) {
+                drawableRight = typedArray.getDrawable(index)
+            } else if (index == R.styleable.DrawableRadioButton_drawableBottom) {
+                drawableBottom = typedArray.getDrawable(index)
             }
         }
+
         drawableLeftWidth = if (drawableLeftWidth == 0) drawableSize else drawableLeftWidth
         drawableLeftHeight = if (drawableLeftHeight == 0) drawableSize else drawableLeftHeight
         drawableTopWidth = if (drawableTopWidth == 0) drawableSize else drawableTopWidth

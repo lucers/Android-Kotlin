@@ -61,6 +61,7 @@ dependencies {
 
     if (!isRunAlone.toBoolean()) {
         implementation project(':module-http')
+        implementation project(':module-widget')
     }
     kapt rootProject.ext.dependencies["arouterCompiler"]
 }

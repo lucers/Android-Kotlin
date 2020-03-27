@@ -1,4 +1,4 @@
-package com.lucers.common.widget
+package com.lucers.widget.banner
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,7 +7,8 @@ import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextSwitcher
 import androidx.core.content.ContextCompat
-import com.lucers.common.R
+import com.lucers.widget.R
+import com.lucers.widget.drawable.DrawableTextView
 
 
 /**

@@ -1,4 +1,4 @@
-package com.lucers.common.widget.callback
+package com.lucers.widget.callback
 
 import android.text.TextWatcher
 

@@ -1,25 +1,23 @@
-package com.lucers.common.widget
+package com.lucers.widget.drawable
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.AppCompatTextView
-import com.lucers.common.R
+import androidx.appcompat.widget.AppCompatEditText
+import com.lucers.widget.R
 
 /**
- * DrawableTextView
+ * DrawableEditText
  *
  * @author Lucers
  */
-class DrawableTextView @JvmOverloads constructor(
+class DrawableEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyle: Int = 0
-) : AppCompatTextView(context, attrs, defStyle) {
+    defStyle: Int = R.attr.editTextStyle
+) : AppCompatEditText(context, attrs, defStyle) {
 
     private var drawableSize = 0
     private var drawableLeftWidth = 0
@@ -35,53 +33,59 @@ class DrawableTextView @JvmOverloads constructor(
     private var drawableRight: Drawable? = null
     private var drawableBottom: Drawable? = null
 
-    private var textRect: Rect = Rect()
-
     init {
         initAttrs(context, attrs)
     }
 
-    private fun initAttrs(
-        context: Context,
-        attrs: AttributeSet?
-    ) {
+    private fun initAttrs(context: Context, attrs: AttributeSet?) {
         if (attrs == null) {
             return
         }
-        val typedArray =
-            context.obtainStyledAttributes(attrs, R.styleable.DrawableTextView)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.DrawableEditText)
         val indexCount = typedArray.indexCount
         for (i in 0 until indexCount) {
-            val index = typedArray.getIndex(i)
-            if (index == R.styleable.DrawableTextView_drawableSize) {
-                drawableSize = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableTextView_drawableLeftWidth) {
-                drawableLeftWidth = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableTextView_drawableLeftHeight) {
-                drawableLeftHeight = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableTextView_drawableTopWidth) {
-                drawableTopWidth = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableTextView_drawableTopHeight) {
-                drawableTopHeight = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableTextView_drawableRightWidth) {
-                drawableRightWidth = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableTextView_drawableRightHeight) {
-                drawableRightHeight = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableTextView_drawableBottomWidth) {
-                drawableBottomWidth = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableTextView_drawableBottomHeight) {
-                drawableBottomHeight = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableTextView_drawableLeft) {
-                drawableLeft = typedArray.getDrawable(index)
-            } else if (index == R.styleable.DrawableTextView_drawableTop) {
-                drawableTop = typedArray.getDrawable(index)
-            } else if (index == R.styleable.DrawableTextView_drawableRight) {
-                drawableRight = typedArray.getDrawable(index)
-            } else if (index == R.styleable.DrawableTextView_drawableBottom) {
-                drawableBottom = typedArray.getDrawable(index)
+            when (val index = typedArray.getIndex(i)) {
+                R.styleable.DrawableEditText_drawableSize -> {
+                    drawableSize = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableEditText_drawableLeftWidth -> {
+                    drawableLeftWidth = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableEditText_drawableLeftHeight -> {
+                    drawableLeftHeight = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableEditText_drawableTopWidth -> {
+                    drawableTopWidth = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableEditText_drawableTopHeight -> {
+                    drawableTopHeight = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableEditText_drawableRightWidth -> {
+                    drawableRightWidth = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableEditText_drawableRightHeight -> {
+                    drawableRightHeight = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableEditText_drawableBottomWidth -> {
+                    drawableBottomWidth = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableEditText_drawableBottomHeight -> {
+                    drawableBottomHeight = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableEditText_drawableLeft -> {
+                    drawableLeft = typedArray.getDrawable(index)
+                }
+                R.styleable.DrawableEditText_drawableTop -> {
+                    drawableTop = typedArray.getDrawable(index)
+                }
+                R.styleable.DrawableEditText_drawableRight -> {
+                    drawableRight = typedArray.getDrawable(index)
+                }
+                R.styleable.DrawableEditText_drawableBottom -> {
+                    drawableBottom = typedArray.getDrawable(index)
+                }
             }
         }
-
         drawableLeftWidth = if (drawableLeftWidth == 0) drawableSize else drawableLeftWidth
         drawableLeftHeight = if (drawableLeftHeight == 0) drawableSize else drawableLeftHeight
         drawableTopWidth = if (drawableTopWidth == 0) drawableSize else drawableTopWidth
@@ -98,32 +102,6 @@ class DrawableTextView @JvmOverloads constructor(
             drawableRight,
             drawableBottom
         )
-    }
-
-    override fun onDraw(canvas: Canvas) {
-        val leftDrawable = compoundDrawables[0]
-        leftDrawable?.let {
-            val totalWidth =
-                paint.measureText(text.toString()) + compoundDrawablePadding + leftDrawable.intrinsicWidth
-            canvas.translate((width - totalWidth) / 2, 0f)
-        }
-        val topDrawable = compoundDrawables[1]
-        topDrawable?.let {
-            paint.getTextBounds(text.toString(), 0, text.length, textRect)
-            val textHeight = textRect.height().toFloat()
-            val totalHeight =
-                textHeight + compoundDrawablePadding + topDrawable.intrinsicWidth
-            canvas.translate(0f, (textHeight - totalHeight) / 2)
-        }
-        val rightDrawable = compoundDrawables[2]
-        rightDrawable?.let {
-
-        }
-        val bottomDrawable = compoundDrawables[3]
-        bottomDrawable?.let {
-
-        }
-        super.onDraw(canvas)
     }
 
     override fun setCompoundDrawablesWithIntrinsicBounds(

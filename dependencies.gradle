@@ -3,6 +3,9 @@ configurations.all {
         def ext = rootProject.ext
         eachDependency { DependencyResolveDetails details ->
             def requested = details.requested
+            if (requested.group == 'androidx.appcompat' && requested.name == 'appcompat') {
+                details.useVersion ext.appcompatVersion
+            }
             if (requested.group == 'androidx.annotation' && requested.name == 'annotation') {
                 details.useVersion ext.annotationVersion
             }
