@@ -1,0 +1,25 @@
+apply from: '../common_build.gradle'
+
+android {
+    defaultConfig {
+        if (isRunAlone.toBoolean()) {
+            applicationId "com.lucers.http"
+        }
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation rootProject.ext.dependencies["junit"]
+    implementation rootProject.ext.dependencies["testRunner"]
+    implementation rootProject.ext.dependencies["testEspresso"]
+
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["gsonConverter"]
+    implementation rootProject.ext.dependencies["rxJavaAdapter"]
+    implementation rootProject.ext.dependencies["scalarConverte"]
+    implementation rootProject.ext.dependencies["httpLog"]
+}

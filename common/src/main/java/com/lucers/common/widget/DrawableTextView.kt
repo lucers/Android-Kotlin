@@ -34,7 +34,6 @@ class DrawableTextView @JvmOverloads constructor(
     private var drawableTop: Drawable? = null
     private var drawableRight: Drawable? = null
     private var drawableBottom: Drawable? = null
-    private var drawableCenter: Boolean = false
 
     private var textRect: Rect = Rect()
 
@@ -80,8 +79,6 @@ class DrawableTextView @JvmOverloads constructor(
                 drawableRight = typedArray.getDrawable(index)
             } else if (index == R.styleable.DrawableTextView_drawableBottom) {
                 drawableBottom = typedArray.getDrawable(index)
-            } else if (index == R.styleable.DrawableTextView_drawableCenter) {
-                drawableCenter = typedArray.getBoolean(index, false)
             }
         }
 
@@ -104,10 +101,6 @@ class DrawableTextView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
-        if (!drawableCenter) {
-            super.onDraw(canvas)
-            return
-        }
         val leftDrawable = compoundDrawables[0]
         leftDrawable?.let {
             val totalWidth =

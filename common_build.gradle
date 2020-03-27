@@ -6,7 +6,6 @@ if (isRunAlone.toBoolean()) {
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 apply from: '../dependencies.gradle'
 
@@ -18,19 +17,6 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
-        kapt {
-            arguments {
-                arg("AROUTER_MODULE_NAME", project.getName())
-                arg("AROUTER_GENERATE_DOC", "enable")
-            }
-        }
     }
 
     sourceSets {
@@ -72,7 +58,5 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api project(':common')
-
-    kapt rootProject.ext.dependencies["arouterCompiler"]
+    implementation project(':common')
 }

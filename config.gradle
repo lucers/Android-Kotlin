@@ -9,6 +9,8 @@ ext {
     rxjavaVersion = '2.2.10'
     gsonVersion = '2.8.6'
 
+    okhttpVersion = '4.4.1'
+
     dependencies = [
             /*
              * UI
@@ -25,7 +27,7 @@ ext {
             immersionBar       : "com.gyf.immersionbar:immersionbar:3.0.0",
             immersionBar_kotlin: "com.gyf.immersionbar:immersionbar-ktx:3.0.0",
             // https://github.com/JessYanCoding/AndroidAutoSize
-            autoSize           : "me.jessyan:autosize:1.1.2",
+            autoSize           : "me.jessyan:autosize:1.2.1",
             // https://github.com/chrisbanes/PhotoView
             photoView          : "com.github.chrisbanes:PhotoView:2.0.0",
 
@@ -71,6 +73,8 @@ ext {
             rxKotlin           : "io.reactivex.rxjava2:rxkotlin:2.4.0",
             // https://github.com/google/gson
             gson               : "com.google.code.gson:gson:2.8.6",
+            // https://github.com/Blankj/AndroidUtilCode
+            utils              : "com.blankj:utilcodex:1.26.0",
 
             /*
              * DeveloperUtil
@@ -96,6 +100,8 @@ ext {
             silicompressor     : "com.iceteck.silicompressorr:silicompressor:2.2.2",
             // https://github.com/tbruyelle/RxPermissions
             rxPermission       : "com.github.tbruyelle:rxpermissions:0.10.2",
+            // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+            okHttp             : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
 
             /*
              * TestUtil

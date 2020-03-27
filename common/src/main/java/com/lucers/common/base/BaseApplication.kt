@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
+import com.blankj.utilcode.util.LogUtils
 import com.lucers.common.BuildConfig
 import com.lucers.common.DelegatesExt
 import com.tencent.mmkv.MMKV
@@ -29,9 +30,12 @@ open class BaseApplication : Application() {
         super.onCreate()
         INSTANCE = this
 
+        LogUtils.getConfig().isLogSwitch = false
+
         if (BuildConfig.DEBUG) {
             ARouter.openLog()
             ARouter.openDebug()
+            LogUtils.getConfig().isLogSwitch = true
         }
 
         AutoSizeConfig.getInstance().setLog(BuildConfig.DEBUG)

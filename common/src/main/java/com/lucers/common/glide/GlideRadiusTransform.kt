@@ -1,12 +1,11 @@
 package com.lucers.common.glide
 
-import android.content.Context
 import android.graphics.*
+import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.SizeUtils
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils
-import com.lucers.common.utils.DensityUtil
-import com.lucers.common.utils.LogUtil
 
 /**
  * GlideRadiusTransform
@@ -14,9 +13,9 @@ import com.lucers.common.utils.LogUtil
  * @author Lucers
  * @date 2019/3/5 0005
  */
-class GlideRadiusTransform(context: Context, dp: Int) : CenterCrop() {
+class GlideRadiusTransform(dp: Int) : CenterCrop() {
 
-    private val radius: Int = DensityUtil.dipToPx(context, dp.toFloat())
+    private val radius: Int = SizeUtils.dp2px(dp.toFloat())
 
     override fun transform(
         pool: BitmapPool, source: Bitmap, outWidth: Int, outHeight: Int
@@ -29,7 +28,7 @@ class GlideRadiusTransform(context: Context, dp: Int) : CenterCrop() {
         if (source == null) {
             return null
         }
-        LogUtil.d("Bitmap source size:" + source.width + "," + source.height)
+        LogUtils.d("Bitmap source size:" + source.width + "," + source.height)
 
         val result = pool[source.width, source.height, Bitmap.Config.ARGB_8888]
         val canvas = Canvas(result)

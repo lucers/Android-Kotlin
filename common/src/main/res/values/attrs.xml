@@ -50,7 +50,6 @@
         <attr name="drawableTop" />
         <attr name="drawableRight" />
         <attr name="drawableBottom" />
-        <attr name="drawableCenter" />
     </declare-styleable>
 
     <!--DrawableEditText-->

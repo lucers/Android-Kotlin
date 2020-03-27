@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 apply from: '../dependencies.gradle'
 
@@ -36,7 +35,6 @@ dependencies {
 
     api rootProject.ext.dependencies["kotlin_core"]
     api rootProject.ext.dependencies["kotlin_jdk"]
-    api rootProject.ext.dependencies["rxKotlin"]
 
     api rootProject.ext.dependencies["materialDesign"]
     api rootProject.ext.dependencies["constraintLayout"]
@@ -52,6 +50,5 @@ dependencies {
     api rootProject.ext.dependencies["rxPermission"]
     api rootProject.ext.dependencies["glide"]
     api rootProject.ext.dependencies["gson"]
-
-    api project(':lib-http')
+    api rootProject.ext.dependencies["utils"]
 }

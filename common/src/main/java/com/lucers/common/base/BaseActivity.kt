@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.launcher.ARouter
+import com.blankj.utilcode.util.LogUtils
 import com.gyf.immersionbar.ktx.immersionBar
 import com.lucers.common.ui.popupwindow.LoadingWindow
-import com.lucers.common.utils.LogUtil
 
 /**
  * BaseActivity
@@ -75,6 +75,6 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     fun onLoadingWindowDismiss(tag: String) {
-        LogUtil.i("onLoadingWindowDismiss : tag is -> $tag")
+        LogUtils.i("onLoadingWindowDismiss : tag is -> $tag")
     }
 }

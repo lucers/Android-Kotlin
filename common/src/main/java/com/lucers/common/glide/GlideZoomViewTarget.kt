@@ -2,9 +2,9 @@ package com.lucers.common.glide
 
 import android.graphics.Bitmap
 import android.widget.ImageView
+import com.blankj.utilcode.util.LogUtils
 import com.bumptech.glide.request.target.BitmapImageViewTarget
 import com.bumptech.glide.request.transition.Transition
-import com.lucers.common.utils.LogUtil
 
 /**
  * GlideZoomViewTarget
@@ -21,7 +21,7 @@ class GlideZoomViewTarget(private val imageView: ImageView) :
         val imageHeight = resource.height
         val width = imageView.width
         val height = imageHeight * width / imageWidth
-        LogUtil.d("imageWidth:$imageWidth,imageHeight$imageHeight,resultSize:$width,$height")
+        LogUtils.d("imageWidth:$imageWidth,imageHeight$imageHeight,resultSize:$width,$height")
 
         val para = imageView.layoutParams
         para.height = height
