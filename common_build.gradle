@@ -1,12 +1,14 @@
 if (isRunAlone.toBoolean()) {
     apply plugin: 'com.android.application'
-    apply plugin: 'kotlin-kapt'
 } else {
     apply plugin: 'com.android.library'
 }
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+if (isRunAlone.toBoolean()) {
+    apply plugin: 'kotlin-kapt'
+}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -58,6 +60,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':common')
+
     if (isRunAlone.toBoolean()) {
         kapt rootProject.ext.dependencies["arouterCompiler"]
     }

@@ -51,7 +51,6 @@ dependencies {
     api rootProject.ext.dependencies["immersionBar_kotlin"]
 
     api rootProject.ext.dependencies["arouterApi"]
-    api rootProject.ext.dependencies["mmkv"]
     api rootProject.ext.dependencies["rxPermission"]
     api rootProject.ext.dependencies["glide"]
     api rootProject.ext.dependencies["gson"]

@@ -14,7 +14,7 @@ import java.nio.charset.Charset
  *
  * @author Lucers
  */
-class ParamInterceptor : Interceptor {
+class RequestInterceptor : Interceptor {
 
     private val appName = AppUtils.getAppName()
 

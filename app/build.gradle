@@ -30,6 +30,20 @@ android {
         }
     }
 
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                output ->
+                    def outputFile = output.outputFile
+                    if (outputFile.name.contains("debug")){
+                        outputFileName = new File("../debug/", "${PACKAGE_NAME_DEBUG}.apk")
+                    }
+                    if (outputFile.name.contains("release")){
+                        outputFileName = new File("../release/", "${PACKAGE_NAME_RELEASE}.apk")
+                    }
+            }
+    }
+
     signingConfigs {
         release {
             keyAlias KEY_ALIAS

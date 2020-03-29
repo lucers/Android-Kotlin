@@ -7,7 +7,6 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.LogUtils
 import com.lucers.common.BuildConfig
 import com.lucers.common.DelegatesExt
-import com.tencent.mmkv.MMKV
 import me.jessyan.autosize.AutoSizeConfig
 
 /**
@@ -17,8 +16,6 @@ open class BaseApplication : Application() {
 
     companion object {
         var INSTANCE: Application by DelegatesExt.notNullSingleValue()
-
-        var mmkv: MMKV by DelegatesExt.notNullSingleValue()
     }
 
     override fun attachBaseContext(base: Context?) {
@@ -43,8 +40,5 @@ open class BaseApplication : Application() {
         ARouter.init(this)
 
         AutoSizeConfig.getInstance().isExcludeFontScale = true
-
-        MMKV.initialize(this)
-        mmkv = MMKV.defaultMMKV()
     }
 }
