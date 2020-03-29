@@ -12,7 +12,7 @@ import me.jessyan.autosize.AutoSizeConfig
 /**
  * BaseApplication
  */
-open class BaseApplication : Application() {
+abstract class BaseApplication : Application() {
 
     companion object {
         var INSTANCE: Application by DelegatesExt.notNullSingleValue()
@@ -41,4 +41,6 @@ open class BaseApplication : Application() {
 
         AutoSizeConfig.getInstance().isExcludeFontScale = true
     }
+
+    abstract fun initApplication(context: Context)
 }

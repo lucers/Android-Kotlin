@@ -1,4 +1,4 @@
-package com.lucers.common
+package com.lucers.common.manager
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity

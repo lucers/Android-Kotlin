@@ -57,13 +57,11 @@ android {
         debug {
             minifyEnabled false
             signingConfig signingConfigs.release
-            buildConfigField "String", "ROUTE_ROOT", ROUTE_ROOT
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled false
             signingConfig signingConfigs.release
-            buildConfigField "String", "ROUTE_ROOT", ROUTE_ROOT
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

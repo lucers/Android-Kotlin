@@ -1,8 +1,14 @@
 package com.lucers.http
 
+import android.content.Context
 import com.lucers.common.base.BaseApplication
 
 /**
- * Created by Lucers on 2020/3/27 0027.
+ * HttpApplication
  */
-class HttpApplication : BaseApplication()
+class HttpApplication : BaseApplication() {
+
+    override fun initApplication(context: Context) {
+//        HttpManager.initConfig()
+    }
+}

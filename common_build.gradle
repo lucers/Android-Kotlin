@@ -18,6 +18,20 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        if (isRunAlone.toBoolean()) {
+            javaCompileOptions {
+                annotationProcessorOptions {
+                    arguments = [AROUTER_MODULE_NAME: project.getName()]
+                }
+            }
+            kapt {
+                arguments {
+                    arg("AROUTER_MODULE_NAME", project.getName())
+                    arg("AROUTER_GENERATE_DOC", "enable")
+                }
+            }
+        }
     }
 
     sourceSets {
@@ -43,15 +57,11 @@ android {
         debug {
             minifyEnabled false
             signingConfig signingConfigs.release
-            buildConfigField "String", "BASE_URL", TEST_URL
-            buildConfigField "String", "ROUTE_ROOT", ROUTE_ROOT
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled false
             signingConfig signingConfigs.release
-            buildConfigField "String", "BASE_URL", BASE_URL
-            buildConfigField "String", "ROUTE_ROOT", ROUTE_ROOT
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
