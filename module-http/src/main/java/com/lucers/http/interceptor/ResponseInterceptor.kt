@@ -1,4 +1,4 @@
-package com.lucers.http
+package com.lucers.http.interceptor
 
 import com.blankj.utilcode.util.AppUtils
 import com.google.gson.Gson

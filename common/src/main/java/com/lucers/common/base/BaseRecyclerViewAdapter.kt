@@ -27,9 +27,9 @@ abstract class BaseRecyclerViewAdapter<T>(
             notifyDataSetChanged()
         }
 
-    private var itemClickListener: OnItemClickListener? = null
-    private var itemLongClickListener: OnItemLongClickListener? = null
-    private var bottomClickListener: OnBottomClickListener? = null
+    var itemClickListener: OnItemClickListener? = null
+    var itemLongClickListener: OnItemLongClickListener? = null
+    var bottomClickListener: OnBottomClickListener? = null
 
     override fun getItemViewType(position: Int): Int {
         if (emptyLayoutId != 0) {
@@ -78,11 +78,11 @@ abstract class BaseRecyclerViewAdapter<T>(
         }
     }
 
-    protected abstract fun onBindSimpleViewHolder(holder: BaseViewHolder, item: T)
+    open fun onBindSimpleViewHolder(holder: BaseViewHolder, item: T) = Unit
 
-    protected abstract fun onBindBottomViewHolder(holder: BaseViewHolder)
+    open fun onBindBottomViewHolder(holder: BaseViewHolder) = Unit
 
-    protected abstract fun onBindEmptyViewHolder(holder: BaseViewHolder)
+    open fun onBindEmptyViewHolder(holder: BaseViewHolder) = Unit
 
     override fun getItemCount(): Int {
         return when {

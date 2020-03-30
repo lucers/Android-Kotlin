@@ -1,12 +1,17 @@
 package com.lucers.android
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.lucers.common.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun getActivityLayout(): Int = R.layout.activity_main
+
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
+        super.initData(savedInstanceState)
     }
 }

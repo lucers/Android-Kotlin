@@ -1,4 +1,4 @@
-package com.lucers.http
+package com.lucers.http.interceptor
 
 import com.blankj.utilcode.util.AppUtils
 import com.google.gson.Gson
@@ -60,7 +60,7 @@ class RequestInterceptor : Interceptor {
                 else -> {
                     var newBody: RequestBody
                     try {
-                        var requestParams = if (it.contentLength() == 0L) {
+                        val requestParams = if (it.contentLength() == 0L) {
                             JsonObject()
                         } else {
                             val json = getRequestContent(it)
@@ -74,7 +74,6 @@ class RequestInterceptor : Interceptor {
                                 requestParams.addProperty(paramName, paramValue)
                             }
                         }
-                        requestParams = addCommonParams(requestParams)
                         newBody = requestParams.toString().toRequestBody(it.contentType())
                     } catch (e: Exception) {
                         newBody = it
@@ -87,19 +86,6 @@ class RequestInterceptor : Interceptor {
             }
         }
         return request
-    }
-
-    private fun addCommonParams(requestParams: JsonObject): JsonObject {
-        val params = JsonObject()
-        params.add("baseParams", createCommonParams())
-        params.add("bizParams", requestParams)
-        return params
-    }
-
-    private fun createCommonParams(): JsonObject {
-        val commonParams = JsonObject()
-        commonParams.addProperty("appName", appName)
-        return commonParams
     }
 
     @Throws(IOException::class)
