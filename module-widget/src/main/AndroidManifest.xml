@@ -3,6 +3,7 @@
     package="com.lucers.widget">
 
     <application
+        android:name=".WidgetApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

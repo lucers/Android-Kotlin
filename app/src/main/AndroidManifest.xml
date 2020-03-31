@@ -24,13 +24,44 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <!-- App Activity -->
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/LoginTheme"
+            android:windowSoftInputMode="adjustNothing|stateHidden" />
+
+        <activity
+            android:name=".ui.activity.WebsActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.activity.AboutUsActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.activity.SettingActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.activity.ProfileActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".ui.activity.FeedbackActivity"
+            android:launchMode="singleTop" />
 
         <!-- Service -->
 

@@ -1,12 +1,13 @@
 package com.lucers.common.manager
 
 import androidx.fragment.app.FragmentActivity
+import com.lucers.common.DelegatesExt
 import java.util.*
 
 /**
  * ActivityManager
  */
-class ActivityManager {
+object ActivityManager {
 
     private val activityStack: Stack<FragmentActivity> = Stack<FragmentActivity>()
 
