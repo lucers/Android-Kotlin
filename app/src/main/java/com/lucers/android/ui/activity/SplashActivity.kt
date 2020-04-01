@@ -1,7 +1,9 @@
 package com.lucers.android.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.lucers.android.R
 import com.lucers.common.base.BaseActivity
 import com.lucers.common.constants.AppRouteConstants

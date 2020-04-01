@@ -4,6 +4,9 @@ import android.os.Bundle
 import com.lucers.common.base.BaseActivity
 import com.lucers.widget.R
 
+/**
+ * WidgetActivity
+ */
 class WidgetActivity : BaseActivity() {
 
     override fun getActivityLayout(): Int = R.layout.activity_widget

@@ -8,7 +8,5 @@ import com.lucers.common.base.BaseApplication
  */
 class WidgetApplication : BaseApplication() {
 
-    override fun initApplication(context: Context) {
-//        HttpManager.initConfig()
-    }
+    override fun initApplication(context: Context) {}
 }
