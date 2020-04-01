@@ -21,7 +21,7 @@ abstract class BaseRecyclerViewAdapter<T>(
         const val VIEW_TYPE_BOTTOM = 250053
     }
 
-    private var list: List<T>? = null
+    var list: List<T>? = null
         set(value) {
             field = value
             notifyDataSetChanged()

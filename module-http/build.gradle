@@ -18,4 +18,5 @@ dependencies {
     api rootProject.ext.dependencies["rxJavaAdapter"]
     api rootProject.ext.dependencies["scalarConverte"]
     api rootProject.ext.dependencies["httpLog"]
+    api rootProject.ext.dependencies["rxAndroid"]
 }

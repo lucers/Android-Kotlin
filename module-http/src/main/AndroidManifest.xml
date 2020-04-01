@@ -24,6 +24,22 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.HttpUrlActivity"
+            android:launchMode="singleTop" />
+
+        <activity android:name=".ui.HttpGetActivity"
+            android:launchMode="singleTop" />
+
+        <activity android:name=".ui.HttpPostActivity"
+            android:launchMode="singleTop" />
+
+        <activity android:name=".ui.HttpInterceptorActivity"
+            android:launchMode="singleTop" />
+
+        <activity android:name=".ui.HttpCacheActivity"
+            android:launchMode="singleTop" />
+
         <!-- config -->
         <!-- AndroidAutoSize config -->
         <meta-data

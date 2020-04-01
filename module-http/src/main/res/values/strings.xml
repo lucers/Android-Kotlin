@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Android-Http</string>
+    <string name="http_url">Url操作</string>
+    <string name="http_get">get请求</string>
+    <string name="http_post">post请求</string>
+    <string name="http_interceptor">拦截器操作</string>
+    <string name="http_cache">缓存处理</string>
 </resources>

@@ -4,21 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HttpActivity">
+    tools:context=".ui.HttpGetActivity"
+    tools:ignore="HardcodedText">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tool_bar"
+        style="@style/NoSpaceActionBarTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/app_name"
+        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+        app:title="@string/http_get"
         app:titleTextColor="@android:color/white" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_http"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_simple_request"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:overScrollMode="never"
+        android:text="直接发起请求"
+        android:textColor="@android:color/black"
         app:layout_constraintTop_toBottomOf="@id/tool_bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
