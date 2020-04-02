@@ -34,11 +34,15 @@ class HttpGetActivity : BaseActivity() {
         btn_simple_request.setOnClickListener {
             simpleRequest()
         }
+        btn_url_request.setOnClickListener {
+            urlRequest()
+        }
     }
 
-    private fun simpleRequest() {
+    private fun urlRequest() {
+        val url = et_http_url.text.toString().trim()
         HttpManager.createApi(HttpApi::class.java)
-            .getRequest()
+            .getRequest(url)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : Observer<Any> {
@@ -51,10 +55,36 @@ class HttpGetActivity : BaseActivity() {
                 }
 
                 override fun onNext(t: Any) {
+                    tv_result.text = t.toString()
                 }
 
                 override fun onError(e: Throwable) {
-                    ToastUtils.showShort(e.message)
+                    tv_result.text = e.message
+                    hideLoadingWindow()
+                }
+            })
+    }
+
+    private fun simpleRequest() {
+        HttpManager.createApi(HttpApi::class.java)
+            .getRequest()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<String> {
+                override fun onComplete() {
+                    hideLoadingWindow()
+                }
+
+                override fun onSubscribe(d: Disposable) {
+                    showLoadingWindow(d.toString())
+                }
+
+                override fun onNext(t: String) {
+                    tv_result.text = t
+                }
+
+                override fun onError(e: Throwable) {
+                    tv_result.text = e.message
                     hideLoadingWindow()
                 }
             })

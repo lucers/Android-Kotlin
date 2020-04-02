@@ -10,13 +10,13 @@ import retrofit2.http.Url
  */
 interface HttpApi {
 
-    @GET("/")
+    @GET
     fun getRequest(@Url url: String) : Observable<Any>
 
     @GET("/")
-    fun getRequest() : Observable<Any>
+    fun getRequest() : Observable<String>
 
-    @POST("/")
+    @POST
     fun postRequest(@Url url: String) : Observable<Any>
 
     @POST("/")
