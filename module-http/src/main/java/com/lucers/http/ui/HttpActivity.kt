@@ -41,10 +41,10 @@ class HttpActivity : BaseActivity() {
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
         funList.add(HttpFun(getString(R.string.http_url), "com.lucers.http.ui.HttpUrlActivity"))
-        funList.add(HttpFun(getString(R.string.http_get), "com.lucers.http.ui.HttpGetActivity"))
-        funList.add(HttpFun(getString(R.string.http_post), "com.lucers.http.ui.HttpPostActivity"))
         funList.add(HttpFun(getString(R.string.http_interceptor), "com.lucers.http.ui.HttpInterceptorActivity"))
         funList.add(HttpFun(getString(R.string.http_cache), "com.lucers.http.ui.HttpCacheActivity"))
+        funList.add(HttpFun(getString(R.string.http_get), "com.lucers.http.ui.HttpGetActivity"))
+        funList.add(HttpFun(getString(R.string.http_post), "com.lucers.http.ui.HttpPostActivity"))
 
         httpFunAdapter.list = funList
     }

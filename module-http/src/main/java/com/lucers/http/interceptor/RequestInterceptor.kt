@@ -1,8 +1,9 @@
 package com.lucers.http.interceptor
 
-import com.blankj.utilcode.util.AppUtils
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.lucers.http.bean.HttpHeader
+import com.lucers.http.bean.HttpParam
 import okhttp3.*
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.Buffer
@@ -16,13 +17,8 @@ import java.nio.charset.Charset
  */
 class RequestInterceptor : Interceptor {
 
-    private val appName = AppUtils.getAppName()
-
-    private val versionCode = AppUtils.getAppVersionCode()
-
-    private val versionName = AppUtils.getAppVersionName()
-
-    private val gson = Gson()
+    val httpHeader = mutableListOf<HttpHeader>()
+    val commonParam = mutableListOf<HttpParam>()
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -31,7 +27,14 @@ class RequestInterceptor : Interceptor {
             "POST" -> request = rebuildPostRequest(request)
             "GET" -> request = rebuildGetRequest(request)
         }
-        return chain.proceed(request)
+        val requestBuilder = request.newBuilder()
+        for (httpHeader in httpHeader) {
+            if (httpHeader.isEmpty()) {
+                continue
+            }
+            requestBuilder.addHeader(httpHeader.key, httpHeader.value)
+        }
+        return chain.proceed(requestBuilder.build())
     }
 
     private fun rebuildPostRequest(request: Request): Request {
@@ -43,6 +46,12 @@ class RequestInterceptor : Interceptor {
                     for (i in 0 until it.size) {
                         bodyBuilder.addEncoded(it.encodedName(i), it.encodedValue(i))
                     }
+                    for (httpParam in commonParam) {
+                        if (httpParam.isEmpty()) {
+                            continue
+                        }
+                        bodyBuilder.addEncoded(httpParam.key, httpParam.value)
+                    }
                     return request.newBuilder()
                         .post(bodyBuilder.build())
                         .build()
@@ -52,6 +61,12 @@ class RequestInterceptor : Interceptor {
                     val parts = it.parts
                     for (part in parts) {
                         bodyBuilder.addPart(part)
+                    }
+                    for (httpParam in commonParam) {
+                        if (httpParam.isEmpty()) {
+                            continue
+                        }
+                        bodyBuilder.addFormDataPart(httpParam.key, httpParam.value)
                     }
                     return request.newBuilder()
                         .post(bodyBuilder.build())
@@ -64,7 +79,7 @@ class RequestInterceptor : Interceptor {
                             JsonObject()
                         } else {
                             val json = getRequestContent(it)
-                            gson.fromJson(json, JsonObject::class.java)
+                            Gson().fromJson(json, JsonObject::class.java)
                         }
                         val params = request.url.queryParameterNames
                         for (paramName in params) {
@@ -73,6 +88,12 @@ class RequestInterceptor : Interceptor {
                                 val paramValue = parameterValues[0]
                                 requestParams.addProperty(paramName, paramValue)
                             }
+                        }
+                        for (httpParam in commonParam) {
+                            if (httpParam.isEmpty()) {
+                                continue
+                            }
+                            requestParams.addProperty(httpParam.key, httpParam.value)
                         }
                         newBody = requestParams.toString().toRequestBody(it.contentType())
                     } catch (e: Exception) {
@@ -96,7 +117,14 @@ class RequestInterceptor : Interceptor {
     }
 
     private fun rebuildGetRequest(request: Request): Request {
-        return request.newBuilder()
+        val urlBuilder = request.url.newBuilder()
+        for (httpParam in commonParam) {
+            if (httpParam.isEmpty()) {
+                continue
+            }
+            urlBuilder.addQueryParameter(httpParam.key, httpParam.value)
+        }
+        return request.newBuilder().url(urlBuilder.build())
             .build()
     }
 }

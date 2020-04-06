@@ -1,4 +1,4 @@
-package com.huatian.dididiangong.constants
+package com.lucers.android.constants
 
 class AppConstants {
 

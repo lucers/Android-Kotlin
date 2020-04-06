@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
  * @author Lucers
  */
 abstract class BaseRecyclerViewAdapter<T>(
-    private var emptyLayoutId: Int = 0,
-    private var bottomLayoutId: Int = 0
+    var emptyLayoutId: Int = 0,
+    var bottomLayoutId: Int = 0
 ) : RecyclerView.Adapter<BaseViewHolder>(), View.OnClickListener, OnLongClickListener {
 
     companion object {
@@ -21,7 +21,7 @@ abstract class BaseRecyclerViewAdapter<T>(
         const val VIEW_TYPE_BOTTOM = 250053
     }
 
-    var list: List<T>? = null
+    var list: MutableList<T> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -38,7 +38,7 @@ abstract class BaseRecyclerViewAdapter<T>(
             }
         }
         if (bottomLayoutId != 0) {
-            if (position == list?.size) {
+            if (position == list.size) {
                 return VIEW_TYPE_BOTTOM
             }
         }
@@ -72,7 +72,7 @@ abstract class BaseRecyclerViewAdapter<T>(
             VIEW_TYPE_EMPTY -> onBindEmptyViewHolder(holder)
             VIEW_TYPE_BOTTOM -> onBindBottomViewHolder(holder)
             else -> if (list.isNullOrEmpty().not()) {
-                onBindSimpleViewHolder(holder, list!![position])
+                onBindSimpleViewHolder(holder, list[position])
                 holder.itemView.tag = position
             }
         }
@@ -95,9 +95,9 @@ abstract class BaseRecyclerViewAdapter<T>(
             }
             else -> {
                 if (bottomLayoutId == 0) {
-                    list!!.size
+                    list.size
                 } else {
-                    list!!.size + 1
+                    list.size + 1
                 }
             }
         }

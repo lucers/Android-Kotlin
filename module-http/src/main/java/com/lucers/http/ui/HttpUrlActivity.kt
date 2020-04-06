@@ -39,16 +39,18 @@ class HttpUrlActivity : BaseActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun currentUrl() {
-        val currentUrl = HttpManager.retrofit?.baseUrl()
+        val currentUrl = HttpManager.getBaseUrl()
         tv_current_url.text = "当前Url: $currentUrl"
     }
 
     private fun changeUrl() {
         try {
             val httpUrl = et_http_url.text?.toString()?.trim()
-            HttpManager.updateBaseUrl(httpUrl)
+            httpUrl?.let {
+                HttpManager.updateBaseUrl(it)
+            }
         } catch (e: Exception) {
-            ToastUtils.showShort(e.message)
+            ToastUtils.showLong(e.message)
         }
         currentUrl()
     }

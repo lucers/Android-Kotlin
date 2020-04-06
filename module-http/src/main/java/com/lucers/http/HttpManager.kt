@@ -1,15 +1,15 @@
 package com.lucers.http
 
 import com.lucers.common.BuildConfig
+import com.lucers.http.bean.HttpHeader
+import com.lucers.http.bean.HttpParam
 import com.lucers.http.interceptor.RequestInterceptor
-import com.lucers.http.interceptor.ResponseInterceptor
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.net.URL
 
 /**
@@ -19,60 +19,61 @@ object HttpManager {
 
     private const val BASE_URL = BuildConfig.BASE_URL
 
-    var retrofit: Retrofit? = null
+    private val retrofitBuilder = Retrofit.Builder()
+
+    private val clientBuilder = OkHttpClient.Builder()
+
+    private val requestInterceptor = RequestInterceptor()
 
     init {
-        val builder = OkHttpClient.Builder()
-            .addInterceptor(RequestInterceptor())
-            .addInterceptor(ResponseInterceptor())
+        clientBuilder.addInterceptor(requestInterceptor)
 
         if (BuildConfig.DEBUG) {
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-            builder.addInterceptor(httpLoggingInterceptor)
-                .build()
+            clientBuilder.addInterceptor(httpLoggingInterceptor)
         }
-        retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+        retrofitBuilder.baseUrl(BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .client(builder.build())
+            .client(clientBuilder.build())
             .build()
     }
 
     @Suppress("UNCHECKED_CAST")
     fun <H> createApi(serviceClass: Class<H>): H {
-        return retrofit?.create(serviceClass) as H
+        return retrofitBuilder.build().create(serviceClass) as H
     }
 
-    fun updateBaseUrl(url: String?) {
-        try {
-            this.retrofit = this.retrofit?.newBuilder()
-                ?.baseUrl(url!!)
-                ?.build()
-        } catch (e: Exception) {
-            throw e
-        }
+    fun updateBaseUrl(url: String) {
+        retrofitBuilder.baseUrl(url)
     }
 
-    fun updateBaseUrl(url: URL?) {
-        try {
-            this.retrofit = this.retrofit?.newBuilder()
-                ?.baseUrl(url!!)
-                ?.build()
-        } catch (e: Exception) {
-            throw e
-        }
+    fun updateBaseUrl(url: URL) {
+        retrofitBuilder.baseUrl(url)
     }
 
-    fun updateBaseUrl(url: HttpUrl?) {
-        try {
-            this.retrofit = this.retrofit?.newBuilder()
-                ?.baseUrl(url!!)
-                ?.build()
-        } catch (e: Exception) {
-            throw e
-        }
+    fun updateBaseUrl(url: HttpUrl) {
+        retrofitBuilder.baseUrl(url)
+    }
+
+    fun getBaseUrl(): HttpUrl = retrofitBuilder.build().baseUrl()
+
+    fun setCommonParam(commonParam: MutableList<HttpParam>) {
+        requestInterceptor.commonParam.clear()
+        requestInterceptor.commonParam.addAll(commonParam)
+    }
+
+    fun setHttpHeader(httpHeader: MutableList<HttpHeader>) {
+        requestInterceptor.httpHeader.clear()
+        requestInterceptor.httpHeader.addAll(httpHeader)
+    }
+
+    fun getHttpHeader(): MutableList<HttpHeader> {
+        return requestInterceptor.httpHeader
+    }
+
+    fun getCommonParam(): MutableList<HttpParam> {
+        return requestInterceptor.commonParam
     }
 }
