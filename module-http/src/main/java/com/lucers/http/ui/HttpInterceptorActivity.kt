@@ -21,20 +21,10 @@ class HttpInterceptorActivity : BaseActivity() {
 
     private val httpHeaderAdapter = HttpHeaderAdapter().also { adapter ->
         adapter.list = HttpManager.getHttpHeader()
-        adapter.list.let {
-            if (it.isEmpty()) {
-                it.add(HttpHeader())
-            }
-        }
     }
 
     private val httpParamAdapter = HttpParamAdapter().also { adapter ->
         adapter.list = HttpManager.getCommonParam()
-        adapter.list.let {
-            if (it.isEmpty()) {
-                it.add(HttpParam())
-            }
-        }
     }
 
     override fun initWindow() {
@@ -64,7 +54,19 @@ class HttpInterceptorActivity : BaseActivity() {
                 httpHeaderAdapter.list.let { httpHeaderAdapter.notifyItemInserted(it.size) }
             }
         }
+        httpHeaderAdapter.emptyClickListener = object : BaseRecyclerViewAdapter.OnEmptyClickListener {
+            override fun onClick(v: View?) {
+                httpHeaderAdapter.list.add(HttpHeader())
+                httpHeaderAdapter.list.let { httpHeaderAdapter.notifyItemInserted(it.size) }
+            }
+        }
         httpParamAdapter.bottomClickListener = object : BaseRecyclerViewAdapter.OnBottomClickListener {
+            override fun onClick(v: View?) {
+                httpParamAdapter.list.add(HttpParam())
+                httpParamAdapter.list.let { httpParamAdapter.notifyItemInserted(it.size) }
+            }
+        }
+        httpParamAdapter.emptyClickListener = object : BaseRecyclerViewAdapter.OnEmptyClickListener {
             override fun onClick(v: View?) {
                 httpParamAdapter.list.add(HttpParam())
                 httpParamAdapter.list.let { httpParamAdapter.notifyItemInserted(it.size) }

@@ -19,6 +19,12 @@ import java.nio.charset.Charset
  */
 class ResponseInterceptor : Interceptor {
 
+    private val appName = AppUtils.getAppName()
+
+    private val versionCode = AppUtils.getAppVersionCode()
+
+    private val versionName = AppUtils.getAppVersionName()
+
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val response = chain.proceed(chain.request())

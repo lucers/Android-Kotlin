@@ -19,6 +19,9 @@ configurations.all {
             if (requested.group == 'com.google.code.gson' && requested.name == 'gson') {
                 details.useVersion ext.gsonVersion
             }
+            if (requested.group == 'com.squareup.okhttp3') {
+                details.useVersion ext.okhttpVersion
+            }
         }
     }
 }

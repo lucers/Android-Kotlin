@@ -1,8 +1,11 @@
 package com.lucers.common.base
 
+import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.os.Handler
 import android.view.Gravity
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.LogUtils
@@ -57,10 +60,20 @@ abstract class BaseActivity : AppCompatActivity() {
 
 
     fun showLoadingWindow(tag: String) {
-        if (loadingWindow == null) {
-            loadingWindow = LoadingWindow(this, tag)
-        }
-        loadingWindow?.showAsDropDown(window?.decorView, 0, 0, Gravity.NO_GRAVITY)
+        hideSoftKeyboard()
+        Handler().postDelayed(
+            {
+                if (loadingWindow == null) {
+                    loadingWindow = LoadingWindow(this, tag)
+                }
+                loadingWindow?.showAsDropDown(window.decorView, 0, 0, Gravity.NO_GRAVITY)
+            }, 50
+        )
+    }
+
+    private fun hideSoftKeyboard() {
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(window.decorView.windowToken, 0)
     }
 
     open fun hideLoadingWindow() {

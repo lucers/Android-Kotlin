@@ -12,7 +12,8 @@ import com.lucers.http.bean.HttpHeader
  * HttpHeaderAdapter
  */
 class HttpHeaderAdapter : BaseRecyclerViewAdapter<HttpHeader>(
-    bottomLayoutId = R.layout.item_add
+    bottomLayoutId = R.layout.item_add,
+    emptyLayoutId = R.layout.item_add
 ) {
 
     override fun getItemLayoutId(viewType: Int) = R.layout.item_key_value
@@ -20,15 +21,10 @@ class HttpHeaderAdapter : BaseRecyclerViewAdapter<HttpHeader>(
     override fun onBindSimpleViewHolder(holder: BaseViewHolder, item: HttpHeader) {
         holder.setText(R.id.et_key, item.key)
             .setText(R.id.et_value, item.value)
-            .setClickListener(R.id.btn_delete, object : View.OnClickListener {
-                override fun onClick(v: View?) {
-                    list.let {
-                        if (it.size == 1) {
-                            return
-                        }
-                        it.remove(item)
-                        notifyItemRemoved(holder.adapterPosition)
-                    }
+            .setClickListener(R.id.btn_delete, View.OnClickListener {
+                list.let {
+                    it.remove(item)
+                    notifyItemRemoved(holder.adapterPosition)
                 }
             })
             .setTextWatcher(R.id.et_key, object : TextWatcher {

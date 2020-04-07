@@ -30,6 +30,7 @@ abstract class BaseRecyclerViewAdapter<T>(
     var itemClickListener: OnItemClickListener? = null
     var itemLongClickListener: OnItemLongClickListener? = null
     var bottomClickListener: OnBottomClickListener? = null
+    var emptyClickListener: OnEmptyClickListener? = null
 
     override fun getItemViewType(position: Int): Int {
         if (emptyLayoutId != 0) {
@@ -51,6 +52,7 @@ abstract class BaseRecyclerViewAdapter<T>(
         when (viewType) {
             VIEW_TYPE_EMPTY -> {
                 itemView = inflater.inflate(emptyLayoutId, parent, false)
+                itemView.setOnClickListener(emptyClickListener)
             }
             VIEW_TYPE_BOTTOM -> {
                 itemView = inflater.inflate(bottomLayoutId, parent, false)
@@ -127,4 +129,6 @@ abstract class BaseRecyclerViewAdapter<T>(
     }
 
     interface OnBottomClickListener : View.OnClickListener
+
+    interface OnEmptyClickListener : View.OnClickListener
 }
