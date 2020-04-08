@@ -38,9 +38,9 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    api rootProject.ext.dependencies["junit"]
-    api rootProject.ext.dependencies["testRunner"]
-    api rootProject.ext.dependencies["testEspresso"]
+//    api rootProject.ext.dependencies["junit"]
+//    api rootProject.ext.dependencies["testRunner"]
+//    api rootProject.ext.dependencies["testEspresso"]
 
     api rootProject.ext.dependencies["androidx"]
     api rootProject.ext.dependencies["multidex"]

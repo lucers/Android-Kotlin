@@ -48,33 +48,46 @@ class DrawableRadioButton @JvmOverloads constructor(
             context.obtainStyledAttributes(attrs, R.styleable.DrawableRadioButton)
         val indexCount = typedArray.indexCount
         for (i in 0 until indexCount) {
-            val index = typedArray.getIndex(i)
-            if (index == R.styleable.DrawableRadioButton_drawableSize) {
-                drawableSize = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableRadioButton_drawableLeftWidth) {
-                drawableLeftWidth = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableRadioButton_drawableLeftHeight) {
-                drawableLeftHeight = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableRadioButton_drawableTopWidth) {
-                drawableTopWidth = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableRadioButton_drawableTopHeight) {
-                drawableTopHeight = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableRadioButton_drawableRightWidth) {
-                drawableRightWidth = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableRadioButton_drawableRightHeight) {
-                drawableRightHeight = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableRadioButton_drawableBottomWidth) {
-                drawableBottomWidth = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableRadioButton_drawableBottomHeight) {
-                drawableBottomHeight = typedArray.getDimensionPixelSize(index, 0)
-            } else if (index == R.styleable.DrawableRadioButton_drawableLeft) {
-                drawableLeft = typedArray.getDrawable(index)
-            } else if (index == R.styleable.DrawableRadioButton_drawableTop) {
-                drawableTop = typedArray.getDrawable(index)
-            } else if (index == R.styleable.DrawableRadioButton_drawableRight) {
-                drawableRight = typedArray.getDrawable(index)
-            } else if (index == R.styleable.DrawableRadioButton_drawableBottom) {
-                drawableBottom = typedArray.getDrawable(index)
+            when (val index = typedArray.getIndex(i)) {
+                R.styleable.DrawableRadioButton_drawableSize -> {
+                    drawableSize = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableRadioButton_drawableLeftWidth -> {
+                    drawableLeftWidth = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableRadioButton_drawableLeftHeight -> {
+                    drawableLeftHeight = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableRadioButton_drawableTopWidth -> {
+                    drawableTopWidth = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableRadioButton_drawableTopHeight -> {
+                    drawableTopHeight = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableRadioButton_drawableRightWidth -> {
+                    drawableRightWidth = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableRadioButton_drawableRightHeight -> {
+                    drawableRightHeight = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableRadioButton_drawableBottomWidth -> {
+                    drawableBottomWidth = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableRadioButton_drawableBottomHeight -> {
+                    drawableBottomHeight = typedArray.getDimensionPixelSize(index, 0)
+                }
+                R.styleable.DrawableRadioButton_drawableLeft -> {
+                    drawableLeft = typedArray.getDrawable(index)
+                }
+                R.styleable.DrawableRadioButton_drawableTop -> {
+                    drawableTop = typedArray.getDrawable(index)
+                }
+                R.styleable.DrawableRadioButton_drawableRight -> {
+                    drawableRight = typedArray.getDrawable(index)
+                }
+                R.styleable.DrawableRadioButton_drawableBottom -> {
+                    drawableBottom = typedArray.getDrawable(index)
+                }
             }
         }
 
