@@ -1,6 +1,7 @@
 package com.lucers.http
 
 import io.reactivex.Observable
+import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Streaming
@@ -19,11 +20,11 @@ interface HttpApi {
 
     @Streaming
     @GET("/test.text")
-    fun getDownload()
+    fun getDownload(): Observable<ResponseBody>
 
     @Streaming
     @GET
-    fun getDownload(@Url url: String)
+    fun getDownload(@Url url: String): Observable<ResponseBody>
 
     @POST
     fun postRequest(@Url url: String): Observable<String>
@@ -33,9 +34,9 @@ interface HttpApi {
 
     @Streaming
     @POST
-    fun postDownload()
+    fun postDownload(): Observable<ResponseBody>
 
     @Streaming
     @POST
-    fun postDownload(@Url url: String)
+    fun postDownload(@Url url: String): Observable<ResponseBody>
 }

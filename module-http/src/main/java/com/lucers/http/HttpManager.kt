@@ -3,6 +3,7 @@ package com.lucers.http
 import com.lucers.common.BuildConfig
 import com.lucers.http.bean.HttpHeader
 import com.lucers.http.bean.HttpParam
+import com.lucers.http.interceptor.CacheInterceptor
 import com.lucers.http.interceptor.RequestInterceptor
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -22,12 +23,14 @@ object HttpManager {
 
     private val retrofitBuilder = Retrofit.Builder()
 
-    private val clientBuilder = OkHttpClient.Builder()
-
     private val requestInterceptor = RequestInterceptor()
 
+    private val cacheInterceptor = CacheInterceptor()
+
     init {
-        clientBuilder.addInterceptor(requestInterceptor)
+        val clientBuilder = OkHttpClient.Builder()
+            .addInterceptor(cacheInterceptor)
+            .addInterceptor(requestInterceptor)
 
         if (BuildConfig.DEBUG) {
             val httpLoggingInterceptor = HttpLoggingInterceptor()

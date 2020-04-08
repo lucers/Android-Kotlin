@@ -36,15 +36,6 @@ class HttpGetActivity : BaseActivity() {
         btn_url_request.setOnClickListener {
             urlRequest()
         }
-        btn_download_request.setOnClickListener {
-            downloadRequest()
-        }
-    }
-
-    private fun downloadRequest() {
-//        val url = et_http_url.text.toString().trim()
-//        HttpManager.createApi(HttpApi::class.java)
-//            .getDownload(url)
     }
 
     private fun urlRequest() {

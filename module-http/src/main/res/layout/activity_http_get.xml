@@ -42,14 +42,7 @@
             android:id="@+id/btn_url_request"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="向输入的Url发起请求"
-            android:textColor="@android:color/black" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_download_request"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="文件下载"
+            android:text="向输入的Url发起Get请求"
             android:textColor="@android:color/black" />
 
         <androidx.appcompat.widget.AppCompatTextView
