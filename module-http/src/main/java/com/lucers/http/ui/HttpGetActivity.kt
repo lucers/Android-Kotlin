@@ -27,8 +27,8 @@ class HttpGetActivity : BaseActivity() {
 
     override fun getActivityLayout(): Int = R.layout.activity_http_get
 
-    override fun initData(savedInstanceState: Bundle?) {
-        super.initData(savedInstanceState)
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
         tool_bar.setNavigationOnClickListener { onBackPressed() }
         btn_simple_request.setOnClickListener {
             simpleRequest()

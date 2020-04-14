@@ -39,15 +39,7 @@ class HttpInterceptorActivity : BaseActivity() {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         tool_bar.setNavigationOnClickListener { onBackPressed() }
-        rv_http_header.layoutManager = LinearLayoutManager(this)
-        rv_http_header.adapter = httpHeaderAdapter
 
-        rv_common_param.layoutManager = LinearLayoutManager(this)
-        rv_common_param.adapter = httpParamAdapter
-    }
-
-    override fun initData(savedInstanceState: Bundle?) {
-        super.initData(savedInstanceState)
         httpHeaderAdapter.bottomClickListener = object : BaseRecyclerViewAdapter.OnBottomClickListener {
             override fun onClick(v: View?) {
                 httpHeaderAdapter.list.add(HttpHeader())
@@ -72,5 +64,11 @@ class HttpInterceptorActivity : BaseActivity() {
                 httpParamAdapter.list.let { httpParamAdapter.notifyItemInserted(it.size) }
             }
         }
+
+        rv_http_header.layoutManager = LinearLayoutManager(this)
+        rv_http_header.adapter = httpHeaderAdapter
+
+        rv_common_param.layoutManager = LinearLayoutManager(this)
+        rv_common_param.adapter = httpParamAdapter
     }
 }
