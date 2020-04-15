@@ -65,6 +65,7 @@
             android:launchMode="singleTop" />
 
         <!-- Service -->
+        <service android:name=".service.FileDownloadService" />
 
         <!-- Receiver -->
 

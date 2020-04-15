@@ -16,5 +16,15 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
+        checkUpdate()
+        updateUserInfo()
+    }
+
+    fun updateUserInfo() {
+
+    }
+
+    fun checkUpdate() {
+
     }
 }

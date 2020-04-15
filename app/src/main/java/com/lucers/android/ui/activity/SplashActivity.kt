@@ -22,6 +22,14 @@ class SplashActivity : BaseActivity(R.layout.activity_splash) {
         super.initData(savedInstanceState)
     }
 
+    fun toNextActivity() {
+        ARouter.getInstance()
+            .build(AppRouteConstants.mainRoute)
+//            .build(AppRouteConstants.loginRoute)
+            .navigation()
+        finish()
+    }
+
     override fun onBackPressed() {
     }
 }

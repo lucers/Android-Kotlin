@@ -24,4 +24,8 @@ class SettingActivity : BaseActivity(R.layout.activity_setting) {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
     }
+
+    override fun initData(savedInstanceState: Bundle?) {
+        super.initData(savedInstanceState)
+    }
 }
