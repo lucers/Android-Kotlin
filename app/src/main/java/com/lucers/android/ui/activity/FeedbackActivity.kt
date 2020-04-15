@@ -12,7 +12,7 @@ import com.lucers.common.constants.AppRouteConstants
  * FeedbackActivity
  */
 @Route(path = AppRouteConstants.feedbackRoute)
-class FeedbackActivity : BaseActivity() {
+class FeedbackActivity : BaseActivity(R.layout.activity_feedback) {
 
     override fun initWindow() {
         super.initWindow()
@@ -20,8 +20,6 @@ class FeedbackActivity : BaseActivity() {
             statusBarColorInt(Color.WHITE)
         }
     }
-
-    override fun getActivityLayout(): Int = R.layout.activity_feedback
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)

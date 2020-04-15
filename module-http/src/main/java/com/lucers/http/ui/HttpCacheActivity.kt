@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_http_cache.*
 /**
  * HttpCacheActivity
  */
-class HttpCacheActivity : BaseActivity() {
+class HttpCacheActivity : BaseActivity(R.layout.activity_http_cache) {
 
     override fun initWindow() {
         super.initWindow()
@@ -17,8 +17,6 @@ class HttpCacheActivity : BaseActivity() {
             statusBarColor(R.color.colorAccent)
         }
     }
-
-    override fun getActivityLayout(): Int = R.layout.activity_http_cache
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)

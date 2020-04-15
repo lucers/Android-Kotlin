@@ -18,4 +18,8 @@ object AppRouteConstants {
     const val feedbackRoute: String = "$routeRoot/feedback"
     const val websRoute: String = "$routeRoot/webs"
     const val aboutUsRoute: String = "$routeRoot/about_us"
+
+
+    const val httpRoute: String = "$routeRoot/http"
+    const val widgetRoute: String = "$routeRoot/widget"
 }

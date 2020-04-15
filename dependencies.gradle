@@ -1,26 +1,32 @@
 configurations.all {
 //    all*.exclude group: 'androidx.annotation', module: 'annotation'
     resolutionStrategy {
-        def ext = rootProject.ext
+        def versions = rootProject.ext.versions
         eachDependency { DependencyResolveDetails details ->
             def requested = details.requested
             if (requested.group == 'androidx.appcompat' && requested.name == 'appcompat') {
-                details.useVersion ext.appcompatVersion
+                details.useVersion versions.appcompatVersion
             }
             if (requested.group == 'androidx.annotation' && requested.name == 'annotation') {
-                details.useVersion ext.annotationVersion
+                details.useVersion versions.annotationVersion
             }
-            if (requested.group == 'androidx.lifecycle' && requested.name == 'lifecycle-common') {
-                details.useVersion ext.lifecycleVersion
+            if (requested.group == 'androidx.lifecycle') {
+                details.useVersion versions.lifecycleVersion
             }
             if (requested.group == 'io.reactivex.rxjava2' && requested.name == 'rxjava') {
-                details.useVersion ext.rxjavaVersion
+                details.useVersion versions.rxjavaVersion
             }
             if (requested.group == 'com.google.code.gson' && requested.name == 'gson') {
-                details.useVersion ext.gsonVersion
+                details.useVersion versions.gsonVersion
+            }
+            if (requested.group == 'org.reactivestreams' && requested.name == 'reactive-streams') {
+                details.useVersion versions.reactiveVersion
             }
             if (requested.group == 'com.squareup.okhttp3') {
-                details.useVersion ext.okhttpVersion
+                details.useVersion versions.okhttpVersion
+            }
+            if (requested.group == 'org.jetbrains.kotlin') {
+                details.useVersion versions.kotlinJdkVersion
             }
         }
     }

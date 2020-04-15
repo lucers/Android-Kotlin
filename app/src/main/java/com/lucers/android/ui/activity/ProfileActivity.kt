@@ -10,9 +10,7 @@ import com.lucers.common.constants.AppRouteConstants
  * ProfileActivity
  */
 @Route(path = AppRouteConstants.profileRoute)
-class ProfileActivity : BaseActivity() {
-
-    override fun getActivityLayout(): Int = R.layout.activity_profile
+class ProfileActivity : BaseActivity(R.layout.activity_profile) {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)

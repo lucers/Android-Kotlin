@@ -7,12 +7,12 @@ apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion versions.compileSdkVersion
 
     defaultConfig {
         applicationId APPLICATION_ID
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
 
@@ -21,7 +21,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
             }
         }
         kapt {
@@ -37,13 +37,17 @@ android {
             variant.outputs.all {
                 output ->
                     def outputFile = output.outputFile
-                    if (outputFile.name.contains("debug")){
+                    if (outputFile.name.contains("debug")) {
                         outputFileName = new File("../debug/", "${PACKAGE_NAME_DEBUG}.apk")
                     }
-                    if (outputFile.name.contains("release")){
+                    if (outputFile.name.contains("release")) {
                         outputFileName = new File("../release/", "${PACKAGE_NAME_RELEASE}.apk")
                     }
             }
+    }
+
+    dataBinding {
+        enabled = true
     }
 
     signingConfigs {
@@ -82,5 +86,5 @@ dependencies {
         implementation project(':module-http')
         implementation project(':module-widget')
     }
-    kapt rootProject.ext.dependencies["arouterCompiler"]
+    kapt annotations.arouterCompiler
 }

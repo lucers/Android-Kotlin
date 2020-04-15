@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_http_post.*
 /**
  * HttpPostActivity
  */
-class HttpPostActivity : BaseActivity() {
+class HttpPostActivity : BaseActivity(R.layout.activity_http_post) {
 
     override fun initWindow() {
         super.initWindow()
@@ -17,8 +17,6 @@ class HttpPostActivity : BaseActivity() {
             statusBarColor(R.color.colorAccent)
         }
     }
-
-    override fun getActivityLayout(): Int = R.layout.activity_http_post
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)

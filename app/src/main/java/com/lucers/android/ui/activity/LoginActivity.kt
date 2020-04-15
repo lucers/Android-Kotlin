@@ -6,7 +6,5 @@ import com.lucers.common.base.BaseActivity
 import com.lucers.common.constants.AppRouteConstants
 
 @Route(path = AppRouteConstants.loginRoute)
-class LoginActivity : BaseActivity() {
-
-    override fun getActivityLayout(): Int = R.layout.activity_login
+class LoginActivity : BaseActivity(R.layout.activity_login) {
 }

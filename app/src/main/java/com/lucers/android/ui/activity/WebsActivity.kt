@@ -10,9 +10,7 @@ import com.lucers.common.constants.AppRouteConstants
  * WebsActivity
  */
 @Route(path = AppRouteConstants.websRoute)
-class WebsActivity : BaseActivity() {
-
-    override fun getActivityLayout(): Int = R.layout.activity_webs
+class WebsActivity : BaseActivity(R.layout.activity_webs) {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)

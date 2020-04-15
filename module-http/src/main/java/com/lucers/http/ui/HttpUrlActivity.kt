@@ -2,6 +2,8 @@ package com.lucers.http.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ktx.immersionBar
 import com.lucers.common.BuildConfig
@@ -13,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_http_url.*
 /**
  * HttpUrlActivity
  */
-class HttpUrlActivity : BaseActivity() {
+class HttpUrlActivity : BaseActivity(R.layout.activity_http_url) {
 
     override fun initWindow() {
         super.initWindow()
@@ -22,11 +24,10 @@ class HttpUrlActivity : BaseActivity() {
         }
     }
 
-    override fun getActivityLayout(): Int = R.layout.activity_http_url
-
     @SuppressLint("SetTextI18n")
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
+
         tool_bar.setNavigationOnClickListener { onBackPressed() }
         tv_default_url.text = "默认Url：${BuildConfig.BASE_URL}"
 

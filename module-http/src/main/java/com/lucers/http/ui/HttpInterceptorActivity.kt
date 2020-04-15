@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_http_interceptor.*
 /**
  * HttpInterceptorActivity
  */
-class HttpInterceptorActivity : BaseActivity() {
+class HttpInterceptorActivity : BaseActivity(R.layout.activity_http_interceptor) {
 
     private val httpHeaderAdapter = HttpHeaderAdapter().also { adapter ->
         adapter.list = HttpManager.getHttpHeader()
@@ -33,8 +33,6 @@ class HttpInterceptorActivity : BaseActivity() {
             statusBarColor(R.color.colorAccent)
         }
     }
-
-    override fun getActivityLayout(): Int = R.layout.activity_http_interceptor
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)

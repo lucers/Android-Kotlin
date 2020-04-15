@@ -15,10 +15,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api rootProject.ext.dependencies["retrofit"]
-    api rootProject.ext.dependencies["gsonConverter"]
-    api rootProject.ext.dependencies["rxJavaAdapter"]
-    api rootProject.ext.dependencies["scalarConverte"]
-    api rootProject.ext.dependencies["httpLog"]
-    api rootProject.ext.dependencies["rxAndroid"]
+    api libraries.retrofit
+    api libraries.gsonConverter
+    api libraries.rxJavaAdapter
+    api libraries.scalarConverte
+    api libraries.httpLog
+    api libraries.rxAndroid
 }

@@ -12,7 +12,7 @@ import com.lucers.common.constants.AppRouteConstants
  * AboutUsActivity
  */
 @Route(path = AppRouteConstants.aboutUsRoute)
-class AboutUsActivity : BaseActivity() {
+class AboutUsActivity : BaseActivity(R.layout.activity_about_us) {
 
     override fun initWindow() {
         super.initWindow()
@@ -20,9 +20,6 @@ class AboutUsActivity : BaseActivity() {
             statusBarColorInt(Color.WHITE)
         }
     }
-
-
-    override fun getActivityLayout(): Int = R.layout.activity_about_us
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)

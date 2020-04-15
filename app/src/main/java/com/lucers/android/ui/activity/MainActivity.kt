@@ -8,10 +8,7 @@ import com.lucers.common.base.BaseActivity
 import com.lucers.common.constants.AppRouteConstants
 
 @Route(path = AppRouteConstants.mainRoute)
-class MainActivity : BaseActivity() {
-
-    override fun getActivityLayout(): Int =
-        R.layout.activity_main
+class MainActivity : BaseActivity(R.layout.activity_main) {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)

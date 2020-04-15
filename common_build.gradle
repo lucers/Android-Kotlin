@@ -9,20 +9,21 @@ apply plugin: 'kotlin-android-extensions'
 if (isRunAlone.toBoolean()) {
     apply plugin: 'kotlin-kapt'
 }
+apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion versions.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         if (isRunAlone.toBoolean()) {
             javaCompileOptions {
                 annotationProcessorOptions {
-                    arguments = [AROUTER_MODULE_NAME: project.getName()]
+                    arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
                 }
             }
             kapt {
@@ -32,6 +33,10 @@ android {
                 }
             }
         }
+    }
+
+    dataBinding {
+        enabled = true
     }
 
     sourceSets {
@@ -77,6 +82,6 @@ dependencies {
     implementation project(':common')
 
     if (isRunAlone.toBoolean()) {
-        kapt rootProject.ext.dependencies["arouterCompiler"]
+        kapt annotations.arouterCompiler
     }
 }

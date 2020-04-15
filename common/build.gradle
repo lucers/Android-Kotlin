@@ -2,21 +2,26 @@ apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion versions.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
         multiDexEnabled true
+    }
+
+    dataBinding {
+        enabled = true
     }
 
     buildTypes {
@@ -36,30 +41,26 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api libraries.androidx
+    api libraries.multidex
 
-//    api rootProject.ext.dependencies["junit"]
-//    api rootProject.ext.dependencies["testRunner"]
-//    api rootProject.ext.dependencies["testEspresso"]
+    api libraries.kotlin_core
+    api libraries.kotlin_jdk
+    api libraries.rxKotlin
 
-    api rootProject.ext.dependencies["androidx"]
-    api rootProject.ext.dependencies["multidex"]
+    api libraries.materialDesign
+    api libraries.constraintLayout
+    api libraries.recyclerView
+    api libraries.photoView
 
-    api rootProject.ext.dependencies["kotlin_core"]
-    api rootProject.ext.dependencies["kotlin_jdk"]
+    api libraries.autoSize
+    api libraries.immersionBar
+    api libraries.immersionBar_kotlin
 
-    api rootProject.ext.dependencies["materialDesign"]
-    api rootProject.ext.dependencies["constraintLayout"]
-    api rootProject.ext.dependencies["recyclerView"]
-    api rootProject.ext.dependencies["photoView"]
-
-    api rootProject.ext.dependencies["autoSize"]
-    api rootProject.ext.dependencies["immersionBar"]
-    api rootProject.ext.dependencies["immersionBar_kotlin"]
-
-    api rootProject.ext.dependencies["arouterApi"]
-    api rootProject.ext.dependencies["rxPermission"]
-    api rootProject.ext.dependencies["glide"]
-    api rootProject.ext.dependencies["gson"]
-    api rootProject.ext.dependencies["utils"]
+    api libraries.arouterApi
+    api libraries.rxPermission
+    api libraries.glide
+    api libraries.gson
+    api libraries.utils
 }

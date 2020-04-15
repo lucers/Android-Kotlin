@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_http_get.*
 /**
  * HttpGetActivity
  */
-class HttpGetActivity : BaseActivity() {
+class HttpGetActivity : BaseActivity(R.layout.activity_http_get) {
 
     override fun initWindow() {
         super.initWindow()
@@ -24,8 +24,6 @@ class HttpGetActivity : BaseActivity() {
             statusBarColor(R.color.colorAccent)
         }
     }
-
-    override fun getActivityLayout(): Int = R.layout.activity_http_get
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)

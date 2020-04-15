@@ -7,6 +7,8 @@ import android.os.Handler
 import android.view.Gravity
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.LogUtils
 import com.gyf.immersionbar.ktx.immersionBar
@@ -16,7 +18,7 @@ import com.lucers.common.ui.popupwindow.LoadingWindow
 /**
  * BaseActivity
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity(val contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
 
     private var screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
@@ -26,7 +28,7 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initWindow()
 
-        setContentView(getActivityLayout())
+        DataBindingUtil.setContentView<ViewDataBinding>(this, contentLayoutId)
 
         ActivityManager.addActivity(this)
 
@@ -47,8 +49,6 @@ abstract class BaseActivity : AppCompatActivity() {
             fitsSystemWindows(true)
         }
     }
-
-    abstract fun getActivityLayout(): Int
 
     open fun initView(savedInstanceState: Bundle?) {
 
