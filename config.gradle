@@ -25,8 +25,6 @@ ext {
     ]
 
     annotations = [
-            // https://github.com/JakeWharton/butterknife
-            butterKnifeCompiler: "com.jakewharton:butterknife-compiler:10.2.0",
             // https://github.com/bumptech/glide
             glideCompiler      : "com.github.bumptech.glide:compiler:${versions.glideVersion}",
             // https://github.com/alibaba/ARouter
@@ -108,8 +106,6 @@ ext {
             /*
              * DevelopSupport
              */
-            // https://github.com/JakeWharton/butterknife
-            butterKnife        : "com.jakewharton:butterknife:10.2.0",
             // https://github.com/alibaba/ARouter
             arouterApi         : "com.alibaba:arouter-api:1.5.0",
             // https://mvnrepository.com/artifact/androidx.multidex/multidex
