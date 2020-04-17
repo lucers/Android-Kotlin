@@ -1,0 +1,15 @@
+apply from: '../common_lib.gradle'
+
+android {
+    defaultConfig {
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api libraries.materialDesign
+    api libraries.photoView
+    api libraries.recyclerView
+}

@@ -27,13 +27,12 @@ abstract class BaseApplication : Application() {
         super.onCreate()
         INSTANCE = this
 
-        LogUtils.getConfig().isLogSwitch = false
-
         if (BuildConfig.DEBUG) {
             ARouter.openLog()
             ARouter.openDebug()
-            LogUtils.getConfig().isLogSwitch = true
         }
+
+        LogUtils.getConfig().isLogSwitch = BuildConfig.DEBUG
 
         AutoSizeConfig.getInstance().setLog(BuildConfig.DEBUG)
 

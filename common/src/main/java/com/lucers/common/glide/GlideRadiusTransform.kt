@@ -25,18 +25,18 @@ class GlideRadiusTransform(dp: Int) : CenterCrop() {
     }
 
     private fun roundCrop(pool: BitmapPool, source: Bitmap?): Bitmap? {
-        if (source == null) {
+        source?.let {
+            LogUtils.d("Bitmap source size:" + it.width + "," + it.height)
+            val result = pool[it.width, it.height, Bitmap.Config.ARGB_8888]
+            val canvas = Canvas(result)
+            val paint = Paint()
+            paint.isAntiAlias = true
+            paint.shader = BitmapShader(it, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+            val rect = RectF(0f, 0f, it.width.toFloat(), it.height.toFloat())
+            canvas.drawRoundRect(rect, radius.toFloat(), radius.toFloat(), paint)
+            return result
+        } ?: let {
             return null
         }
-        LogUtils.d("Bitmap source size:" + source.width + "," + source.height)
-
-        val result = pool[source.width, source.height, Bitmap.Config.ARGB_8888]
-        val canvas = Canvas(result)
-        val paint = Paint()
-        paint.isAntiAlias = true
-        paint.shader = BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
-        val rect = RectF(0f, 0f, source.width.toFloat(), source.height.toFloat())
-        canvas.drawRoundRect(rect, radius.toFloat(), radius.toFloat(), paint)
-        return result
     }
 }

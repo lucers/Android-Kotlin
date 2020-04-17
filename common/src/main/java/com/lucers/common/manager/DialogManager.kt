@@ -17,23 +17,19 @@ object DialogManager {
         }
     }
 
-    fun showAlertDialog(
-        activity: FragmentActivity,
-        alertMessage: String,
-        confirmClickListener: AlertDialog.OnConfirmClickListener
-    ) {
+    fun showAlertDialog(activity: FragmentActivity, alertMessage: String, confirmClickListener: AlertDialog.OnConfirmClickListener) {
         val fragmentManager = activity.supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         val fragment = fragmentManager.findFragmentByTag(AlertDialog::class.java.simpleName)
-        if (fragment != null) {
-            fragmentTransaction.show(fragment)
-            return
+        fragment?.let {
+            fragmentTransaction.show(it)
+        } ?: let {
+            val dialogFragment = AlertDialog()
+            dialogFragment.onConfirmClickListener = confirmClickListener
+            val bundle = Bundle()
+            bundle.putString(BundleConstants.alertMessage, alertMessage)
+            dialogFragment.arguments = bundle
+            dialogFragment.show(fragmentTransaction, dialogFragment.javaClass.simpleName)
         }
-        val dialogFragment = AlertDialog()
-        dialogFragment.onConfirmClickListener = confirmClickListener
-        val bundle = Bundle()
-        bundle.putString(BundleConstants.alertMessage, alertMessage)
-        dialogFragment.arguments = bundle
-        dialogFragment.show(fragmentTransaction, dialogFragment.javaClass.simpleName)
     }
 }

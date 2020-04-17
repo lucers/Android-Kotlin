@@ -1,0 +1,33 @@
+apply from: '../common_lib.gradle'
+
+android {
+    defaultConfig {
+        versionCode 1
+        versionName "1.0"
+    }
+
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            buildConfigField "String", "BASE_URL", TEST_URL
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            buildConfigField "String", "BASE_URL", BASE_URL
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api libraries.retrofit
+    api libraries.gsonConverter
+    api libraries.rxJavaAdapter
+    api libraries.scalarConverte
+    api libraries.httpLog
+    api libraries.rxAndroid
+}

@@ -11,7 +11,7 @@ import com.lucers.common.R
 abstract class BaseDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
-        Dialog(context!!, R.style.DialogTheme)
+        Dialog(requireContext(), R.style.DialogTheme)
 
     override fun onCreateView(
         inflater: LayoutInflater,

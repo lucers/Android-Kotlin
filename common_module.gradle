@@ -1,8 +1,14 @@
-apply plugin: 'com.android.application'
+if (isRunAlone.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+if (isRunAlone.toBoolean()) {
+    apply plugin: 'kotlin-kapt'
+}
 
 apply from: '../dependencies.gradle'
 
@@ -10,44 +16,34 @@ android {
     compileSdkVersion versions.compileSdkVersion
 
     defaultConfig {
-        applicationId APPLICATION_ID
         minSdkVersion versions.minSdkVersion
         targetSdkVersion versions.targetSdkVersion
-        versionCode 1
-        versionName "1.0.0"
-
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+        if (isRunAlone.toBoolean()) {
+            javaCompileOptions {
+                annotationProcessorOptions {
+                    arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+                }
             }
-        }
-        kapt {
-            arguments {
-                arg("AROUTER_MODULE_NAME", project.getName())
-                arg("AROUTER_GENERATE_DOC", "enable")
+            kapt {
+                arguments {
+                    arg("AROUTER_MODULE_NAME", project.getName())
+                    arg("AROUTER_GENERATE_DOC", "enable")
+                }
             }
         }
     }
 
-    android.applicationVariants.all {
-        variant ->
-            variant.outputs.all {
-                output ->
-                    def outputFile = output.outputFile
-                    if (outputFile.name.contains("debug")) {
-                        outputFileName = new File("../debug/", "${PACKAGE_NAME_DEBUG}.apk")
-                    }
-                    if (outputFile.name.contains("release")) {
-                        outputFileName = new File("../release/", "${PACKAGE_NAME_RELEASE}.apk")
-                    }
+    sourceSets {
+        main {
+            if (isRunAlone.toBoolean()) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
             }
-    }
-
-    dataBinding {
-        enabled = true
+        }
     }
 
     signingConfigs {
@@ -66,7 +62,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
-            minifyEnabled true
+            minifyEnabled false
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -82,9 +78,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':common')
 
-    implementation project(':lib-http')
-    implementation project(':lib-widget')
-    implementation project(':lib-mvvm')
-
-    kapt annotations.arouterCompiler
+    if (isRunAlone.toBoolean()) {
+        kapt annotations.arouterCompiler
+    }
 }

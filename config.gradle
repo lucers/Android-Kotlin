@@ -1,36 +1,41 @@
 ext {
     versions = [
-            minSdkVersion    : 19,
-            compileSdkVersion: 29,
-            targetSdkVersion : 29,
+            minSdkVersion            : 19,
+            compileSdkVersion        : 29,
+            targetSdkVersion         : 29,
 
-            gradleVersion    : '3.6.2',
+            gradleVersion            : '3.6.2',
 
-            appcompatVersion : '1.1.0',
-            annotationVersion: '1.1.0',
-            lifecycleVersion : '2.2.0',
-            rxjavaVersion    : '2.2.10',
-            gsonVersion      : '2.8.6',
+            androidxAppcompatVersion : '1.1.0',
+            androidxCoreVersion      : '1.2.0',
+            androidxActivityVersion  : '1.1.0',
+            androidxFragmentVersion  : '1.2.4',
+            androidxAnnotationVersion: '1.1.0',
+            androidxLifecycleVersion : '2.2.0',
+            rxjavaVersion            : '2.2.10',
+            gsonVersion              : '2.8.6',
 
-            okhttpVersion    : '4.5.0',
-            retrofitVersion  : '2.8.1',
+            okhttpVersion            : '4.5.0',
+            retrofitVersion          : '2.8.1',
 
-            junnitVersion    : '4.13',
-            kotlinCoreVersion: '1.2.0',
-            kotlinJdkVersion : '1.3.71',
-            reactiveVersion  : '1.0.3',
+            junnitVersion            : '4.13',
+            kotlinCoreVersion        : '1.2.0',
+            kotlinJdkVersion         : '1.3.72',
+            reactiveVersion          : '1.0.3',
 
-            materialVersion  : '1.1.0',
-            glideVersion     : '4.11.0'
+            materialVersion          : '1.1.0',
+            glideVersion             : '4.11.0',
+
+            roomVersion              : '2.2.5'
     ]
 
     annotations = [
             // https://github.com/bumptech/glide
-            glideCompiler      : "com.github.bumptech.glide:compiler:${versions.glideVersion}",
+            glideCompiler  : "com.github.bumptech.glide:compiler:${versions.glideVersion}",
             // https://github.com/alibaba/ARouter
-            arouterCompiler    : "com.alibaba:arouter-compiler:1.2.2",
-            // https://mvnrepository.com/artifact/android.arch.persistence.room
-            roomCompiler       : "android.arch.persistence.room:compiler:1.1.1"
+            arouterCompiler: "com.alibaba:arouter-compiler:1.2.2",
+            // https://mvnrepository.com/artifact/androidx.room
+            roomCompiler   : "android.room:room-compiler:${versions.roomVersion}"
     ]
 
     libraries = [
@@ -100,8 +105,9 @@ ext {
              */
             // https://github.com/LitePalFramework/LitePal
             litePal            : "org.litepal.android:java:3.0.0",
-            // https://mvnrepository.com/artifact/android.arch.persistence.room
-            room               : "android.arch.persistence.room:runtime:1.1.1",
+            // https://mvnrepository.com/artifact/androidx.room
+            room               : "androidx.room:room-runtime:${versions.roomVersion}",
+            roomRxJava         : "androidx.room:room-runtime:${versions.roomVersion}",
 
             /*
              * DevelopSupport
@@ -124,6 +130,7 @@ ext {
             gson               : "com.google.code.gson:gson:${versions.gsonVersion}",
             // https://github.com/airbnb/lottie-android
             lottie             : "com.airbnb.android:lottie:3.4.0",
+            extensions         : "android.arch.lifecycle:extensions:${versions.lifecycleVersion}",
 
             /*
              * Http
@@ -133,8 +140,8 @@ ext {
             rxJavaAdapter      : "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofitVersion}",
             gsonConverter      : "com.squareup.retrofit2:converter-gson:${versions.retrofitVersion}",
             scalarConverte     : "com.squareup.retrofit2:converter-scalars:${versions.retrofitVersion}",
-            httpLog            : "com.squareup.okhttp3:logging-interceptor:${versions.okhttpVersion}",
             // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+            httpLog            : "com.squareup.okhttp3:logging-interceptor:${versions.okhttpVersion}",
             okHttp             : "com.squareup.okhttp3:okhttp:${versions.okhttpVersion}",
 
             /*

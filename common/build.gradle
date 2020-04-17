@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 apply from: '../dependencies.gradle'
 
@@ -17,23 +16,16 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        multiDexEnabled true
-    }
-
-    dataBinding {
-        enabled = true
     }
 
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField "String", "BASE_URL", TEST_URL
             buildConfigField "String", "ROUTE_ROOT", ROUTE_ROOT
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled false
-            buildConfigField "String", "BASE_URL", BASE_URL
             buildConfigField "String", "ROUTE_ROOT", ROUTE_ROOT
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -47,12 +39,8 @@ dependencies {
 
     api libraries.kotlin_core
     api libraries.kotlin_jdk
-    api libraries.rxKotlin
 
-    api libraries.materialDesign
     api libraries.constraintLayout
-    api libraries.recyclerView
-    api libraries.photoView
 
     api libraries.autoSize
     api libraries.immersionBar
