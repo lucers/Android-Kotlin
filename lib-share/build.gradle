@@ -1,19 +1,12 @@
 apply from: '../common_lib.gradle'
-apply plugin: 'kotlin-kapt'
 
 android {
     defaultConfig {
         versionCode 1
         versionName "1.0"
     }
-
-    dataBinding {
-        enabled = true
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':common')
-    implementation project(':base')
 }
