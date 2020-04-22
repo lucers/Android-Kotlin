@@ -98,7 +98,6 @@ class TextBanner @JvmOverloads constructor(
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     fun startRotation() {
         texts?.let {
             stopRotation()
@@ -106,7 +105,6 @@ class TextBanner @JvmOverloads constructor(
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     fun stopRotation() {
         handler?.removeCallbacks(textRunnable)
     }

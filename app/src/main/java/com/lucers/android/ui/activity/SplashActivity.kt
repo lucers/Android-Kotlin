@@ -15,13 +15,17 @@ import com.lucers.mvvm.model.CountDownViewModel
 @Route(path = AppRouteConstants.splashRoute)
 class SplashActivity : BaseMvvmActivity<ActivitySplashBinding>(R.layout.activity_splash) {
 
+    private val viewModel: CountDownViewModel by lazy {
+        ViewModelProvider.NewInstanceFactory().create(CountDownViewModel::class.java)
+    }
+
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
-        val countDownViewModel = ViewModelProvider.NewInstanceFactory().create(CountDownViewModel::class.java)
-        dataBinding.countDownModel = countDownViewModel
-        lifecycle.addObserver(countDownViewModel)
+        dataBinding.countDownModel = viewModel
+        lifecycle.addObserver(viewModel)
     }
 
     override fun onBackPressed() {
+        //Splash activity can't be back
     }
 }

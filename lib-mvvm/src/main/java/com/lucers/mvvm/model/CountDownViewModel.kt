@@ -2,9 +2,7 @@ package com.lucers.mvvm.model
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
-import com.blankj.utilcode.util.LogUtils
 import com.lucers.mvvm.base.BaseViewModel
 
 /**
@@ -12,17 +10,21 @@ import com.lucers.mvvm.base.BaseViewModel
  */
 class CountDownViewModel : BaseViewModel(), LifecycleObserver {
 
-    var countTime: MutableLiveData<Long> = MutableLiveData()
+    var countTime: Long = 0
+
+    var countOver: Boolean = false
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    fun startCount() {
+    fun onResume() {
+        countOver = countTime == 0L
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    fun stopCount() {
+    fun onPause() {
+
     }
 
     fun finishCount() {
-        stopCount()
+        countOver = true
     }
 }
