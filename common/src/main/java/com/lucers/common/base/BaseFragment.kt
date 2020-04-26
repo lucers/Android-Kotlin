@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 /**
  * BaseFragment
  */
-abstract class BaseFragment(contentLayoutId: Int) : Fragment(contentLayoutId) {
+abstract class BaseFragment(val contentLayoutId: Int) : Fragment(contentLayoutId) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

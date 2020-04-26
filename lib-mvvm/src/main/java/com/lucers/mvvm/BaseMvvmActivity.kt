@@ -1,4 +1,4 @@
-package com.lucers.mvvm.base
+package com.lucers.mvvm
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -12,9 +12,9 @@ abstract class BaseMvvmActivity<DataBinding : ViewDataBinding>(contentLayoutId: 
 
     lateinit var dataBinding: DataBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)
         dataBinding = DataBindingUtil.setContentView(this, contentLayoutId)
         dataBinding.lifecycleOwner = this
-        super.onCreate(savedInstanceState)
     }
 }

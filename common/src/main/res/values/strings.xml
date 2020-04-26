@@ -3,7 +3,7 @@
     <string name="we_chat_login">微信账号登录</string>
     <string name="register">注册</string>
     <string name="login">登录</string>
-    <string name="skip">跳过</string>
+    <string name="skip">跳过%d</string>
     <string name="or">OR</string>
     <string name="phone_number">手机号</string>
     <string name="password">密码</string>

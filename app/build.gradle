@@ -32,6 +32,9 @@ android {
                 arg("AROUTER_GENERATE_DOC", "enable")
             }
         }
+        ndk {
+            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
     }
 
     android.applicationVariants.all {
@@ -91,5 +94,6 @@ dependencies {
     implementation project(':lib-mvvm')
 
 //    implementation libraries.firebase
+    implementation libraries.bugly
     kapt annotations.arouterCompiler
 }
