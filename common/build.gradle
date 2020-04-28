@@ -10,11 +10,13 @@ android {
         debug {
             minifyEnabled false
             buildConfigField "String", "ROUTE_ROOT", ROUTE_ROOT
+            buildConfigField "String", "BUGLY_ID", BUGLY_ID
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled false
             buildConfigField "String", "ROUTE_ROOT", ROUTE_ROOT
+            buildConfigField "String", "BUGLY_ID", BUGLY_ID
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -32,4 +34,6 @@ dependencies {
     api libraries.rxPermission
     api libraries.glide
     api libraries.gson
+
+    implementation libraries.bugly
 }

@@ -6,4 +6,5 @@
 
     <color name="default_text_color">#FF9FA5AF</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>

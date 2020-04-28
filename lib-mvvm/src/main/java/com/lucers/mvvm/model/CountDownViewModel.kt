@@ -1,7 +1,6 @@
-package com.lucers.android.model
+package com.lucers.mvvm.model
 
 import androidx.lifecycle.ViewModel
-import io.reactivex.Observable
 
 /**
  * CountDownViewModel

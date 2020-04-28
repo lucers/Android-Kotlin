@@ -89,11 +89,9 @@ dependencies {
     implementation project(':common')
     implementation project(':base')
 
-    implementation project(':lib-http')
     implementation project(':lib-widget')
     implementation project(':lib-mvvm')
+//    implementation project(':lib-mvp')
 
-//    implementation libraries.firebase
-    implementation libraries.bugly
     kapt annotations.arouterCompiler
 }

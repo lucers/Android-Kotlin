@@ -1,50 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.SplashActivity">
 
-    <data>
-
-        <import type="com.lucers.android.model.CountDownViewModel" />
-
-        <variable
-            name="countModel"
-            type="CountDownViewModel" />
-
-        <variable
-            name="posterUrl"
-            type="String" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activity.SplashActivity">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_count"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_margin="12dp"
-            android:background="@drawable/bg_splash_count"
-            android:gravity="center"
-            android:onClick="@{()->countModel.finishCount()}"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:text="@{String.format(@string/skip,countModel.countTime)}"
-            android:textColor="@color/color_splash_count"
-            android:textSize="14sp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="跳过5"
-            tools:visibility="visible" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_poster"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="h,360:640"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+        android:background="@android:color/holo_blue_bright" />
+</androidx.constraintlayout.widget.ConstraintLayout>
