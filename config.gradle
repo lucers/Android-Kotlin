@@ -99,6 +99,8 @@ ext {
             glideOkhttp        : "com.github.bumptech.glide:okhttp3-integration:${versions.glideVersion}",
             // https://github.com/tbruyelle/RxPermissions
             rxPermission       : "com.github.tbruyelle:rxpermissions:0.10.2",
+            // https://mvnrepository.com/artifact/com.amitshekhar.android/debug-db
+            dbView             : "com.amitshekhar.android:debug-db:1.0.4",
 
             /*
              * SQL
