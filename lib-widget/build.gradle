@@ -12,4 +12,5 @@ dependencies {
     api libraries.materialDesign
     api libraries.photoView
     api libraries.recyclerView
+    api libraries.smartRefreshLayout
 }

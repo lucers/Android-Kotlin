@@ -48,7 +48,7 @@ abstract class BaseApplication : Application() {
 
         AutoSizeConfig.getInstance().isExcludeFontScale = true
 
-        initBugly()
+//        initBugly()
     }
 
     private fun initBugly() {

@@ -89,9 +89,11 @@ dependencies {
     implementation project(':common')
     implementation project(':base')
 
-    implementation project(':lib-widget')
     implementation project(':lib-mvvm')
+//    implementation project(':lib-mvrx')
 //    implementation project(':lib-mvp')
 
     kapt annotations.arouterCompiler
+
+    implementation 'androidx.leanback:leanback:1.0.0'
 }

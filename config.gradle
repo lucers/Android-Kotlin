@@ -52,6 +52,8 @@ ext {
             recyclerView       : "androidx.recyclerview:recyclerview:1.1.0",
             // https://github.com/chrisbanes/PhotoView
             photoView          : "com.github.chrisbanes:PhotoView:2.0.0",
+            // https://github.com/scwang90/SmartRefreshLayout
+            smartRefreshLayout : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.2",
 
             /*
              * AndroidTest

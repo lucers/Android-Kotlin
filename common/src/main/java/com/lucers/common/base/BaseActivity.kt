@@ -14,7 +14,7 @@ import com.lucers.common.manager.ActivityManager
  */
 abstract class BaseActivity(val contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
 
-    private var screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    var screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
