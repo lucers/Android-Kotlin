@@ -32,29 +32,6 @@ class ActivityManageActivity : BaseActivity(R.layout.activity_activity_manage) {
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
         gv_activities.adapter = activityAdapter
-        gv_activities.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>) {
-
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                ToastUtils.showShort(String.format("当前选中%d位置", position))
-                if (needLoadMore(position)) {
-                    loadMore()
-                }
-            }
-        }
-    }
-
-    private fun needLoadMore(position: Int): Boolean {
-        return activityAdapter.count - position < gv_activities.numColumns * 2
-    }
-
-    private fun loadMore() {
-        for (size: Int in IntRange(1, 6)) {
-            activities.add(activities[size])
-        }
-        activityAdapter.notifyDataSetChanged()
     }
 
     override fun initData(savedInstanceState: Bundle?) {
