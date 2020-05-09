@@ -6,11 +6,14 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.lucers.widget.adapter.GridAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -19,11 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TestActivity
+ * WidgetActivity
  *
  * @author lucerstu
  */
-public class WidgetActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class WidgetActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, OnLoadMoreListener {
 
     private SmartRefreshLayout refreshLayout;
     private GridView gridView;
@@ -43,24 +46,37 @@ public class WidgetActivity extends AppCompatActivity implements AdapterView.OnI
         initData();
     }
 
+    /**
+     * 初始化控件配置
+     */
     private void initView() {
         refreshLayout = findViewById(R.id.refresh_layout);
-//        refreshLayout.setEnableLoadMore(false);
+        // 去掉下拉刷新
         refreshLayout.setEnableRefresh(false);
+        // 设置加载更多的监听
+        refreshLayout.setOnLoadMoreListener(this);
 
         gridView = findViewById(R.id.gridView);
 
         gridAdapter = new GridAdapter(data);
 
         gridView.setAdapter(gridAdapter);
+        // 设置TV上选择监听
         gridView.setOnItemSelectedListener(this);
     }
 
+    /**
+     * 加载初始化显示数据
+     */
     private void initData() {
         data.addAll(getData());
         gridAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * 模拟获取数据
+     * @return 返回一段数据
+     */
     @NotNull
     @Contract(pure = true)
     private List<String> getData() {
@@ -74,25 +90,36 @@ public class WidgetActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (needLoadMore(position)) {
+            //显示加载更多动画
+            refreshLayout.autoLoadMore();
             loadMore();
         }
     }
 
+    /**
+     * 模拟数据加载
+     */
     private void loadMore() {
-        refreshLayout.autoLoadMore();
+        // 修改为加载中
         loading = true;
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
+                    // 模拟网络请求中
                     Thread.sleep(3000L);
+                    // 模拟没有获取到更多数据了
                     if (data.size() > 200) {
+                        // 修改为没有加载到数据
                         noMore = true;
+                        // 修改为加载结束
                         loading = false;
                         loadOver();
                         return;
                     }
+                    // 模拟获取到数据了，将数据加入显示列表
                     data.addAll(getData());
+                    // 修改为加载结束
                     loading = false;
                     loadOver();
                 } catch (InterruptedException e) {
@@ -102,26 +129,49 @@ public class WidgetActivity extends AppCompatActivity implements AdapterView.OnI
         }).start();
     }
 
+    /**
+     * 加载结束处理
+     */
     private void loadOver() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                // 如果获取的数据没有了，显示提示
                 if (noMore) {
                     Toast.makeText(getApplication(), "没有更多数据了", Toast.LENGTH_SHORT).show();
                 }
+                // 结束动画，并刷新数据列表
                 refreshLayout.finishLoadMore();
                 gridAdapter.notifyDataSetChanged();
             }
         });
     }
 
+    /**
+     * 根据位置，加载状态，数据状态判断是否需要加载数据
+     *
+     * @param position 位置
+     * @return 是否加载数据
+     */
     @Contract(pure = true)
     private boolean needLoadMore(int position) {
+        // 当前数据总数减去选择的位置如果小于gridView的每行个数的两倍，代表已经选到了最后两行中的item
         return gridAdapter.getCount() - position < gridView.getNumColumns() * 2 && !loading && !noMore;
     }
 
+    /**
+     * 没有数据被选中的监听
+     */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    /**
+     * 加载更多的监听
+     */
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        loadMore();
     }
 }
