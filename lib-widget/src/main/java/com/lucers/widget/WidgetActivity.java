@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.lucers.widget.adapter.GridAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -38,6 +39,11 @@ public class WidgetActivity extends AppCompatActivity implements AdapterView.OnI
     private boolean loading = false;
     private boolean noMore = false;
 
+    private int itemMaxSize = 200;
+
+    private int pagePosition = 1;
+    private int pageSize = 50;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +61,8 @@ public class WidgetActivity extends AppCompatActivity implements AdapterView.OnI
         refreshLayout.setEnableRefresh(false);
         // 设置加载更多的监听
         refreshLayout.setOnLoadMoreListener(this);
+        //是否上拉Footer的时候向上平移列表或者内容
+        refreshLayout.setEnableFooterTranslationContent(true);
 
         gridView = findViewById(R.id.gridView);
 
@@ -75,13 +83,13 @@ public class WidgetActivity extends AppCompatActivity implements AdapterView.OnI
 
     /**
      * 模拟获取数据
+     *
      * @return 返回一段数据
      */
     @NotNull
-    @Contract(pure = true)
     private List<String> getData() {
         List<String> data = new ArrayList<>();
-        for (int i = 1; i <= 30; i++) {
+        for (int i = (pagePosition - 1) * pageSize + 1; i <= pagePosition * pageSize; i++) {
             data.add("位置:" + i);
         }
         return data;
@@ -90,9 +98,8 @@ public class WidgetActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (needLoadMore(position)) {
-            //显示加载更多动画
+            // 触发加载更多
             refreshLayout.autoLoadMore();
-            loadMore();
         }
     }
 
@@ -100,6 +107,9 @@ public class WidgetActivity extends AppCompatActivity implements AdapterView.OnI
      * 模拟数据加载
      */
     private void loadMore() {
+        LogUtils.d("loadMore");
+        // 下一页
+        pagePosition++;
         // 修改为加载中
         loading = true;
         new Thread(new Runnable() {
@@ -109,11 +119,13 @@ public class WidgetActivity extends AppCompatActivity implements AdapterView.OnI
                     // 模拟网络请求中
                     Thread.sleep(3000L);
                     // 模拟没有获取到更多数据了
-                    if (data.size() > 200) {
+                    if (data.size() >= itemMaxSize) {
                         // 修改为没有加载到数据
                         noMore = true;
                         // 修改为加载结束
                         loading = false;
+                        // 没有获取到更多数据或者获取数据失败了，页面要回退
+                        pagePosition--;
                         loadOver();
                         return;
                     }
@@ -156,7 +168,7 @@ public class WidgetActivity extends AppCompatActivity implements AdapterView.OnI
     @Contract(pure = true)
     private boolean needLoadMore(int position) {
         // 当前数据总数减去选择的位置如果小于gridView的每行个数的两倍，代表已经选到了最后两行中的item
-        return gridAdapter.getCount() - position < gridView.getNumColumns() * 2 && !loading && !noMore;
+        return gridAdapter.getCount() - position <= gridView.getNumColumns() && !loading && !noMore;
     }
 
     /**
