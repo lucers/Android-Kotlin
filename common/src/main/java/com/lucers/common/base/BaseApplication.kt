@@ -2,7 +2,6 @@ package com.lucers.common.base
 
 import android.app.Application
 import android.content.Context
-import android.os.Process
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
@@ -12,9 +11,6 @@ import com.lucers.common.BuildConfig
 import com.lucers.common.DelegatesExt
 import com.tencent.bugly.crashreport.CrashReport
 import me.jessyan.autosize.AutoSizeConfig
-import java.io.BufferedReader
-import java.io.FileReader
-import java.io.IOException
 
 /**
  * BaseApplication
@@ -33,22 +29,28 @@ abstract class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
+        // App day night model
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
+        // ARouter log
         if (BuildConfig.DEBUG) {
             ARouter.openLog()
             ARouter.openDebug()
         }
 
+        // LogUtils log
         LogUtils.getConfig().isLogSwitch = BuildConfig.DEBUG
 
+        // AutoSize log
         AutoSizeConfig.getInstance().setLog(BuildConfig.DEBUG)
 
+        // ARouter init
         ARouter.init(this)
 
+        // AutoSize textSize config
         AutoSizeConfig.getInstance().isExcludeFontScale = true
 
-//        initBugly()
+        initBugly()
     }
 
     private fun initBugly() {

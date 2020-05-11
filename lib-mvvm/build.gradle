@@ -15,7 +15,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation libraries.utils
     implementation project(':common')
-    implementation project(':base')
     implementation project(':lib-http')
 }

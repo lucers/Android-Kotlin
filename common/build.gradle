@@ -24,7 +24,7 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(":base")
+    api project(":base")
 
     api libraries.autoSize
     api libraries.immersionBar
@@ -32,9 +32,11 @@ dependencies {
 
     api libraries.arouterApi
     api libraries.rxPermission
+    api libraries.utils
     api libraries.glide
     api libraries.gson
     api project(':lib-widget')
 
+    implementation libraries.multidex
     implementation libraries.bugly
 }

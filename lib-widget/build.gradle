@@ -9,6 +9,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation libraries.utils
+    api libraries.constraintLayout
     api libraries.materialDesign
     api libraries.photoView
     api libraries.recyclerView
