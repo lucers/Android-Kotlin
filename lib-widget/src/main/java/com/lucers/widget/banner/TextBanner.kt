@@ -22,9 +22,9 @@ class TextBanner @JvmOverloads constructor(
     attrs: AttributeSet? = null
 ) : TextSwitcher(context, attrs), LifecycleObserver {
 
-    private var textSize = 0
-    private var textColor = 0
-    private var textGravity = 0
+    var textSize = 0
+    var textColor = 0
+    var textGravity = 0
 
     private var position = 0
 
@@ -98,6 +98,7 @@ class TextBanner @JvmOverloads constructor(
         }
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     fun startRotation() {
         texts?.let {
             stopRotation()
@@ -105,6 +106,7 @@ class TextBanner @JvmOverloads constructor(
         }
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     fun stopRotation() {
         handler?.removeCallbacks(textRunnable)
     }

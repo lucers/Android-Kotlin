@@ -10,7 +10,7 @@ import com.lucers.widget.R
 /**
  * Created by Lucers on 2020/5/9.
  */
-class GridAdapter(private val data: List<String>) : BaseAdapter() {
+class GridAdapter(val data: List<String>) : BaseAdapter() {
 
     override fun getCount(): Int {
         return data.size
