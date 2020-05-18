@@ -25,16 +25,12 @@ class SplashActivity : BaseMvvmActivity<ActivitySplashBinding>(R.layout.activity
     }
 
     override fun initWindow() {
-        immersionBar {
-            transparentNavigationBar()
-        }
     }
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
         dataBinding.viewModel = viewModel
         lifecycle.addObserver(viewModel)
-        DeviceUtils.getUniqueDeviceId()
     }
 
     override fun onBackPressed() {

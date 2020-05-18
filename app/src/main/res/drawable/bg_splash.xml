@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@android:color/holo_blue_bright" />
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+    <item
+        android:bottom="@dimen/splash_bottom_height">
+        <bitmap
+            android:gravity="bottom|center_horizontal"
+            android:src="@drawable/slogan" />
+    </item>
 </layer-list>
