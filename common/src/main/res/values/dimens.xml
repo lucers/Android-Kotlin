@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="default_text_size">14sp</dimen>
+
     <dimen name="splash_bottom_height">10dp</dimen>
+    <dimen name="slogan_width">72dp</dimen>
+    <dimen name="slogan_height">72dp</dimen>
+    <dimen name="slogan_total_height">92dp</dimen>
 </resources>

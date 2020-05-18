@@ -35,7 +35,9 @@ ext {
             // https://github.com/alibaba/ARouter
             arouterCompiler: "com.alibaba:arouter-compiler:1.2.2",
             // https://mvnrepository.com/artifact/androidx.room
-            roomCompiler   : "android.room:room-compiler:${versions.roomVersion}"
+            roomCompiler   : "android.room:room-compiler:${versions.roomVersion}",
+            // https://github.com/liujingxing/okhttp-RxHttp
+            rxHttpCompiler : "com.ljx.rxhttp:rxhttp-compiler:2.2.2"
     ]
 
     libraries = [
@@ -153,6 +155,8 @@ ext {
             // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
             httpLog            : "com.squareup.okhttp3:logging-interceptor:${versions.okhttpVersion}",
             okHttp             : "com.squareup.okhttp3:okhttp:${versions.okhttpVersion}",
+            // https://github.com/liujingxing/okhttp-RxHttp
+            rxHttp             : "com.ljx.rxhttp:rxhttp:2.2.2",
 
             /*
              * ThirdSDK

@@ -19,6 +19,12 @@
         android:layout_height="match_parent"
         tools:context=".ui.activity.SplashActivity">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_poster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/slogan_total_height"/>
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_count"
             android:layout_width="wrap_content"
