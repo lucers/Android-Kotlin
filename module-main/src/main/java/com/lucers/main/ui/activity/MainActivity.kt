@@ -1,11 +1,10 @@
-package com.lucers.android.ui.activity
+package com.lucers.main.ui.activity
 
 import android.os.Bundle
-import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.lucers.android.R
 import com.lucers.common.base.BaseActivity
 import com.lucers.common.constants.AppRouteConstants
+import com.lucers.main.R
 
 @Route(path = AppRouteConstants.mainRoute)
 class MainActivity : BaseActivity(R.layout.activity_main) {

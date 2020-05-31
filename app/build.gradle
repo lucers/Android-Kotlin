@@ -51,8 +51,8 @@ android {
             }
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
 
     signingConfigs {
@@ -86,12 +86,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation project(':common')
-
     implementation project(':lib-mvvm')
 
-    kapt annotations.arouterCompiler
+    if (!isRunAlone.toBoolean()) {
+        implementation project(':module-main')
+    }
 
-    implementation libraries.leanback
+    kapt annotations.arouterCompiler
 }

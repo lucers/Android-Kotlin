@@ -8,14 +8,13 @@ android {
         versionName "1.0"
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation libraries.utils
     implementation project(':common')
     implementation project(':lib-http')
 }

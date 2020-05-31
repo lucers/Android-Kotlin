@@ -13,12 +13,6 @@ object AppRouteConstants {
     const val splashRoute: String = "$routeRoot/splash"
     const val mainRoute: String = "$routeRoot/main"
     const val loginRoute: String = "$routeRoot/login"
-    const val settingRoute: String = "$routeRoot/setting"
-    const val profileRoute: String = "$routeRoot/profile"
-    const val feedbackRoute: String = "$routeRoot/feedback"
-    const val websRoute: String = "$routeRoot/webs"
-    const val aboutUsRoute: String = "$routeRoot/about_us"
-
 
     const val httpRoute: String = "$routeRoot/http"
     const val widgetRoute: String = "$routeRoot/widget"

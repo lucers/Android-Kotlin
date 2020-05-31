@@ -6,9 +6,7 @@ if (isRunAlone.toBoolean()) {
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-if (isRunAlone.toBoolean()) {
-    apply plugin: 'kotlin-kapt'
-}
+apply plugin: 'kotlin-kapt'
 
 apply from: '../dependencies.gradle'
 
@@ -21,17 +19,15 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        if (isRunAlone.toBoolean()) {
-            javaCompileOptions {
-                annotationProcessorOptions {
-                    arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
-                }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
             }
-            kapt {
-                arguments {
-                    arg("AROUTER_MODULE_NAME", project.getName())
-                    arg("AROUTER_GENERATE_DOC", "enable")
-                }
+        }
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+                arg("AROUTER_GENERATE_DOC", "enable")
             }
         }
     }
@@ -39,9 +35,9 @@ android {
     sourceSets {
         main {
             if (isRunAlone.toBoolean()) {
-                manifest.srcFile 'src/main/AndroidManifest.xml'
-            } else {
                 manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
             }
         }
     }
@@ -78,7 +74,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':common')
 
-    if (isRunAlone.toBoolean()) {
-        kapt annotations.arouterCompiler
-    }
+    kapt annotations.arouterCompiler
 }

@@ -4,7 +4,7 @@ ext {
             compileSdkVersion        : 29,
             targetSdkVersion         : 29,
 
-            gradleVersion            : '3.6.3',
+            gradleVersion            : '4.0.0',
 
             androidxAppcompatVersion : '1.1.0',
             androidxCoreVersion      : '1.2.0',

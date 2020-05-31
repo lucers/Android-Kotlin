@@ -36,6 +36,7 @@ dependencies {
     api libraries.glide
     api libraries.gson
     api project(':lib-widget')
+    api libraries.leanback
 
     implementation libraries.multidex
     implementation libraries.bugly

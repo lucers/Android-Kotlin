@@ -1,5 +1,6 @@
 rootProject.name = 'Android-Kotlin'
 include ':app'
+include ':module-main'
 include ':common'
 include ':lib-http'
 include ':lib-widget'
