@@ -23,18 +23,19 @@
             android:id="@+id/iv_poster"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="@dimen/slogan_total_height"/>
+            android:layout_marginBottom="@dimen/slogan_total_height"
+            app:loadImage="@{viewModel.posterUrl}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_count"
             android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_height="30dp"
             android:layout_margin="12dp"
             android:background="@drawable/bg_splash_count"
-            android:fitsSystemWindows="true"
             android:gravity="center"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:onClick="@{()-> viewModel.skip()}"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:text="@{String.format(@string/skip,viewModel.countTime)}"
             android:textColor="@color/color_splash_count"
             android:visibility="@{viewModel.showCount?View.VISIBLE:View.INVISIBLE}"
