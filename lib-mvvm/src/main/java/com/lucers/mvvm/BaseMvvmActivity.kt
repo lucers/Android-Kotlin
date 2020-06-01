@@ -14,6 +14,7 @@ abstract class BaseMvvmActivity<DataBinding : ViewDataBinding>(contentLayoutId: 
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
+        // dataBinding contact UI
         dataBinding = DataBindingUtil.setContentView(this, contentLayoutId)
         dataBinding.lifecycleOwner = this
     }

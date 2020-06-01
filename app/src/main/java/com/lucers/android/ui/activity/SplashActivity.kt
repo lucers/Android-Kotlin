@@ -1,5 +1,7 @@
 package com.lucers.android.ui.activity
 
+import android.app.ActivityManager
+import android.content.Context
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -29,8 +31,11 @@ class SplashActivity : BaseMvvmActivity<ActivitySplashBinding>(R.layout.activity
 
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
+        // dataBinding contact viewModel
         dataBinding.viewModel = viewModel
         lifecycle.addObserver(viewModel)
+        val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        LogUtils.d(activityManager.memoryClass)
     }
 
     override fun onBackPressed() {
