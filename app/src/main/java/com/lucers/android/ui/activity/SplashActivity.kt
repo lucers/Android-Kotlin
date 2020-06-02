@@ -1,17 +1,10 @@
 package com.lucers.android.ui.activity
 
-import android.app.ActivityManager
-import android.content.Context
 import android.os.Bundle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.blankj.utilcode.util.DeviceUtils
-import com.blankj.utilcode.util.LogUtils
-import com.gyf.immersionbar.ktx.immersionBar
 import com.lucers.android.R
 import com.lucers.android.databinding.ActivitySplashBinding
-import com.lucers.common.base.BaseActivity
 import com.lucers.common.constants.AppRouteConstants
 import com.lucers.mvvm.BaseMvvmActivity
 import com.lucers.mvvm.model.SplashModel
@@ -34,8 +27,6 @@ class SplashActivity : BaseMvvmActivity<ActivitySplashBinding>(R.layout.activity
         // dataBinding contact viewModel
         dataBinding.viewModel = viewModel
         lifecycle.addObserver(viewModel)
-        val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        LogUtils.d(activityManager.memoryClass)
     }
 
     override fun onBackPressed() {

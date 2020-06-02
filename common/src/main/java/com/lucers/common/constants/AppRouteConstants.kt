@@ -1,19 +1,19 @@
 package com.lucers.common.constants
 
-import com.lucers.common.BuildConfig
-
-
 /**
  * AppRouteConstants
  */
 object AppRouteConstants {
 
-    private const val routeRoot: String = BuildConfig.ROUTE_ROOT
+    const val splashRoute: String = "/app/splash"
 
-    const val splashRoute: String = "$routeRoot/splash"
-    const val mainRoute: String = "$routeRoot/main"
-    const val loginRoute: String = "$routeRoot/login"
+    private const val mainRouteRoot: String = "/main"
 
-    const val httpRoute: String = "$routeRoot/http"
-    const val widgetRoute: String = "$routeRoot/widget"
+    const val mainRoute: String = "$mainRouteRoot/main"
+
+    const val loginRoute: String = "/login/login"
+
+    const val httpRoute: String = "/http/http"
+
+    const val widgetRoute: String = "/widget/widget"
 }

@@ -16,5 +16,6 @@ class MainApplication : BaseApplication() {
     }
 
     override fun initApplication(context: Context) {
+        LogUtils.d("initMainApplication")
     }
 }
