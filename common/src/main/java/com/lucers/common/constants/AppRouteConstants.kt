@@ -11,7 +11,9 @@ object AppRouteConstants {
 
     const val mainRoute: String = "$mainRouteRoot/main"
 
-    const val loginRoute: String = "/login/login"
+    private const val loginRouteRoot: String = "/login"
+
+    const val loginRoute: String = "$loginRouteRoot/login"
 
     const val httpRoute: String = "/http/http"
 

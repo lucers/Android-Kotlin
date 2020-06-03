@@ -29,7 +29,9 @@ dependencies {
     api libraries.immersionBar_kotlin
 
     api libraries.arouterApi
-    api libraries.rxPermission
+    api libraries.rxAndroid
+    api libraries.rxKotlin
+    api libraries.rxJava3
     api libraries.utils
     api libraries.glide
     api libraries.gson

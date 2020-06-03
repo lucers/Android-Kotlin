@@ -1,0 +1,23 @@
+apply from: '../common_module.gradle'
+
+android {
+    compileSdkVersion versions.compileSdkVersion
+
+    defaultConfig {
+        if (isRunAlone.toBoolean()) {
+            applicationId "com.lucers.login"
+        }
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+    implementation project(':lib-mvvm')
+}

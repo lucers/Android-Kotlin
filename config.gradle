@@ -7,26 +7,26 @@ ext {
             gradleVersion            : '4.0.0',
 
             androidxAppcompatVersion : '1.1.0',
+            materialVersion          : '1.1.0',
             androidxCoreVersion      : '1.2.0',
             androidxActivityVersion  : '1.1.0',
             androidxFragmentVersion  : '1.2.4',
             androidxAnnotationVersion: '1.1.0',
             androidxLifecycleVersion : '2.2.0',
-            rxjavaVersion            : '2.2.10',
-            gsonVersion              : '2.8.6',
-
-            okhttpVersion            : '4.5.0',
-            retrofitVersion          : '2.8.1',
-
-            junnitVersion            : '4.13',
-            kotlinCoreVersion        : '1.2.0',
-            kotlinJdkVersion         : '1.3.72',
             reactiveVersion          : '1.0.3',
 
-            materialVersion          : '1.1.0',
+            kotlinCoreVersion        : '1.2.0',
+            kotlinJdkVersion         : '1.3.72',
+
+            roomVersion              : '2.2.5',
+
+            rxjava3Version           : '3.0.1',
+            gsonVersion              : '2.8.6',
+            okhttpVersion            : '4.5.0',
+            retrofitVersion          : '2.8.1',
             glideVersion             : '4.11.0',
 
-            roomVersion              : '2.2.5'
+            junnitVersion            : '4.13'
     ]
 
     annotations = [
@@ -45,7 +45,7 @@ ext {
              * Widget
              */
             // https://mvnrepository.com/artifact/androidx.appcompat/appcompat
-            androidx           : "androidx.appcompat:appcompat:${versions.appcompatVersion}",
+            androidx           : "androidx.appcompat:appcompat:${versions.androidxAppcompatVersion}",
             // https://mvnrepository.com/artifact/com.google.android.material/material
             materialDesign     : "com.google.android.material:material:${versions.materialVersion}",
             // https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout
@@ -129,8 +129,8 @@ ext {
             // https://github.com/Tencent/MMKV
             mmkv               : "com.tencent:mmkv:1.0.23",
             // https://github.com/ReactiveX
-            rxJava             : "io.reactivex.rxjava3:rxjava:3.0.1",
-            rxAndroid          : "io.reactivex.rxjava2:rxandroid:2.1.1",
+            rxJava3            : "io.reactivex.rxjava3:rxjava:${versions.rxjava3Version}",
+            rxAndroid          : "io.reactivex.rxjava3:rxandroid:3.0.0",
             rxKotlin           : "io.reactivex.rxjava2:rxkotlin:2.4.0",
             // https://mvnrepository.com/artifact/org.aspectj/aspectjrt
             aspectjrt          : "org.aspectj:aspectjrt:1.9.5",

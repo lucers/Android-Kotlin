@@ -2,7 +2,7 @@ package com.lucers.http.transformer
 
 import com.lucers.http.HttpConstants
 import com.lucers.http.bean.HttpResponse
-import io.reactivex.ObservableTransformer
+import io.reactivex.rxjava3.core.ObservableTransformer
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketException

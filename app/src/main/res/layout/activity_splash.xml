@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.lucers.mvvm.model.SplashModel" />
+        <import type="com.lucers.android.model.SplashModel" />
 
         <import type="android.view.View" />
 

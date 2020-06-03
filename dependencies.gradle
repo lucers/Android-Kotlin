@@ -1,41 +1,43 @@
-configurations.all {
-//    all*.exclude group: 'androidx.annotation', module: 'annotation'
-    resolutionStrategy {
-        def versions = rootProject.ext.versions
-        eachDependency { DependencyResolveDetails details ->
-            def requested = details.requested
-            if (requested.group == 'androidx.appcompat' && requested.name == 'appcompat') {
-                details.useVersion versions.androidxAppcompatVersion
-            }
-            if (requested.group == 'androidx.core' && requested.name == 'core') {
-                details.useVersion versions.androidxCoreVersion
-            }
-            if (requested.group == 'androidx.activity' && requested.name == 'activity') {
-                details.useVersion versions.androidxActivityVersion
-            }
-            if (requested.group == 'androidx.fragment' && requested.name == 'fragment') {
-                details.useVersion versions.androidxFragmentVersion
-            }
-            if (requested.group == 'androidx.annotation' && requested.name == 'annotation') {
-                details.useVersion versions.androidxAnnotationVersion
-            }
-            if (requested.group == 'androidx.lifecycle') {
-                details.useVersion versions.androidxLifecycleVersion
-            }
-            if (requested.group == 'io.reactivex.rxjava2' && requested.name == 'rxjava') {
-                details.useVersion versions.rxjavaVersion
-            }
-            if (requested.group == 'com.google.code.gson' && requested.name == 'gson') {
-                details.useVersion versions.gsonVersion
-            }
-            if (requested.group == 'org.reactivestreams' && requested.name == 'reactive-streams') {
-                details.useVersion versions.reactiveVersion
-            }
-            if (requested.group == 'com.squareup.okhttp3') {
-                details.useVersion versions.okhttpVersion
-            }
-            if (requested.group == 'org.jetbrains.kotlin') {
-                details.useVersion versions.kotlinJdkVersion
+configurations {
+    all {
+        all*.exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
+        resolutionStrategy {
+            def versions = rootProject.ext.versions
+            eachDependency { DependencyResolveDetails details ->
+                def requested = details.requested
+                if (requested.group == 'androidx.appcompat' && requested.name == 'appcompat') {
+                    details.useVersion versions.androidxAppcompatVersion
+                }
+                if (requested.group == 'androidx.core' && requested.name == 'core') {
+                    details.useVersion versions.androidxCoreVersion
+                }
+                if (requested.group == 'androidx.activity' && requested.name == 'activity') {
+                    details.useVersion versions.androidxActivityVersion
+                }
+                if (requested.group == 'androidx.fragment' && requested.name == 'fragment') {
+                    details.useVersion versions.androidxFragmentVersion
+                }
+                if (requested.group == 'androidx.annotation' && requested.name == 'annotation') {
+                    details.useVersion versions.androidxAnnotationVersion
+                }
+                if (requested.group == 'androidx.lifecycle') {
+                    details.useVersion versions.androidxLifecycleVersion
+                }
+                if (requested.group == 'io.reactivex.rxjava3' && requested.name == 'rxjava') {
+                    details.useVersion versions.rxjava3Version
+                }
+                if (requested.group == 'com.google.code.gson' && requested.name == 'gson') {
+                    details.useVersion versions.gsonVersion
+                }
+                if (requested.group == 'org.reactivestreams' && requested.name == 'reactive-streams') {
+                    details.useVersion versions.reactiveVersion
+                }
+                if (requested.group == 'com.squareup.okhttp3') {
+                    details.useVersion versions.okhttpVersion
+                }
+                if (requested.group == 'org.jetbrains.kotlin') {
+                    details.useVersion versions.kotlinJdkVersion
+                }
             }
         }
     }

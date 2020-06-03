@@ -7,7 +7,7 @@ import com.lucers.android.R
 import com.lucers.android.databinding.ActivitySplashBinding
 import com.lucers.common.constants.AppRouteConstants
 import com.lucers.mvvm.BaseMvvmActivity
-import com.lucers.mvvm.model.SplashModel
+import com.lucers.android.model.SplashModel
 
 /**
  * SplashActivity

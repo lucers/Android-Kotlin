@@ -1,15 +1,14 @@
-package com.lucers.mvvm.model
+package com.lucers.android.model
 
 import android.app.Application
 import androidx.lifecycle.*
 import com.alibaba.android.arouter.launcher.ARouter
-import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.LogUtils
+import com.lucers.common.RxSchedulers
 import com.lucers.common.constants.AppRouteConstants
-import com.lucers.http.transformer.RxSchedulers
 import com.lucers.mvvm.BaseAndroidViewModel
-import io.reactivex.Observable
-import io.reactivex.disposables.Disposable
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.Disposable
 import java.util.concurrent.TimeUnit
 
 /**
@@ -20,7 +19,7 @@ class SplashModel(application: Application) : BaseAndroidViewModel(application),
     private val totalTime = 5L
 
     private val _showCount = MutableLiveData(false)
-    private val _countTime = MutableLiveData(0L)
+    private val _countTime = MutableLiveData(totalTime)
     private val _adUrl = MutableLiveData("")
 
     val showCount: LiveData<Boolean> = _showCount
@@ -32,7 +31,7 @@ class SplashModel(application: Application) : BaseAndroidViewModel(application),
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun getAdvertisement() {
-        // get remote adUrl，onSuccess load into imageView，onFailure skip to next
+        // get remote adUrl，onSuccess load into imageView，onFailure skip
         LogUtils.d("getAdvertisement")
     }
 
@@ -40,12 +39,12 @@ class SplashModel(application: Application) : BaseAndroidViewModel(application),
     fun startCount() {
         LogUtils.d("startCount")
         _showCount.value = true
-        subscribe = Observable.interval(currentTime, 1L, TimeUnit.SECONDS)
+        subscribe = Observable.interval(1L, TimeUnit.SECONDS)
             .compose(RxSchedulers.schedulers())
             .subscribe {
-                currentTime = totalTime.minus(it)
-                _countTime.value = currentTime
-                if (currentTime == 1L) {
+                currentTime++
+                _countTime.value = totalTime.minus(currentTime)
+                if (currentTime == totalTime) {
                     skip()
                 }
             }
