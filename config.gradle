@@ -20,7 +20,7 @@ ext {
 
             roomVersion              : '2.2.5',
 
-            rxjava3Version           : '3.0.1',
+            rxjava3Version           : '3.0.4',
             gsonVersion              : '2.8.6',
             okhttpVersion            : '4.5.0',
             retrofitVersion          : '2.8.1',
@@ -30,9 +30,9 @@ ext {
     ]
 
     annotations = [
-            // https://github.com/bumptech/glide
+            // https://mvnrepository.com/artifact/com.github.bumptech.glide
             glideCompiler  : "com.github.bumptech.glide:compiler:${versions.glideVersion}",
-            // https://github.com/alibaba/ARouter
+            // https://mvnrepository.com/artifact/com.alibaba
             arouterCompiler: "com.alibaba:arouter-compiler:1.2.2",
             // https://mvnrepository.com/artifact/androidx.room
             roomCompiler   : "android.room:room-compiler:${versions.roomVersion}",
@@ -100,7 +100,7 @@ ext {
             luban              : "top.zibin:Luban:1.1.8",
             // https://github.com/Tourenathan-G5organisation/SiliCompressor
             silicompressor     : "com.iceteck.silicompressorr:silicompressor:2.2.2",
-            // https://github.com/bumptech/glide
+            // https://mvnrepository.com/artifact/com.github.bumptech.glide
             glide              : "com.github.bumptech.glide:glide:${versions.glideVersion}",
             glideOkhttp        : "com.github.bumptech.glide:okhttp3-integration:${versions.glideVersion}",
             // https://github.com/tbruyelle/RxPermissions
@@ -115,12 +115,12 @@ ext {
             litePal            : "org.litepal.android:java:3.0.0",
             // https://mvnrepository.com/artifact/androidx.room
             room               : "androidx.room:room-runtime:${versions.roomVersion}",
-            roomRxJava         : "androidx.room:room-runtime:${versions.roomVersion}",
+            roomRxJava         : "androidx.room:room-rxjava2:${versions.roomVersion}",
 
             /*
              * DevelopSupport
              */
-            // https://github.com/alibaba/ARouter
+            // https://mvnrepository.com/artifact/com.alibaba
             arouterApi         : "com.alibaba:arouter-api:1.5.0",
             // https://mvnrepository.com/artifact/androidx.multidex/multidex
             multidex           : "androidx.multidex:multidex:2.0.1",
