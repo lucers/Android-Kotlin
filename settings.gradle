@@ -1,9 +1,12 @@
-include ':module-login'
 rootProject.name = 'Android-Kotlin'
 include ':app'
-include ':module-main'
+
+include ':base'
 include ':common'
+
+include ':module-main'
+include ':module-login'
+
 include ':lib-http'
 include ':lib-widget'
 include ':lib-mvvm'
-include ':base'

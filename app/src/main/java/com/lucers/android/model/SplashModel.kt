@@ -3,7 +3,9 @@ package com.lucers.android.model
 import android.app.Application
 import androidx.lifecycle.*
 import com.alibaba.android.arouter.launcher.ARouter
+import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.LogUtils
+import com.lucers.android.ui.activity.SplashActivity
 import com.lucers.common.RxSchedulers
 import com.lucers.common.constants.AppRouteConstants
 import com.lucers.mvvm.BaseAndroidViewModel
@@ -60,5 +62,6 @@ class SplashModel(application: Application) : BaseAndroidViewModel(application),
         ARouter.getInstance()
             .build(AppRouteConstants.mainRoute)
             .navigation()
+        ActivityUtils.finishActivity(SplashActivity::class.java)
     }
 }

@@ -3,6 +3,8 @@ apply from: '../common_lib.gradle'
 apply plugin: 'kotlin-kapt'
 
 android {
+    compileSdkVersion versions.compileSdkVersion
+
     defaultConfig {
         versionCode 1
         versionName "1.0"
@@ -14,7 +16,5 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':common')
-    implementation project(':lib-http')
 }

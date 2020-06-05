@@ -1,6 +1,8 @@
 apply from: '../common_lib.gradle'
 
 android {
+    compileSdkVersion versions.compileSdkVersion
+
     defaultConfig {
         versionCode 1
         versionName "1.0.0"
@@ -21,7 +23,6 @@ android {
 }
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
     api project(":base")
 
     api libraries.autoSize

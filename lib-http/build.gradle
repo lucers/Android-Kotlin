@@ -1,6 +1,8 @@
 apply from: '../common_lib.gradle'
 
 android {
+    compileSdkVersion versions.compileSdkVersion
+
     defaultConfig {
         versionCode 1
         versionName "1.0"
@@ -22,7 +24,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':common')
 
     api libraries.retrofit

@@ -5,7 +5,6 @@ apply plugin: 'kotlin-android-extensions'
 apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion versions.compileSdkVersion
 
     defaultConfig {
         minSdkVersion versions.minSdkVersion
@@ -24,6 +23,3 @@ android {
 
 }
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-}

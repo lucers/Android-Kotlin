@@ -69,6 +69,7 @@ android {
             minifyEnabled false
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationIdSuffix APPLICATION_ID
         }
         release {
             minifyEnabled true
