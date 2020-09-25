@@ -1,10 +1,10 @@
 ext {
     versions = [
             minSdkVersion            : 19,
-            compileSdkVersion        : 29,
-            targetSdkVersion         : 29,
+            compileSdkVersion        : 30,
+            targetSdkVersion         : 30,
 
-            gradleVersion            : '4.0.0',
+            gradleVersion            : '4.0.1',
 
             androidxAppcompatVersion : '1.1.0',
             materialVersion          : '1.1.0',
@@ -16,7 +16,7 @@ ext {
             reactiveVersion          : '1.0.3',
 
             kotlinCoreVersion        : '1.2.0',
-            kotlinJdkVersion         : '1.3.72',
+            kotlinJdkVersion         : '1.4.10',
 
             roomVersion              : '2.2.5',
 
@@ -92,7 +92,7 @@ ext {
             immersionBar       : "com.gyf.immersionbar:immersionbar:3.0.0",
             immersionBar_kotlin: "com.gyf.immersionbar:immersionbar-ktx:3.0.0",
             // https://github.com/Blankj/AndroidUtilCode
-            utils              : "com.blankj:utilcodex:1.26.0",
+            utils              : "com.blankj:utilcodex:1.29.0",
             // https://github.com/promeG/TinyPinyin
             tinyPinYin         : "com.github.promeg:tinypinyin:2.0.3",
             tinyPinYinCity     : "com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3",

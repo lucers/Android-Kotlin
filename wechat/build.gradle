@@ -1,0 +1,28 @@
+apply from: '../common_lib.gradle'
+
+android {
+    compileSdkVersion versions.compileSdkVersion
+
+    defaultConfig {
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            buildConfigField "String", "WX_APP_ID", WX_APP_ID
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            buildConfigField "String", "WX_APP_ID", WX_APP_ID
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation project(':common')
+    implementation libraries.weChat
+}

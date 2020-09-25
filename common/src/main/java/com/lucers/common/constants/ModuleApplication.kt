@@ -5,7 +5,5 @@ package com.lucers.common.constants
  */
 object ModuleApplication {
 
-    const val mainModule = "com.lucers.main.MainApplication"
-
-    val names = arrayOf(mainModule)
+    val names: Array<String> by lazy { arrayOf("com.lucers.main.MainApplication", "com.lucers.android.WXApplication") }
 }

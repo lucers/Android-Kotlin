@@ -4,8 +4,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-//apply plugin: 'com.google.gms.google-services'
-
 apply from: '../dependencies.gradle'
 
 android {
@@ -37,6 +35,24 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            keyAlias KEY_ALIAS
+            storePassword RELEASE_STORE_PASSWORD
+            keyPassword RELEASE_KEY_PASSWORD
+            storeFile file(RELEASE_STORE_FILE)
+        }
+    }
+
+    flavorDimensions "android"
+
+    productFlavors {
+        android {
+            applicationId APPLICATION_ID
+            signingConfig signingConfigs.release
+        }
+    }
+
     android.applicationVariants.all {
         variant ->
             variant.outputs.all {
@@ -55,15 +71,6 @@ android {
         dataBinding = true
     }
 
-    signingConfigs {
-        release {
-            keyAlias KEY_ALIAS
-            storePassword RELEASE_STORE_PASSWORD
-            keyPassword RELEASE_KEY_PASSWORD
-            storeFile file(RELEASE_STORE_FILE)
-        }
-    }
-
     buildTypes {
         debug {
             minifyEnabled false
@@ -71,9 +78,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
-//            minifyEnabled false
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+//            minifyEnabled true
+//            shrinkResources true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -83,11 +90,18 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
     implementation project(':common')
     implementation project(':lib-mvvm')
+    implementation project(':lib-http')
 
     if (!isRunAlone.toBoolean()) {
         implementation project(':module-main')
