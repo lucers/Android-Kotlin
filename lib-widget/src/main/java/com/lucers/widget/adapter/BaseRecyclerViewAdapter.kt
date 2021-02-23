@@ -2,7 +2,6 @@ package com.lucers.widget.adapter
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
@@ -11,26 +10,23 @@ import androidx.recyclerview.widget.RecyclerView
  *
  * @author Lucers
  */
-abstract class BaseRecyclerViewAdapter<Item, Holder : RecyclerView.ViewHolder>(
-    var emptyLayoutId: Int = 0,
-    var bottomLayoutId: Int = 0
-) : RecyclerView.Adapter<Holder>(), View.OnClickListener, OnLongClickListener {
+abstract class BaseRecyclerViewAdapter<Item>(
+    open var headerLayoutId: Int = 0,
+    open var emptyLayoutId: Int = 0,
+    open var footerLayoutId: Int = 0,
+) : RecyclerView.Adapter<BaseViewHolder>() {
 
     companion object {
+        const val VIEW_TYPE_HEADER = 751451
         const val VIEW_TYPE_EMPTY = 41223
-        const val VIEW_TYPE_BOTTOM = 250053
+        const val VIEW_TYPE_FOOTER = 611151
     }
 
-    var list: MutableList<Item> = mutableListOf()
+    var list: List<Item> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
-
-    var itemClickListener: OnItemClickListener? = null
-    var itemLongClickListener: OnItemLongClickListener? = null
-    var bottomClickListener: OnBottomClickListener? = null
-    var emptyClickListener: OnEmptyClickListener? = null
 
     override fun getItemViewType(position: Int): Int {
         if (emptyLayoutId != 0) {
@@ -38,82 +34,148 @@ abstract class BaseRecyclerViewAdapter<Item, Holder : RecyclerView.ViewHolder>(
                 return VIEW_TYPE_EMPTY
             }
         }
-        if (bottomLayoutId != 0) {
-            if (position == list.size) {
-                return VIEW_TYPE_BOTTOM
+        if (headerLayoutId != 0) {
+            if (position == 0) {
+                return VIEW_TYPE_HEADER
+            }
+        }
+        if (footerLayoutId != 0) {
+            if (position == itemCount - 1) {
+                return VIEW_TYPE_FOOTER
             }
         }
         return super.getItemViewType(position)
     }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+    open var itemClickListener: OnItemClickListener? = null
+    open var itemLongClickListener: OnItemLongClickListener? = null
+    open var footerClickListener: OnFooterClickListener? = null
+    open var emptyClickListener: OnEmptyClickListener? = null
+    open var headerClickListener: OnHeaderClickListener? = null
+    open var onAdapterViewListener: OnAdapterViewListener? = null
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val itemView: View
         val inflater = LayoutInflater.from(parent.context)
         when (viewType) {
+            VIEW_TYPE_HEADER -> {
+                itemView = inflater.inflate(headerLayoutId, parent, false)
+                itemView.setOnClickListener(headerClickListener)
+            }
             VIEW_TYPE_EMPTY -> {
                 itemView = inflater.inflate(emptyLayoutId, parent, false)
                 itemView.setOnClickListener(emptyClickListener)
             }
-            VIEW_TYPE_BOTTOM -> {
-                itemView = inflater.inflate(bottomLayoutId, parent, false)
-                itemView.setOnClickListener(bottomClickListener)
+            VIEW_TYPE_FOOTER -> {
+                itemView = inflater.inflate(footerLayoutId, parent, false)
+                itemView.setOnClickListener(footerClickListener)
             }
             else -> {
                 itemView = inflater.inflate(getItemLayoutId(viewType), parent, false)
-                itemView.setOnClickListener(this)
-                itemView.setOnLongClickListener(this)
             }
         }
-
-        return object : RecyclerView.ViewHolder(itemView) {} as Holder
+        return BaseViewHolder(parent.context, itemView)
     }
 
     abstract fun getItemLayoutId(viewType: Int): Int
 
-    override fun onBindViewHolder(holder: Holder, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when (getItemViewType(position)) {
+            VIEW_TYPE_HEADER -> onBindHeaderViewHolder(holder)
             VIEW_TYPE_EMPTY -> onBindEmptyViewHolder(holder)
-            VIEW_TYPE_BOTTOM -> onBindBottomViewHolder(holder)
+            VIEW_TYPE_FOOTER -> onBindFooterViewHolder(holder)
             else -> if (list.isNullOrEmpty().not()) {
-                onBindSimpleViewHolder(holder, list[position])
-                holder.itemView.tag = position
+                var adapterPosition = holder.adapterPosition
+                if (headerLayoutId != 0) {
+                    adapterPosition = holder.adapterPosition - 1
+                }
+                onBindSimpleViewHolder(holder, list[adapterPosition])
+                itemClickListener?.let { listener ->
+                    holder.itemView.setOnClickListener {
+                        listener.onItemClick(it, adapterPosition)
+                    }
+                }
+
+                itemLongClickListener?.let { listener ->
+                    holder.itemView.setOnLongClickListener {
+                        listener.onItemLongClick(it, adapterPosition)
+                        false
+                    }
+                }
             }
         }
     }
 
-    open fun onBindSimpleViewHolder(holder: Holder, item: Item) = Unit
+    open fun onBindHeaderViewHolder(holder: BaseViewHolder) = Unit
 
-    open fun onBindBottomViewHolder(holder: Holder) = Unit
+    open fun onBindSimpleViewHolder(holder: BaseViewHolder, item: Item) = Unit
 
-    open fun onBindEmptyViewHolder(holder: Holder) = Unit
+    open fun onBindFooterViewHolder(holder: BaseViewHolder) = Unit
+
+    open fun onBindEmptyViewHolder(holder: BaseViewHolder) = Unit
 
     override fun getItemCount(): Int {
-        return when {
+        when {
             list.isNullOrEmpty() -> {
-                if (emptyLayoutId == 0) {
+                return if (emptyLayoutId == 0) {
                     0
                 } else {
                     1
                 }
             }
             else -> {
-                if (bottomLayoutId == 0) {
-                    list.size
-                } else {
-                    list.size + 1
+                var count = list.size
+                if (headerLayoutId != 0) {
+                    count += 1
                 }
+                if (footerLayoutId != 0) {
+                    count += 1
+                }
+                return count
             }
         }
     }
 
-    override fun onClick(view: View) {
-        itemClickListener?.onItemClick(view, view.tag as Int)
+    fun addData(index: Int = this.list.size, list: List<Item>) {
+        if (index > this.list.size && list !is MutableList) {
+            return
+        }
+        (this.list as MutableList).addAll(index, list)
+        notifyItemRangeInserted(if (headerLayoutId == 0) index else index + 1, list.size)
     }
 
-    override fun onLongClick(view: View): Boolean {
-        itemLongClickListener?.onItemLongClick(view, view.tag as Int)
-        return false
+    fun addData(index: Int = this.list.size, item: Item) {
+        if (index > this.list.size && list !is MutableList) {
+            return
+        }
+        (list as MutableList).add(index, item)
+        notifyItemInserted(if (headerLayoutId == 0) index else index + 1)
+    }
+
+    fun removeData(item: Item) {
+        val index = list.indexOf(item)
+        if (index >= 0 && list is MutableList) {
+            (list as MutableList).remove(item)
+            notifyItemRemoved(if (headerLayoutId == 0) index else index + 1)
+            notifyItemRangeChanged(if (headerLayoutId == 0) index else index + 1, list.size - index)
+        }
+    }
+
+    fun removeData(itemList: List<Item>) {
+        itemList.forEach {
+            this.removeData(it)
+        }
+    }
+
+    fun removeData(index: Int) {
+        if (index > this.list.size) {
+            return
+        }
+        if (index >= 0 && list is MutableList) {
+            (list as MutableList).removeAt(index)
+            notifyItemRemoved(if (headerLayoutId == 0) index else index + 1)
+            notifyItemRangeChanged(if (headerLayoutId == 0) index else index + 1, list.size - index)
+        }
     }
 
     interface OnItemClickListener {
@@ -126,7 +188,14 @@ abstract class BaseRecyclerViewAdapter<Item, Holder : RecyclerView.ViewHolder>(
         fun onItemLongClick(view: View, position: Int)
     }
 
-    interface OnBottomClickListener : View.OnClickListener
+    interface OnFooterClickListener : View.OnClickListener
 
     interface OnEmptyClickListener : View.OnClickListener
+
+    interface OnHeaderClickListener : View.OnClickListener
+
+    interface OnAdapterViewListener {
+
+        fun onAdapterViewClick(view: View, position: Int)
+    }
 }

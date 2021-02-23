@@ -3,12 +3,14 @@
     package="com.lucers.common">
 
     <application>
-        <activity android:name=".ui.activity.ActivityManageActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
+        <activity
+            android:name=".ui.activity.ActivityManageActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activity.ChoosePictureActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activity.PictureViewActivity"
+            android:launchMode="singleTop" />
     </application>
 </manifest>

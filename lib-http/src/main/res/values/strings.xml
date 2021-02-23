@@ -1,1 +1,13 @@
-<resources/>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Http Status -->
+    <string name="un_know_service_exception">Un know service exception</string>
+    <string name="connect_exception">Connect exception</string>
+    <string name="socket_timeout_exception">Socket timeout exception</string>
+    <string name="socket_exception">Socket exception</string>
+    <string name="http_exception">Http exception</string>
+    <string name="un_know_exception">Un know exception</string>
+    <string name="json_syntax_exception">Json syntax exception</string>
+    <string name="ssl_hand_shake_exception">SSL hand shake exception</string>
+    <string name="error_net_data_empty">Network data empty</string>
+</resources>

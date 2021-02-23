@@ -1,9 +1,9 @@
 package com.lucers.http.interceptor
 
 import com.google.gson.Gson
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.lucers.http.bean.HttpHeader
-import com.lucers.http.bean.HttpCommonParam
+import com.google.gson.JsonParseException
 import okhttp3.*
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.Buffer
@@ -17,8 +17,13 @@ import java.nio.charset.Charset
  */
 class RequestInterceptor : Interceptor {
 
-    val httpHeader = mutableListOf<HttpHeader>()
-    val commonParam = mutableListOf<HttpCommonParam>()
+    val commonParam: HashMap<String, Any> by lazy {
+        HashMap()
+    }
+
+    val httpHeader: HashMap<String, Any> by lazy {
+        HashMap()
+    }
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -28,83 +33,81 @@ class RequestInterceptor : Interceptor {
             "GET" -> request = rebuildGetRequest(request)
         }
         val requestBuilder = request.newBuilder()
-        for (httpHeader in httpHeader) {
-            if (httpHeader.isEmpty()) {
-                continue
+        requestBuilder.headers(request.headers)
+        httpHeader.keys.forEach {
+            if (request.headers[it].isNullOrBlank()) {
+                requestBuilder.addHeader(it, httpHeader[it].toString())
             }
-            requestBuilder.addHeader(httpHeader.key, httpHeader.value)
         }
         return chain.proceed(requestBuilder.build())
     }
 
     private fun rebuildPostRequest(request: Request): Request {
         val requestBody = request.body
-        requestBody?.let {
-            when (it) {
+        requestBody?.let { body ->
+            val newBody = when (body) {
                 is FormBody -> {
                     val bodyBuilder = FormBody.Builder(Charset.defaultCharset())
-                    for (i in 0 until it.size) {
-                        bodyBuilder.addEncoded(it.encodedName(i), it.encodedValue(i))
+                    for (i in 0 until body.size) {
+                        bodyBuilder.addEncoded(body.encodedName(i), body.encodedValue(i))
                     }
-                    for (httpParam in commonParam) {
-                        if (httpParam.isEmpty()) {
-                            continue
-                        }
-                        bodyBuilder.addEncoded(httpParam.key, httpParam.value)
+                    commonParam.keys.forEach {
+                        bodyBuilder.addEncoded(it, commonParam[it].toString())
                     }
-                    return request.newBuilder()
-                        .post(bodyBuilder.build())
-                        .build()
+                    bodyBuilder.build()
                 }
                 is MultipartBody -> {
                     val bodyBuilder = MultipartBody.Builder()
-                    val parts = it.parts
+                    val parts = body.parts
                     for (part in parts) {
                         bodyBuilder.addPart(part)
                     }
-                    for (httpParam in commonParam) {
-                        if (httpParam.isEmpty()) {
-                            continue
-                        }
-                        bodyBuilder.addFormDataPart(httpParam.key, httpParam.value)
+                    commonParam.keys.forEach {
+                        bodyBuilder.addFormDataPart(it, commonParam[it].toString())
                     }
-                    return request.newBuilder()
-                        .post(bodyBuilder.build())
-                        .build()
+                    bodyBuilder.build()
                 }
                 else -> {
                     var newBody: RequestBody
                     try {
-                        val requestParams = if (it.contentLength() == 0L) {
+                        val requestParams = if (body.contentLength() == 0L) {
                             JsonObject()
                         } else {
-                            val json = getRequestContent(it)
-                            Gson().fromJson(json, JsonObject::class.java)
-                        }
-                        val params = request.url.queryParameterNames
-                        for (paramName in params) {
-                            val parameterValues = request.url.queryParameterValues(paramName)
-                            if (parameterValues.isNotEmpty()) {
-                                val paramValue = parameterValues[0]
-                                requestParams.addProperty(paramName, paramValue)
+                            val json = getRequestContent(body)
+                            when {
+                                json.startsWith("{") -> {
+                                    Gson().fromJson(json, JsonObject::class.java)
+                                }
+                                json.startsWith("[") -> {
+                                    Gson().fromJson(json, JsonArray::class.java)
+                                }
+                                else -> {
+                                    throw JsonParseException("Error Json: $json")
+                                }
                             }
                         }
-                        for (httpParam in commonParam) {
-                            if (httpParam.isEmpty()) {
-                                continue
+
+                        if (requestParams is JsonObject) {
+                            commonParam.keys.forEach {
+                                requestParams.addProperty(it, commonParam[it].toString())
                             }
-                            requestParams.addProperty(httpParam.key, httpParam.value)
                         }
-                        newBody = requestParams.toString().toRequestBody(it.contentType())
+                        newBody = requestParams.toString().toRequestBody(body.contentType())
                     } catch (e: Exception) {
-                        newBody = it
+                        newBody = body
                         e.printStackTrace()
                     }
-                    return request.newBuilder()
-                        .post(newBody)
-                        .build()
+                    newBody
                 }
             }
+            val urlBuilder = request.url.newBuilder()
+            commonParam.keys.forEach {
+                urlBuilder.addQueryParameter(it, commonParam[it].toString())
+            }
+            return request.newBuilder()
+                .url(urlBuilder.build())
+                .post(newBody)
+                .build()
         }
         return request
     }
@@ -118,11 +121,8 @@ class RequestInterceptor : Interceptor {
 
     private fun rebuildGetRequest(request: Request): Request {
         val urlBuilder = request.url.newBuilder()
-        for (httpParam in commonParam) {
-            if (httpParam.isEmpty()) {
-                continue
-            }
-            urlBuilder.addQueryParameter(httpParam.key, httpParam.value)
+        commonParam.keys.forEach {
+            urlBuilder.addQueryParameter(it, commonParam[it].toString())
         }
         return request.newBuilder().url(urlBuilder.build())
             .build()

@@ -3,10 +3,12 @@ package com.lucers.widget.drawable
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.Gravity
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatRadioButton
 import com.lucers.widget.R
+import kotlin.math.ceil
 
 /**
  * DrawableRadioButton
@@ -40,62 +42,77 @@ class DrawableRadioButton @JvmOverloads constructor(
     private fun initAttrs(context: Context, attrs: AttributeSet?) {
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.DrawableRadioButton)
-            val indexCount = typedArray.indexCount
-            for (i in 0 until indexCount) {
-                when (val index = typedArray.getIndex(i)) {
-                    R.styleable.DrawableRadioButton_drawableSize -> {
-                        drawableSize = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableRadioButton_drawableLeftWidth -> {
-                        drawableLeftWidth = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableRadioButton_drawableLeftHeight -> {
-                        drawableLeftHeight = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableRadioButton_drawableTopWidth -> {
-                        drawableTopWidth = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableRadioButton_drawableTopHeight -> {
-                        drawableTopHeight = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableRadioButton_drawableRightWidth -> {
-                        drawableRightWidth = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableRadioButton_drawableRightHeight -> {
-                        drawableRightHeight = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableRadioButton_drawableBottomWidth -> {
-                        drawableBottomWidth = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableRadioButton_drawableBottomHeight -> {
-                        drawableBottomHeight = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableRadioButton_drawableLeft -> {
-                        drawableLeft = typedArray.getDrawable(index)
-                    }
-                    R.styleable.DrawableRadioButton_drawableTop -> {
-                        drawableTop = typedArray.getDrawable(index)
-                    }
-                    R.styleable.DrawableRadioButton_drawableRight -> {
-                        drawableRight = typedArray.getDrawable(index)
-                    }
-                    R.styleable.DrawableRadioButton_drawableBottom -> {
-                        drawableBottom = typedArray.getDrawable(index)
-                    }
-                }
-            }
+
+            drawableSize =
+                typedArray.getDimensionPixelSize(
+                    R.styleable.DrawableTextView_drawableSize,
+                    drawableSize
+                )
+
+            drawableLeft = typedArray.getDrawable(R.styleable.DrawableTextView_drawableLeft)
+            drawableLeftWidth =
+                typedArray.getDimensionPixelSize(
+                    R.styleable.DrawableTextView_drawableLeftWidth,
+                    drawableLeftWidth
+                )
+            drawableLeftHeight =
+                typedArray.getDimensionPixelSize(
+                    R.styleable.DrawableTextView_drawableLeftHeight,
+                    drawableLeftHeight
+                )
+
+            drawableTop = typedArray.getDrawable(R.styleable.DrawableTextView_drawableTop)
+            drawableTopWidth =
+                typedArray.getDimensionPixelSize(
+                    R.styleable.DrawableTextView_drawableTopWidth,
+                    drawableTopWidth
+                )
+            drawableTopHeight =
+                typedArray.getDimensionPixelSize(
+                    R.styleable.DrawableTextView_drawableTopHeight,
+                    drawableTopHeight
+                )
+
+            drawableRight = typedArray.getDrawable(R.styleable.DrawableTextView_drawableRight)
+            drawableRightWidth =
+                typedArray.getDimensionPixelSize(
+                    R.styleable.DrawableTextView_drawableRightWidth,
+                    drawableRightWidth
+                )
+            drawableRightHeight = typedArray.getDimensionPixelSize(
+                R.styleable.DrawableTextView_drawableRightHeight,
+                drawableRightHeight
+            )
+
+            drawableBottom = typedArray.getDrawable(R.styleable.DrawableTextView_drawableBottom)
+            drawableBottomWidth = typedArray.getDimensionPixelSize(
+                R.styleable.DrawableTextView_drawableBottomWidth,
+                drawableBottomWidth
+            )
+            drawableBottomHeight = typedArray.getDimensionPixelSize(
+                R.styleable.DrawableTextView_drawableBottomHeight,
+                drawableBottomHeight
+            )
 
             drawableLeftWidth = if (drawableLeftWidth == 0) drawableSize else drawableLeftWidth
             drawableLeftHeight = if (drawableLeftHeight == 0) drawableSize else drawableLeftHeight
             drawableTopWidth = if (drawableTopWidth == 0) drawableSize else drawableTopWidth
             drawableTopHeight = if (drawableTopHeight == 0) drawableSize else drawableTopHeight
             drawableRightWidth = if (drawableRightWidth == 0) drawableSize else drawableRightWidth
-            drawableRightHeight = if (drawableRightHeight == 0) drawableSize else drawableRightHeight
-            drawableBottomWidth = if (drawableBottomWidth == 0) drawableSize else drawableBottomWidth
-            drawableBottomHeight = if (drawableBottomHeight == 0) drawableSize else drawableBottomHeight
+            drawableRightHeight =
+                if (drawableRightHeight == 0) drawableSize else drawableRightHeight
+            drawableBottomWidth =
+                if (drawableBottomWidth == 0) drawableSize else drawableBottomWidth
+            drawableBottomHeight =
+                if (drawableBottomHeight == 0) drawableSize else drawableBottomHeight
 
             typedArray.recycle()
-            setCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom)
+            setCompoundDrawablesWithIntrinsicBounds(
+                drawableLeft,
+                drawableTop,
+                drawableRight,
+                drawableBottom
+            )
         }
     }
 
@@ -105,11 +122,66 @@ class DrawableRadioButton @JvmOverloads constructor(
         right: Drawable?,
         bottom: Drawable?
     ) {
-        left?.setBounds(0, 0, drawableLeftWidth, drawableLeftHeight)
-        top?.setBounds(0, 0, drawableLeftWidth, drawableLeftHeight)
-        right?.setBounds(0, 0, drawableRightWidth, drawableRightHeight)
-        bottom?.setBounds(0, 0, drawableBottomWidth, drawableBottomHeight)
+        left?.setBounds(
+            0,
+            0,
+            if (drawableLeftWidth == 0) left.intrinsicWidth else drawableLeftWidth,
+            if (drawableLeftHeight == 0) left.intrinsicHeight else drawableLeftHeight
+        )
+        top?.setBounds(
+            0,
+            0,
+            if (drawableTopWidth == 0) top.intrinsicWidth else drawableTopWidth,
+            if (drawableTopHeight == 0) top.intrinsicHeight else drawableTopHeight
+        )
+        right?.setBounds(
+            0,
+            0,
+            if (drawableRightWidth == 0) right.intrinsicWidth else drawableRightWidth,
+            if (drawableRightHeight == 0) right.intrinsicHeight else drawableRightHeight
+        )
+        bottom?.setBounds(
+            0,
+            0,
+            if (drawableBottomWidth == 0) bottom.intrinsicWidth else drawableBottomWidth,
+            if (drawableBottomHeight == 0) bottom.intrinsicHeight else drawableBottomHeight
+        )
         setCompoundDrawables(left, top, right, bottom)
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        if (gravity == Gravity.CENTER) {
+            var paddingLeft = 0
+            var paddingTop = 0
+            var paddingRight = 0
+            var paddingBottom = 0
+            val textWidth = paint.measureText(text.toString())
+            val fontMetrics = paint.fontMetrics
+            val textHeight = ceil(fontMetrics.bottom - fontMetrics.top)
+            drawableLeft?.let {
+                paddingLeft =
+                    ((width - textWidth - compoundDrawablePadding - drawableLeftWidth) / 2).toInt()
+            }
+            drawableTop?.let {
+                paddingTop =
+                    ((height - textHeight - compoundDrawablePadding - drawableTopHeight) / 2).toInt()
+            }
+            drawableRight?.let {
+                paddingRight =
+                    ((width - textWidth - compoundDrawablePadding - drawableRightWidth) / 2).toInt()
+            }
+            drawableBottom?.let {
+                paddingBottom =
+                    ((height - textHeight - compoundDrawablePadding - drawableBottomHeight) / 2).toInt()
+            }
+            setPadding(
+                paddingLeft + paddingRight,
+                paddingTop + paddingBottom,
+                paddingRight + paddingLeft,
+                paddingBottom + paddingTop
+            )
+        }
     }
 
     fun setDrawableLeft(@DrawableRes drawableLeft: Int) {
@@ -129,18 +201,38 @@ class DrawableRadioButton @JvmOverloads constructor(
     }
 
     fun setDrawableLeft(drawableLeft: Drawable?) {
-        setCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom)
+        setCompoundDrawablesWithIntrinsicBounds(
+            drawableLeft,
+            drawableTop,
+            drawableRight,
+            drawableBottom
+        )
     }
 
     fun setDrawableTop(drawableTop: Drawable?) {
-        setCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom)
+        setCompoundDrawablesWithIntrinsicBounds(
+            drawableLeft,
+            drawableTop,
+            drawableRight,
+            drawableBottom
+        )
     }
 
     fun setDrawableRight(drawableRight: Drawable?) {
-        setCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom)
+        setCompoundDrawablesWithIntrinsicBounds(
+            drawableLeft,
+            drawableTop,
+            drawableRight,
+            drawableBottom
+        )
     }
 
     fun setDrawableBottom(drawableBottom: Drawable?) {
-        setCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom)
+        setCompoundDrawablesWithIntrinsicBounds(
+            drawableLeft,
+            drawableTop,
+            drawableRight,
+            drawableBottom
+        )
     }
 }

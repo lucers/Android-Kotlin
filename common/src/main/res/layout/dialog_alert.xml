@@ -1,58 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:background="@drawable/layout_background_white">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <View
-        android:layout_width="1dp"
-        android:layout_height="45dp"
-        android:background="#E6E6E6"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <data>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/btn_cancel"
-        android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:gravity="center"
-        android:text="@string/cancel"
-        android:textColor="#999999"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    </data>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/btn_confirm"
-        android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:gravity="center"
-        android:text="@string/confirm"
-        android:textColor="#FA9D18"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <View
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#E6E6E6"
-        app:layout_constraintBottom_toTopOf="@id/btn_cancel" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_layout_background_white">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_alert_message"
-        android:layout_width="match_parent"
-        android:layout_height="115dp"
-        android:gravity="center"
-        android:maxHeight="200dp"
-        android:textColor="#333333"
-        app:layout_constraintBottom_toTopOf="@id/btn_cancel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="提示内容" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_alert_title"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/alert_title"
+            android:textColor="@color/default_text_color_1"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_alert_message"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxHeight="200dp"
+            android:textColor="@color/default_text_color_2"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_alert_title"
+            tools:text="Alert Message" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="@color/default_text_color_3"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@id/btn_confirm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_alert_message"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btn_confirm"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/confirm"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_cancel"
+            app:layout_constraintTop_toBottomOf="@id/tv_alert_message" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/default_divide_line_color"
+            app:layout_constraintTop_toBottomOf="@id/tv_alert_title" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/default_divide_line_color"
+            app:layout_constraintBottom_toTopOf="@id/btn_confirm" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="0dp"
+            android:background="@color/default_divide_line_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_confirm"
+            app:layout_constraintStart_toEndOf="@id/btn_cancel"
+            app:layout_constraintTop_toBottomOf="@id/tv_alert_message" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

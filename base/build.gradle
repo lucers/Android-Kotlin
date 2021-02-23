@@ -14,4 +14,8 @@ dependencies {
 
     api libraries.kotlin_core
     api libraries.kotlin_jdk
+
+    api libraries.autoSize
+
+    api libraries.utils
 }

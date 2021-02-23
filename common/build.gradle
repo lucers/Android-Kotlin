@@ -1,45 +1,63 @@
 apply from: '../common_lib.gradle'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion versions.compileSdkVersion
 
     defaultConfig {
         versionCode 1
         versionName "1.0.0"
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+                arg("AROUTER_GENERATE_DOC", "enable")
+            }
+        }
     }
 
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField "String", "BUGLY_ID", BUGLY_ID
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled false
-            buildConfigField "String", "BUGLY_ID", BUGLY_ID
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
         }
     }
 }
 
 dependencies {
     api project(":base")
+    api project(":lib-widget")
 
-    api libraries.autoSize
     api libraries.immersionBar
     api libraries.immersionBar_kotlin
 
+    api libraries.permissionX
     api libraries.arouterApi
     api libraries.rxAndroid
     api libraries.rxKotlin
     api libraries.rxJava3
-    api libraries.utils
     api libraries.glide
     api libraries.gson
-    api project(':lib-widget')
-    api libraries.leanback
+    api libraries.lottie
 
     implementation libraries.multidex
-    implementation libraries.bugly
-    implementation libraries.buglyNative
+
+    kapt annotations.glideCompiler
+    kapt annotations.arouterCompiler
 }

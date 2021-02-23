@@ -29,7 +29,11 @@ abstract class BaseDialogFragment : DialogFragment() {
 
     abstract fun getDialogLayoutId(): Int
 
-    abstract fun initView()
+    open fun initView() {
 
-    abstract fun initData()
+    }
+
+    open fun initData() {
+
+    }
 }

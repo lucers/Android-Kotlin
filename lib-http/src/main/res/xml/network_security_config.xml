@@ -2,24 +2,12 @@
 <network-security-config>
     <!-- https://developer.android.com/training/articles/security-config -->
     <!-- base -->
-    <base-config cleartextTrafficPermitted="false">
-        <trust-anchors>
-            <certificates src="system" />
-        </trust-anchors>
-    </base-config>
+    <base-config cleartextTrafficPermitted="false" />
 
-    <!-- domains -->
-    <domain-config cleartextTrafficPermitted="false">
-        <domain includeSubdomains="true">android.bugly.qq.com</domain>
-        <trust-anchors>
-            <certificates src="system" />
-        </trust-anchors>
+    <!-- domain -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">192.168.50.227</domain>
+        <domain includeSubdomains="true">192.168.50.156</domain>
+        <domain includeSubdomains="true">sandbox.payssion.com</domain>
     </domain-config>
-
-    <!-- debug config -->
-    <debug-overrides cleartextTrafficPermitted="true">
-        <trust-anchors>
-            <certificates src="system" />
-        </trust-anchors>
-    </debug-overrides>
 </network-security-config>

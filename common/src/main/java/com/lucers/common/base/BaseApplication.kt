@@ -6,10 +6,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
 import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.ProcessUtils
 import com.lucers.common.BuildConfig
 import com.lucers.common.DelegatesExt
-import com.tencent.bugly.crashreport.CrashReport
 import me.jessyan.autosize.AutoSizeConfig
 
 /**
@@ -17,12 +15,16 @@ import me.jessyan.autosize.AutoSizeConfig
  */
 abstract class BaseApplication : Application() {
 
+    /**
+     * Instance Provider
+     */
     companion object {
         var INSTANCE: Application by DelegatesExt.notNullSingleValue()
     }
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
+        // multi dex
         MultiDex.install(this)
     }
 
@@ -49,17 +51,10 @@ abstract class BaseApplication : Application() {
 
         // AutoSize textSize config
         AutoSizeConfig.getInstance().isExcludeFontScale = true
-
-        initBugly()
     }
 
-    private fun initBugly() {
-        val packageName = applicationContext.packageName
-        val progressName = ProcessUtils.getCurrentProcessName()
-        val strategy = CrashReport.UserStrategy(applicationContext)
-        strategy.isUploadProcess = progressName.isNullOrBlank() || progressName == packageName
-        CrashReport.initCrashReport(applicationContext, BuildConfig.BUGLY_ID, BuildConfig.DEBUG, strategy)
-    }
-
+    /**
+     * module application implement
+     */
     abstract fun initApplication(context: Context)
 }

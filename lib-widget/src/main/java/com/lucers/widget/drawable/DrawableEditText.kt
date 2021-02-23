@@ -40,61 +40,72 @@ class DrawableEditText @JvmOverloads constructor(
     private fun initAttrs(context: Context, attrs: AttributeSet?) {
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.DrawableEditText)
-            val indexCount = typedArray.indexCount
-            for (i in 0 until indexCount) {
-                when (val index = typedArray.getIndex(i)) {
-                    R.styleable.DrawableEditText_drawableSize -> {
-                        drawableSize = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableEditText_drawableLeftWidth -> {
-                        drawableLeftWidth = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableEditText_drawableLeftHeight -> {
-                        drawableLeftHeight = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableEditText_drawableTopWidth -> {
-                        drawableTopWidth = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableEditText_drawableTopHeight -> {
-                        drawableTopHeight = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableEditText_drawableRightWidth -> {
-                        drawableRightWidth = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableEditText_drawableRightHeight -> {
-                        drawableRightHeight = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableEditText_drawableBottomWidth -> {
-                        drawableBottomWidth = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableEditText_drawableBottomHeight -> {
-                        drawableBottomHeight = typedArray.getDimensionPixelSize(index, 0)
-                    }
-                    R.styleable.DrawableEditText_drawableLeft -> {
-                        drawableLeft = typedArray.getDrawable(index)
-                    }
-                    R.styleable.DrawableEditText_drawableTop -> {
-                        drawableTop = typedArray.getDrawable(index)
-                    }
-                    R.styleable.DrawableEditText_drawableRight -> {
-                        drawableRight = typedArray.getDrawable(index)
-                    }
-                    R.styleable.DrawableEditText_drawableBottom -> {
-                        drawableBottom = typedArray.getDrawable(index)
-                    }
-                }
-            }
+
+            drawableSize = typedArray.getDimensionPixelSize(
+                R.styleable.DrawableTextView_drawableSize,
+                drawableSize
+            )
+
+            drawableLeft = typedArray.getDrawable(R.styleable.DrawableTextView_drawableLeft)
+            drawableLeftWidth = typedArray.getDimensionPixelSize(
+                R.styleable.DrawableTextView_drawableLeftWidth,
+                drawableLeftWidth
+            )
+            drawableLeftHeight = typedArray.getDimensionPixelSize(
+                R.styleable.DrawableTextView_drawableLeftHeight,
+                drawableLeftHeight
+            )
+
+            drawableTop = typedArray.getDrawable(R.styleable.DrawableTextView_drawableTop)
+            drawableTopWidth = typedArray.getDimensionPixelSize(
+                R.styleable.DrawableTextView_drawableTopWidth,
+                drawableTopWidth
+            )
+            drawableTopHeight = typedArray.getDimensionPixelSize(
+                R.styleable.DrawableTextView_drawableTopHeight,
+                drawableTopHeight
+            )
+
+            drawableRight = typedArray.getDrawable(R.styleable.DrawableTextView_drawableRight)
+            drawableRightWidth = typedArray.getDimensionPixelSize(
+                R.styleable.DrawableTextView_drawableRightWidth,
+                drawableRightWidth
+            )
+            drawableRightHeight = typedArray.getDimensionPixelSize(
+                R.styleable.DrawableTextView_drawableRightHeight,
+                drawableRightHeight
+            )
+
+            drawableBottom = typedArray.getDrawable(R.styleable.DrawableTextView_drawableBottom)
+            drawableBottomWidth = typedArray.getDimensionPixelSize(
+                R.styleable.DrawableTextView_drawableBottomWidth,
+                drawableBottomWidth
+            )
+            drawableBottomHeight =
+                typedArray.getDimensionPixelSize(
+                    R.styleable.DrawableTextView_drawableBottomHeight,
+                    drawableBottomHeight
+                )
+
             drawableLeftWidth = if (drawableLeftWidth == 0) drawableSize else drawableLeftWidth
             drawableLeftHeight = if (drawableLeftHeight == 0) drawableSize else drawableLeftHeight
             drawableTopWidth = if (drawableTopWidth == 0) drawableSize else drawableTopWidth
             drawableTopHeight = if (drawableTopHeight == 0) drawableSize else drawableTopHeight
             drawableRightWidth = if (drawableRightWidth == 0) drawableSize else drawableRightWidth
-            drawableRightHeight = if (drawableRightHeight == 0) drawableSize else drawableRightHeight
-            drawableBottomWidth = if (drawableBottomWidth == 0) drawableSize else drawableBottomWidth
-            drawableBottomHeight = if (drawableBottomHeight == 0) drawableSize else drawableBottomHeight
+            drawableRightHeight =
+                if (drawableRightHeight == 0) drawableSize else drawableRightHeight
+            drawableBottomWidth =
+                if (drawableBottomWidth == 0) drawableSize else drawableBottomWidth
+            drawableBottomHeight =
+                if (drawableBottomHeight == 0) drawableSize else drawableBottomHeight
 
             typedArray.recycle()
-            setCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom)
+            setCompoundDrawablesWithIntrinsicBounds(
+                drawableLeft,
+                drawableTop,
+                drawableRight,
+                drawableBottom
+            )
         }
     }
 
@@ -104,10 +115,30 @@ class DrawableEditText @JvmOverloads constructor(
         right: Drawable?,
         bottom: Drawable?
     ) {
-        left?.setBounds(0, 0, drawableLeftWidth, drawableLeftHeight)
-        top?.setBounds(0, 0, drawableLeftWidth, drawableLeftHeight)
-        right?.setBounds(0, 0, drawableRightWidth, drawableRightHeight)
-        bottom?.setBounds(0, 0, drawableBottomWidth, drawableBottomHeight)
+        left?.setBounds(
+            0,
+            0,
+            if (drawableLeftWidth == 0) left.intrinsicWidth else drawableLeftWidth,
+            if (drawableLeftHeight == 0) left.intrinsicHeight else drawableLeftHeight
+        )
+        top?.setBounds(
+            0,
+            0,
+            if (drawableTopWidth == 0) top.intrinsicWidth else drawableTopWidth,
+            if (drawableTopHeight == 0) top.intrinsicHeight else drawableTopHeight
+        )
+        right?.setBounds(
+            0,
+            0,
+            if (drawableRightWidth == 0) right.intrinsicWidth else drawableRightWidth,
+            if (drawableRightHeight == 0) right.intrinsicHeight else drawableRightHeight
+        )
+        bottom?.setBounds(
+            0,
+            0,
+            if (drawableBottomWidth == 0) bottom.intrinsicWidth else drawableBottomWidth,
+            if (drawableBottomHeight == 0) bottom.intrinsicHeight else drawableBottomHeight
+        )
         setCompoundDrawables(left, top, right, bottom)
     }
 
@@ -128,18 +159,38 @@ class DrawableEditText @JvmOverloads constructor(
     }
 
     fun setDrawableLeft(drawableLeft: Drawable?) {
-        setCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom)
+        setCompoundDrawablesWithIntrinsicBounds(
+            drawableLeft,
+            drawableTop,
+            drawableRight,
+            drawableBottom
+        )
     }
 
     fun setDrawableTop(drawableTop: Drawable?) {
-        setCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom)
+        setCompoundDrawablesWithIntrinsicBounds(
+            drawableLeft,
+            drawableTop,
+            drawableRight,
+            drawableBottom
+        )
     }
 
     fun setDrawableRight(drawableRight: Drawable?) {
-        setCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom)
+        setCompoundDrawablesWithIntrinsicBounds(
+            drawableLeft,
+            drawableTop,
+            drawableRight,
+            drawableBottom
+        )
     }
 
     fun setDrawableBottom(drawableBottom: Drawable?) {
-        setCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop, drawableRight, drawableBottom)
+        setCompoundDrawablesWithIntrinsicBounds(
+            drawableLeft,
+            drawableTop,
+            drawableRight,
+            drawableBottom
+        )
     }
 }

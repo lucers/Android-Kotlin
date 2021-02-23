@@ -1,10 +1,9 @@
 package com.lucers.common.base
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.blankj.utilcode.util.ActivityUtils
 
 /**
  * BaseFragment
@@ -23,5 +22,31 @@ abstract class BaseFragment(val contentLayoutId: Int) : Fragment(contentLayoutId
 
     open fun initData(view: View, savedInstanceState: Bundle?) {
 
+    }
+
+    open fun startLoading() {
+        activity?.let {
+            if (it is BaseActivity) {
+                it.startLoading()
+            }
+        } ?: let {
+            val topActivity = ActivityUtils.getTopActivity()
+            if (topActivity is BaseActivity) {
+                it.startLoading()
+            }
+        }
+    }
+
+    open fun stopLoading() {
+        activity?.let {
+            if (it is BaseActivity) {
+                it.stopLoading()
+            }
+        } ?: let {
+            val topActivity = ActivityUtils.getTopActivity()
+            if (topActivity is BaseActivity) {
+                it.stopLoading()
+            }
+        }
     }
 }

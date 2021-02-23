@@ -1,24 +1,21 @@
 package com.lucers.http
 
-import com.lucers.http.bean.HttpHeader
-import com.lucers.http.bean.HttpCommonParam
 import com.lucers.http.interceptor.CacheInterceptor
 import com.lucers.http.interceptor.RequestInterceptor
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.net.URL
+import java.util.concurrent.TimeUnit
 
 /**
  * HttpManager
  */
 object HttpManager {
-
-    private const val BASE_URL = BuildConfig.BASE_URL
 
     private val retrofitBuilder = Retrofit.Builder()
 
@@ -28,6 +25,9 @@ object HttpManager {
 
     init {
         val clientBuilder = OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(cacheInterceptor)
             .addInterceptor(requestInterceptor)
 
@@ -36,8 +36,8 @@ object HttpManager {
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
             clientBuilder.addInterceptor(httpLoggingInterceptor)
         }
-        retrofitBuilder.baseUrl(BASE_URL)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        retrofitBuilder.baseUrl(BuildConfig.BASE_URL)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(clientBuilder.build())
@@ -63,21 +63,37 @@ object HttpManager {
 
     fun getBaseUrl(): HttpUrl = retrofitBuilder.build().baseUrl()
 
-    fun setCommonParam(commonCommonParam: MutableList<HttpCommonParam>) {
+    fun setCommonParam(commonParam: HashMap<String, Any>) {
         requestInterceptor.commonParam.clear()
-        requestInterceptor.commonParam.addAll(commonCommonParam)
+        requestInterceptor.commonParam.putAll(commonParam)
     }
 
-    fun setHttpHeader(httpHeader: MutableList<HttpHeader>) {
+    fun addCommonParam(key: String, value: Any) {
+        requestInterceptor.commonParam[key] = value
+    }
+
+    fun setHttpHeader(httpHeader: HashMap<String, Any>) {
         requestInterceptor.httpHeader.clear()
-        requestInterceptor.httpHeader.addAll(httpHeader)
+        requestInterceptor.httpHeader.putAll(httpHeader)
     }
 
-    fun getHttpHeader(): MutableList<HttpHeader> {
+    fun addHttpHeader(key: String, value: Any) {
+        requestInterceptor.httpHeader[key] = value
+    }
+
+    fun removeHttpHeader(key: String) {
+        requestInterceptor.httpHeader.remove(key)
+    }
+
+    fun getHttpHeader(): HashMap<String, Any> {
         return requestInterceptor.httpHeader
     }
 
-    fun getCommonParam(): MutableList<HttpCommonParam> {
+    fun getCommonParam(): HashMap<String, Any> {
         return requestInterceptor.commonParam
+    }
+
+    fun removeCommonParam(key: String) {
+        requestInterceptor.commonParam.remove(key)
     }
 }

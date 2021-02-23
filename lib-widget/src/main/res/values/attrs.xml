@@ -69,10 +69,10 @@
         <attr name="drawableBottom" />
     </declare-styleable>
 
-    <!--LetterListView-->
-    <declare-styleable name="LetterListView">
-        <attr name="letterSize" format="dimension" />
-        <attr name="letterColor" format="color" />
+    <!--SymbolIndicatorView-->
+    <declare-styleable name="SymbolIndicatorView">
+        <attr name="symbolSize" format="dimension" />
+        <attr name="symbolColor" format="color" />
     </declare-styleable>
 
     <attr name="halfVisibleItemCount" format="integer" />
@@ -117,13 +117,47 @@
         <attr name="textSize" />
         <attr name="textColor" />
         <attr name="textGravity" format="enum">
-            <enum name="center" value="0"/>
-            <enum name="top" value="1"/>
-            <enum name="bottom" value="2"/>
-            <enum name="start" value="3"/>
-            <enum name="end" value="4"/>
-            <enum name="center_horizontal" value="5"/>
-            <enum name="center_vertical" value="6"/>
+            <enum name="center" value="0" />
+            <enum name="top" value="1" />
+            <enum name="bottom" value="2" />
+            <enum name="start" value="3" />
+            <enum name="end" value="4" />
+            <enum name="center_horizontal" value="5" />
+            <enum name="center_vertical" value="6" />
         </attr>
+    </declare-styleable>
+
+    <!-- ImageBanner-->
+    <declare-styleable name="ImageBanner">
+        <attr name="autoLoop" format="boolean" />
+        <attr name="delaySec" format="integer" />
+        <attr name="orientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <!-- IndicatorView-->
+    <declare-styleable name="IndicatorView">
+        <attr name="indicatorWidth" format="dimension" />
+        <attr name="indicatorHeight" format="dimension" />
+        <attr name="indicatorMargin" format="dimension" />
+        <attr name="indicatorUnSelected" format="reference" />
+        <attr name="indicatorSelected" format="reference" />
+    </declare-styleable>
+
+    <!-- BothWayProgressBar -->
+    <declare-styleable name="BothWayProgressBar">
+        <attr name="backgroundLineColor" format="color" />
+        <attr name="progressLineColor" format="color" />
+        <attr name="thumbSize" format="dimension" />
+        <attr name="lineSize" format="dimension" />
+        <attr name="textMargin" format="dimension" />
+        <attr name="totalProgress" format="integer" />
+        <attr name="lowProgress" format="integer" />
+        <attr name="highProgress" format="integer" />
+        <attr name="progress" format="integer" />
+        <attr name="textSize" />
+        <attr name="textColor" />
     </declare-styleable>
 </resources>

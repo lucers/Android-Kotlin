@@ -15,5 +15,8 @@ dependencies {
     api libraries.materialDesign
     api libraries.photoView
     api libraries.recyclerView
-    api libraries.smartRefreshLayout
+    api libraries.flexBox
+//    api libraries.smartRefreshLayout
+    api libraries.easySwipeMenu
+    api libraries.cardStackView
 }

@@ -1,6 +1,7 @@
 configurations {
     all {
         all*.exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
+//        all*.exclude group: 'androidx.viewpager', module: 'viewpager'
         resolutionStrategy {
             def versions = rootProject.ext.versions
             eachDependency { DependencyResolveDetails details ->
@@ -10,6 +11,12 @@ configurations {
                 }
                 if (requested.group == 'androidx.core' && requested.name == 'core') {
                     details.useVersion versions.androidxCoreVersion
+                }
+                if (requested.group == 'androidx.core' && requested.name == 'core-ktx') {
+                    details.useVersion versions.androidxCoreVersion
+                }
+                if (requested.group == 'androidx.collection' && requested.name == 'collection') {
+                    details.useVersion versions.androidxCollectionVersion
                 }
                 if (requested.group == 'androidx.activity' && requested.name == 'activity') {
                     details.useVersion versions.androidxActivityVersion
@@ -34,6 +41,9 @@ configurations {
                 }
                 if (requested.group == 'com.squareup.okhttp3') {
                     details.useVersion versions.okhttpVersion
+                }
+                if (requested.group == 'com.squareup.okio' && requested.name == 'okio') {
+                    details.useVersion versions.okio
                 }
                 if (requested.group == 'org.jetbrains.kotlin') {
                     details.useVersion versions.kotlinJdkVersion

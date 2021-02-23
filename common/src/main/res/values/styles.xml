@@ -3,12 +3,15 @@
     <!-- Base application theme. -->
     <style name="CommonAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="android:textColor">@color/default_text_color</item>
-        <item name="editTextColor">@color/default_text_color</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:textSize">@dimen/default_text_size</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/default_text_color_1</item>
+        <item name="android:editTextColor">@color/default_text_color_1</item>
+        <item name="android:textColorHint">@color/default_text_color_3</item>
+        <item name="colorControlActivated">@color/default_text_color_2</item>
+        <item name="android:textCursorDrawable">@drawable/text_cursor</item>
+        <item name="android:textSize">@dimen/default_text_size</item>
         <item name="android:windowBackground">@drawable/window_background</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnimationEndStart</item>
     </style>
@@ -16,6 +19,27 @@
     <!--LoginTheme-->
     <style name="LoginTheme" parent="CommonAppTheme">
         <item name="android:windowAnimationStyle">@style/ActivityAnimationDownUp</item>
+    </style>
+
+    <!-- NoSpaceActionBarTheme -->
+    <style name="NoSpaceActionBarTheme" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
+
+    <!-- TransparentActivityTheme -->
+    <style name="TransparentActivityTheme" parent="CommonAppTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!-- DialogTheme -->
+    <style name="DialogTheme" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 
     <!-- ActivityAnimationAlpha -->
@@ -42,30 +66,21 @@
         <item name="android:activityCloseExitAnimation">@anim/anim_end_start_close_exit</item>
     </style>
 
-    <!-- NoSpaceActionBarTheme -->
-    <style name="NoSpaceActionBarTheme" parent="Base.Widget.AppCompat.Toolbar">
-        <item name="contentInsetStart">0dp</item>
-        <item name="contentInsetStartWithNavigation">0dp</item>
-    </style>
-
-    <!-- TransparentActivityTheme -->
-    <style name="TransparentActivityTheme" parent="CommonAppTheme">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowIsTranslucent">true</item>
-    </style>
-
-    <!-- DialogTheme -->
-    <style name="DialogTheme" parent="android:style/Theme.Dialog">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:fitsSystemWindows">true</item>
-    </style>
-
     <!-- BottomDialogAnimation -->
     <style name="BottomDialogAnimation">
         <item name="android:windowEnterAnimation">@anim/anim_down_up_open_enter</item>
         <item name="android:windowExitAnimation">@anim/anim_down_up_close_exit</item>
+    </style>
+
+    <!-- PopupWindowPullAnimation -->
+    <style name="PopupWindowPullAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/anim_up_down_enter</item>
+        <item name="android:windowExitAnimation">@anim/anim_up_down_exit</item>
+    </style>
+
+    <!-- PopupWindowRightInAnimation -->
+    <style name="PopupWindowRightInAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/anim_end_start_open_enter</item>
+        <item name="android:windowExitAnimation">@anim/anim_end_start_close_exit</item>
     </style>
 </resources>
