@@ -2,10 +2,8 @@ package com.lucers.android.wxapi
 
 import android.os.Bundle
 import com.blankj.utilcode.util.LogUtils
-import com.lucers.android.WXApplication
 import com.lucers.android.WXFunction
 import com.lucers.common.base.BaseActivity
-import com.lucers.common.base.BaseApplication
 import com.tencent.mm.opensdk.constants.ConstantsAPI
 import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp

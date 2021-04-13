@@ -17,8 +17,8 @@ class AppApplication : BaseApplication() {
 
     override fun initApplication(context: Context) {
         ModuleApplication.names.forEach {
-            val clazz = Class.forName(it)
             try {
+                val clazz = Class.forName(it)
                 val app = clazz.newInstance() as BaseApplication
                 app.initApplication(this)
             } catch (e: Exception) {

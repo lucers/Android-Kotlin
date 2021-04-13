@@ -5,5 +5,5 @@ package com.lucers.common.constants
  */
 object ModuleApplication {
 
-    val names = arrayOf("")
+    val names = arrayOf("com.lucers.main.MainApplication")
 }

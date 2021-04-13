@@ -1,14 +1,14 @@
 package com.lucers.android
 
+import android.content.Context
 import android.graphics.Bitmap
-import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.ImageUtils
 import com.blankj.utilcode.util.LogUtils
-import com.bumptech.glide.util.ByteBufferUtil
 import com.lucers.common.base.BaseApplication
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram
 import com.tencent.mm.opensdk.modelmsg.*
 import com.tencent.mm.opensdk.openapi.IWXAPI
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
 
 /**
  * WXFunction
@@ -26,6 +26,10 @@ object WXFunction {
     const val previewMiniProgramType: Int = WXMiniProgramObject.MINIPROGRAM_TYPE_PREVIEW
 
     var wxApi: IWXAPI? = null
+
+    fun createWxApi(context: Context, appId: String) {
+        wxApi = WXAPIFactory.createWXAPI(context, appId)
+    }
 
     fun isWeChatInstall(): Boolean {
         val result = wxApi?.isWXAppInstalled ?: false
