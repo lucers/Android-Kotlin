@@ -1,12 +1,14 @@
 package com.lucers.android
 
 import android.graphics.Bitmap
+import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.ImageUtils
 import com.blankj.utilcode.util.LogUtils
 import com.bumptech.glide.util.ByteBufferUtil
 import com.lucers.common.base.BaseApplication
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram
 import com.tencent.mm.opensdk.modelmsg.*
+import com.tencent.mm.opensdk.openapi.IWXAPI
 
 /**
  * WXFunction
@@ -23,40 +25,46 @@ object WXFunction {
     const val releaseMiniProgramType: Int = WXMiniProgramObject.MINIPTOGRAM_TYPE_RELEASE
     const val previewMiniProgramType: Int = WXMiniProgramObject.MINIPROGRAM_TYPE_PREVIEW
 
-    val wxApi by lazy {
-        (BaseApplication.INSTANCE as WXApplication).wxApi
+    var wxApi: IWXAPI? = null
+
+    fun isWeChatInstall(): Boolean {
+        val result = wxApi?.isWXAppInstalled ?: false
+        if (result.not()) {
+            LogUtils.e("WeChat not installed")
+        }
+        return result
     }
 
     fun weChatLogin(scope: String, state: String = BaseApplication.INSTANCE.packageName) {
         try {
-            if (!wxApi.isWXAppInstalled) {
+            if (isWeChatInstall().not()) {
                 return
             }
             val req = SendAuth.Req()
             req.scope = scope
             req.state = state
-            wxApi.sendReq(req)
+            wxApi?.sendReq(req)
         } catch (e: Exception) {
             LogUtils.e(e.message)
         }
     }
 
-    fun openWeChatMiniProgramer(userName: String, pagePath: String, type: Int) {
+    fun openWeChatMiniProgram(userName: String, pagePath: String, type: Int) {
         try {
-            if (!wxApi.isWXAppInstalled) {
+            if (isWeChatInstall().not()) {
                 return
             }
             val req = WXLaunchMiniProgram.Req()
             req.userName = userName
             req.path = pagePath
             req.miniprogramType = type
-            wxApi.sendReq(req)
+            wxApi?.sendReq(req)
         } catch (e: Exception) {
             LogUtils.e(e.message)
         }
     }
 
-    fun WeChatTextShare(text: String, scene: Int) {
+    fun weChatTextShare(text: String, scene: Int) {
         weChatShare(WXMediaMessage().apply {
             mediaObject = WXTextObject().apply {
                 this.text = text
@@ -93,7 +101,7 @@ object WXFunction {
         }, "video", scene)
     }
 
-    fun WeChatUrlShare(url: String, title: String, description: String, thumbData: ByteArray, scene: Int) {
+    fun weChatUrlShare(url: String, title: String, description: String, thumbData: ByteArray, scene: Int) {
         weChatShare(WXMediaMessage().apply {
             this.title = title
             this.description = description
@@ -127,9 +135,9 @@ object WXFunction {
         }, "url", scene)
     }
 
-    private fun weChatShare(mediaMessage: WXMediaMessage, type: String? = null, scene: Int) {
+    fun weChatShare(mediaMessage: WXMediaMessage, type: String? = null, scene: Int, openId: String? = null) {
         try {
-            if (!wxApi.isWXAppInstalled) {
+            if (isWeChatInstall().not()) {
                 return
             }
 
@@ -137,16 +145,12 @@ object WXFunction {
                 it.transaction = buildTransaction(type)
                 it.message = mediaMessage
                 it.scene = scene
-                it.userOpenId = getOpenId()
+                it.userOpenId = openId
             }
-            wxApi.sendReq(req)
+            wxApi?.sendReq(req)
         } catch (e: Exception) {
             LogUtils.e(e.message)
         }
-    }
-
-    private fun getOpenId(): String {
-        return ""
     }
 
     private fun buildTransaction(type: String?): String {

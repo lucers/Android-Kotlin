@@ -3,6 +3,7 @@ package com.lucers.android.wxapi
 import android.os.Bundle
 import com.blankj.utilcode.util.LogUtils
 import com.lucers.android.WXApplication
+import com.lucers.android.WXFunction
 import com.lucers.common.base.BaseActivity
 import com.lucers.common.base.BaseApplication
 import com.tencent.mm.opensdk.constants.ConstantsAPI
@@ -18,14 +19,15 @@ class WXPayEntryActivity : BaseActivity(0), IWXAPIEventHandler {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        val result: Boolean =
-            (BaseApplication.INSTANCE as WXApplication).wxApi.handleIntent(intent, this)
+        val result: Boolean = WXFunction.wxApi?.handleIntent(intent, this) ?: false
+        LogUtils.d("WXPayEntryActivity handleIntent: $result")
         if (result.not()) {
             finish()
         }
     }
 
     override fun onResp(baseResp: BaseResp) {
+        // receive WeChat's response
         LogUtils.d("onResp:${baseResp}")
         if (baseResp.type == ConstantsAPI.COMMAND_PAY_BY_WX) {
             val payResp = baseResp as PayResp
@@ -46,6 +48,7 @@ class WXPayEntryActivity : BaseActivity(0), IWXAPIEventHandler {
     }
 
     override fun onReq(baseReq: BaseReq) {
+        // receive request from WeChat
         LogUtils.d("onResp:${baseReq}")
     }
 }

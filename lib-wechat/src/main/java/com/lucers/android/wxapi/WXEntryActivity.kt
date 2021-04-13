@@ -3,6 +3,7 @@ package com.lucers.android.wxapi
 import android.os.Bundle
 import com.blankj.utilcode.util.LogUtils
 import com.lucers.android.WXApplication
+import com.lucers.android.WXFunction
 import com.lucers.common.base.BaseActivity
 import com.lucers.common.base.BaseApplication
 import com.tencent.mm.opensdk.constants.ConstantsAPI
@@ -19,8 +20,8 @@ class WXEntryActivity : BaseActivity(0), IWXAPIEventHandler {
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
-        val result: Boolean = (BaseApplication.INSTANCE as WXApplication).wxApi.handleIntent(intent, this)
-        LogUtils.d("Init result: $result")
+        val result: Boolean = WXFunction.wxApi?.handleIntent(intent, this) ?: false
+        LogUtils.d("WXEntryActivity handleIntent: $result")
         if (result.not()) {
             finish()
         }

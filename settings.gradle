@@ -1,4 +1,3 @@
-include ':wechat'
 rootProject.name = 'Android-Kotlin'
 include ':app'
 
@@ -13,3 +12,5 @@ include ':lib-widget'
 include ':lib-mvvm'
 
 include ':lib-oaid'
+
+include ':lib-wechat'
